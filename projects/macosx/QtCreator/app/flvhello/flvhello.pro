@@ -13,22 +13,34 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qt.pri
+#   File: flvhello.pro
 #
 # Author: $author$
-#   Date: 5/29/2015
+#   Date: 10/2/2015
 ########################################################################
+include(../../../../../build/QtCreator/fl.pri)
+include(../../fl.pri)
+include(../../../../QtCreator/vedere.pri)
+include(../../vedere.pri)
+include(../../../../QtCreator/app/flvhello/flvhello.pri)
 
-########################################################################
-# qt
-qt_INCLUDEPATH += \
+TARGET = flvhello
 
-qt_DEFINES += \
+INCLUDEPATH += \
+$${flvhello_INCLUDEPATH} \
+$${fl_INCLUDEPATH} \
 
-qt_HEADERS += \
+DEFINES += \
+$${flvhello_DEFINES} \
+$${fl_DEFINES} \
 
-qt_SOURCES += \
+HEADERS += \
+$${flvhello_HEADERS} \
 
-qt_LIBS += \
+SOURCES += \
+$${flvhello_SOURCES} \
 
-QT += widgets
+LIBS += \
+$${flvhello_LIBS} \
+$${fl_LIBS} \
+

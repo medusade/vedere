@@ -19,12 +19,17 @@
 #   Date: 5/26/2015
 ########################################################################
 
-QMAKE_CXXFLAGS += -std=c++0x
+VEDERE_OS = linux
 
 ########################################################################
 # xos
-XOS_BLD = ../$${XOS_PKG}/build/linux/QtCreator/Debug
+XOS_BLD = ../$${XOS_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
 XOS_LIB = $${XOS_BLD}/lib
+
+########################################################################
+# lamna
+LAMNA_BLD = ../$${LAMNA_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
+LAMNA_LIB = $${LAMNA_BLD}/lib
 
 ########################################################################
 # vedere
@@ -33,6 +38,8 @@ vedere_INCLUDEPATH += \
 vedere_LIBS += \
 -L$${VEDERE_LIB}/libvedere \
 -lvedere \
+-L$${LAMNA_LIB}/liblamna \
+-llamna \
 -L$${XOS_LIB}/libxosnadir \
 -lxosnadir \
 -lpthread \

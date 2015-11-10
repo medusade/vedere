@@ -24,35 +24,12 @@
 #
 # pkg-config --cflags --libs gtk+-3.0
 #
-gtk_INCLUDEPATH += \
-/usr/include/gtk-3.0 \
-/usr/include/pango-1.0 \
-/usr/include/gio-unix-2.0 \
-/usr/include/atk-1.0 \
-/usr/include/cairo \
-/usr/include/gdk-pixbuf-2.0 \
-/usr/include/freetype2 \
-/usr/include/glib-2.0 \
-/usr/lib/x86_64-linux-gnu/glib-2.0/include \
-/usr/include/pixman-1 \
-/usr/include/libpng12 \
-
 gtk_DEFINES += \
+$${build_gtk_DEFINES} \
 
-gtk_HEADERS += \
-
-gtk_SOURCES += \
+gtk_INCLUDEPATH += \
+$${build_gtk_INCLUDEPATH} \
 
 gtk_LIBS += \
--lgtk-3 \
--lgdk-3 \
--latk-1.0 \
--lgio-2.0 \
--lpangocairo-1.0 \
--lgdk_pixbuf-2.0 \
--lcairo-gobject \
--lpango-1.0 \
--lcairo \
--lgobject-2.0 \
--lglib-2.0 \
+$${build_gtk_LIBS} \
 

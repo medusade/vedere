@@ -13,22 +13,24 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qt.pri
+#   File: wx.pri
 #
 # Author: $author$
-#   Date: 5/29/2015
+#   Date: 10/2/2015
 ########################################################################
 
 ########################################################################
-# qt
-qt_INCLUDEPATH += \
+# wx
+wx_INCLUDEPATH += \
+$${build_wx_INCLUDEPATH} \
 
-qt_DEFINES += \
+wx_DEFINES += \
+$${build_wx_DEFINES} \
 
-qt_HEADERS += \
+wx_LIBS += \
+$${build_wx_LIBS} \
 
-qt_SOURCES += \
+########################################################################
+# NO Qt
+QT -= gui core
 
-qt_LIBS += \
-
-QT += widgets

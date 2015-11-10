@@ -25,26 +25,49 @@ $${vedere_INCLUDEPATH} \
 gvhello_DEFINES += \
 $${vedere_DEFINES} \
 
+########################################################################
+gvhello_HEADERS += \
+$${XOS_SRC}/xos/mt/queue.hpp \
+
+gvhello_SOURCES += \
+$${XOS_SRC}/xos/mt/queue.cpp \
+
+########################################################################
+gvhello_HEADERS += \
+$${LAMNA_SRC}/lamna/gui/gtk/application/window.hpp \
+$${LAMNA_SRC}/lamna/gui/gtk/widget.hpp \
+
+gvhello_SOURCES += \
+
+########################################################################
 gvhello_HEADERS += \
 $${VEDERE_SRC}/vedere/app/gui/gtk/hello/main.hpp \
+$${VEDERE_SRC}/vedere/app/gui/hello/window.hpp \
 $${VEDERE_SRC}/vedere/gui/gtk/application/window_main.hpp \
 $${VEDERE_SRC}/vedere/gui/gtk/application/main.hpp \
 $${VEDERE_SRC}/vedere/gui/gtk/application/window.hpp \
 $${VEDERE_SRC}/vedere/gui/gtk/main_window.hpp \
+$${VEDERE_SRC}/vedere/gui/gtk/drawing_area.hpp \
 $${VEDERE_SRC}/vedere/gui/gtk/widget.hpp \
 $${VEDERE_SRC}/vedere/gui/gtk/main.hpp \
+$${VEDERE_SRC}/vedere/gui/gtk/gtk.hpp \
 $${VEDERE_SRC}/vedere/gui/main.hpp \
 $${VEDERE_SRC}/vedere/console/main.hpp \
 $${VEDERE_SRC}/vedere/console/main_opt.hpp \
 $${VEDERE_SRC}/vedere/console/main_main.hpp \
+$${VEDERE_SRC}/vedere/base/base.hpp \
 
+########################################################################
 gvhello_SOURCES += \
 $${VEDERE_SRC}/vedere/gui/gtk/application/window_main.cpp \
 $${VEDERE_SRC}/vedere/gui/gtk/application/window.cpp \
+$${VEDERE_SRC}/vedere/gui/gtk/drawing_area.cpp \
 $${VEDERE_SRC}/vedere/gui/gtk/widget.cpp \
 $${VEDERE_SRC}/vedere/app/gui/gtk/hello/main.cpp \
 $${VEDERE_SRC}/vedere/console/main_opt.cpp \
 $${VEDERE_SRC}/vedere/console/main_main.cpp \
+
+########################################################################
 
 gvhello_LIBS += \
 $${vedere_LIBS} \

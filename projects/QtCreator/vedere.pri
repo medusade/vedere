@@ -26,6 +26,12 @@ VEDERE_BIN = $${VEDERE_BLD}/bin
 VEDERE_LIB = $${VEDERE_BLD}/lib
 VEDERE_SRC = $${VEDERE_PKG}/src
 
+CONFIG(debug, debug|release) {
+VEDERE_CONFIG = Debug
+} else {
+VEDERE_CONFIG = Release
+}
+
 ########################################################################
 # xos
 XOS_PKG = $${VEDERE_PKG}/../nadir
@@ -38,11 +44,24 @@ $${XOS_SRC} \
 xos_DEFINES += \
 
 ########################################################################
+# lamna
+LAMNA_PKG = $${VEDERE_PKG}/../lamna
+LAMNA_PRJ = $${LAMNA_PKG}
+LAMNA_SRC = $${LAMNA_PKG}/src
+
+lamna_INCLUDEPATH += \
+$${LAMNA_SRC} \
+
+lamna_DEFINES += \
+
+########################################################################
 # vedere
 vedere_INCLUDEPATH += \
 $${VEDERE_SRC} \
+$${lamna_INCLUDEPATH} \
 $${xos_INCLUDEPATH} \
 
 vedere_DEFINES += \
 $${xos_DEFINES} \
+$${lamna_DEFINES} \
 

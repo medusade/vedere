@@ -18,9 +18,10 @@
 # Author: $author$
 #   Date: 5/27/2015
 ########################################################################
+include(../../../../../build/QtCreator/gtk.pri)
+include(../../gtk.pri)
 include(../../../../QtCreator/vedere.pri)
 include(../../vedere.pri)
-include(../../gtk.pri)
 include(../../../../QtCreator/app/gvhello/gvhello.pri)
 
 TARGET = gvhello
@@ -41,3 +42,4 @@ $${gvhello_SOURCES} \
 LIBS += \
 $${gvhello_LIBS} \
 $${gtk_LIBS} \
+

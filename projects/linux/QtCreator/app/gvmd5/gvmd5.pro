@@ -13,22 +13,33 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qt.pri
+#   File: gvmd5.pro
 #
 # Author: $author$
-#   Date: 5/29/2015
+#   Date: 8/27/2015
 ########################################################################
+include(../../../../../build/QtCreator/gtk.pri)
+include(../../gtk.pri)
+include(../../../../QtCreator/vedere.pri)
+include(../../vedere.pri)
+include(../../../../QtCreator/app/gvmd5/gvmd5.pri)
 
-########################################################################
-# qt
-qt_INCLUDEPATH += \
+TARGET = gvmd5
 
-qt_DEFINES += \
+INCLUDEPATH += \
+$${gvmd5_INCLUDEPATH} \
+$${gtk_INCLUDEPATH} \
 
-qt_HEADERS += \
+DEFINES += \
+$${gvmd5_DEFINES} \
 
-qt_SOURCES += \
+HEADERS += \
+$${gvmd5_HEADERS} \
 
-qt_LIBS += \
+SOURCES += \
+$${gvmd5_SOURCES} \
 
-QT += widgets
+LIBS += \
+$${gvmd5_LIBS} \
+$${gtk_LIBS} \
+

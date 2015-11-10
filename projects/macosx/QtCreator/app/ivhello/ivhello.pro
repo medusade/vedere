@@ -13,22 +13,46 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qt.pri
+#   File: ivhello.pro
 #
 # Author: $author$
-#   Date: 5/29/2015
+#   Date: 11/5/2015
 ########################################################################
+include(../../../../QtCreator/vedere.pri)
+include(../../vedere.pri)
+include(../../../../QtCreator/app/ivhello/ivhello.pri)
+
+TARGET = ivhello
+
+INCLUDEPATH += \
+$${ivhello_INCLUDEPATH} \
+
+DEFINES += \
+$${ivhello_DEFINES} \
 
 ########################################################################
-# qt
-qt_INCLUDEPATH += \
+OBJECTIVE_HEADERS += \
+$${ivhello_OBJECTIVE_HEADERS} \
 
-qt_DEFINES += \
+OBJECTIVE_SOURCES += \
+$${ivhello_OBJECTIVE_SOURCES} \
 
-qt_HEADERS += \
+########################################################################
+HEADERS += \
+$${OBJECTIVE_HEADERS} \
+$${ivhello_HEADERS} \
 
-qt_SOURCES += \
+SOURCES += \
+$${ivhello_SOURCES} \
 
-qt_LIBS += \
+########################################################################
+LIBS += \
+$${ivhello_LIBS} \
+-framework AppKit \
+-framework CoreFoundation \
+-framework Foundation \
 
-QT += widgets
+########################################################################
+# NO Qt
+QT -= gui core
+

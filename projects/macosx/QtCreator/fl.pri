@@ -13,22 +13,24 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qt.pri
+#   File: fl.pri
 #
 # Author: $author$
-#   Date: 5/29/2015
+#   Date: 10/2/2015
 ########################################################################
 
 ########################################################################
-# qt
-qt_INCLUDEPATH += \
+# fl
+fl_INCLUDEPATH += \
+$${build_fl_INCLUDEPATH} \
 
-qt_DEFINES += \
+fl_DEFINES += \
+$${build_fl_DEFINES} \
 
-qt_HEADERS += \
+fl_LIBS += \
+$${build_fl_LIBS} \
 
-qt_SOURCES += \
+########################################################################
+# NO Qt
+QT -= gui core
 
-qt_LIBS += \
-
-QT += widgets

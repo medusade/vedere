@@ -13,67 +13,56 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qvhello.pri
+#   File: flvhello.pri
 #
 # Author: $author$
-#   Date: 5/29/2015
+#   Date: 10/2/2015
 ########################################################################
 
-qvhello_INCLUDEPATH += \
+flvhello_INCLUDEPATH += \
 $${vedere_INCLUDEPATH} \
 
-qvhello_DEFINES += \
+flvhello_DEFINES += \
 $${vedere_DEFINES} \
 
 ########################################################################
 
-qvhello_HEADERS += \
-$${XOS_SRC}/xos/io/read/file.hpp \
-$${XOS_SRC}/xos/io/file/reader.hpp \
+_flvhello_HEADERS += \
+$${VEDERE_SRC}/vedere/gui/fl/widget.hpp \
 
-qvhello_SOURCES += \
-$${XOS_SRC}/xos/io/read/file.cpp \
-$${XOS_SRC}/xos/io/file/reader.cpp \
+flvhello_HEADERS += \
+$${VEDERE_SRC}/vedere/gui/fl/double_window.hpp \
+$${VEDERE_SRC}/vedere/gui/fl/main.hpp \
+$${VEDERE_SRC}/vedere/gui/fl/fl.hpp \
 
-########################################################################
+_flvhello_SOURCES += \
+$${VEDERE_SRC}/vedere/gui/fl/widget.cpp \
 
-qvhello_HEADERS += \
-$${VEDERE_SRC}/vedere/graphic/rectangle.hpp \
-
-qvhello_SOURCES += \
-$${VEDERE_SRC}/vedere/graphic/rectangle.cpp \
-
-########################################################################
-
-qvhello_HEADERS += \
-$${VEDERE_SRC}/vedere/gui/qt/application/main.hpp \
-$${VEDERE_SRC}/vedere/gui/qt/main.hpp \
-$${VEDERE_SRC}/vedere/gui/main.hpp \
-
-qvhello_SOURCES += \
+flvhello_SOURCES += \
+$${VEDERE_SRC}/vedere/gui/fl/double_window.cpp \
+$${VEDERE_SRC}/vedere/gui/fl/fl.cpp \
 
 ########################################################################
 
-qvhello_HEADERS += \
-$${VEDERE_SRC}/vedere/app/gui/hello/window.hpp \
-$${VEDERE_SRC}/vedere/app/gui/hello/renderer.hpp \
-$${VEDERE_SRC}/vedere/app/gui/qt/hello/main.hpp \
+_flvhello_HEADERS += \
 $${VEDERE_SRC}/vedere/app/gui/hello/main.hpp \
-$${VEDERE_SRC}/vedere/app/gui/hello/main_opt.hpp \
+
+flvhello_HEADERS += \
+$${VEDERE_SRC}/vedere/app/gui/fl/hello/main.hpp \
+$${VEDERE_SRC}/vedere/gui/main.hpp \
 $${VEDERE_SRC}/vedere/console/main.hpp \
 $${VEDERE_SRC}/vedere/console/main_opt.hpp \
 $${VEDERE_SRC}/vedere/console/main_main.hpp \
 
-qvhello_SOURCES += \
-$${VEDERE_SRC}/vedere/app/gui/hello/window.cpp \
-$${VEDERE_SRC}/vedere/app/gui/hello/renderer.cpp \
-$${VEDERE_SRC}/vedere/app/gui/qt/hello/main.cpp \
+_flvhello_SOURCES += \
+
+flvhello_SOURCES += \
+$${VEDERE_SRC}/vedere/app/gui/fl/hello/main.cpp \
 $${VEDERE_SRC}/vedere/console/main_opt.cpp \
 $${VEDERE_SRC}/vedere/console/main_main.cpp \
 
 ########################################################################
 
-qvhello_LIBS += \
+flvhello_LIBS += \
 $${vedere_LIBS} \
-
 
