@@ -22,12 +22,15 @@
 #define _VEDERE_GUI_QT_MAIN_HPP
 
 #include "vedere/gui/main.hpp"
+#include "lamna/gui/qt/main.hpp"
 
 namespace vedere {
 namespace gui {
 namespace qt {
 
-typedef gui::main_implements main_implements;
+typedef lamna::gui::qt::main_implements main_implements;
+typedef lamna::gui::qt::main main;
+/*typedef gui::main_implements main_implements;
 typedef gui::main main_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: main
@@ -46,7 +49,7 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-};
+};*/
 
 } // namespace qt 
 } // namespace gui 

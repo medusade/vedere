@@ -22,16 +22,17 @@
 #define _VEDERE_GUI_QT_GUI_HPP
 
 #include "vedere/base/base.hpp"
-#include <QtCore/QtCore>
+#include "lamna/gui/qt/gui.hpp"
+/*#include <QtCore/QtCore>
 #if  (QT_VERSION < QT_VERSION_CHECK(5, 0, 0))
 #include <QtGui/QtGui>
 #else
 #include <QtWidgets/QtWidgets>
-#endif
+#endif*/
 
-#define VEDERE_APP_GUI_QT_DEFAULT_BACKGROUND_RED   255
-#define VEDERE_APP_GUI_QT_DEFAULT_BACKGROUND_GREEN 0
-#define VEDERE_APP_GUI_QT_DEFAULT_BACKGROUND_BLUE  0
+#define VEDERE_APP_GUI_QT_DEFAULT_BACKGROUND_RED   LAMNA_APP_GUI_QT_DEFAULT_BACKGROUND_RED
+#define VEDERE_APP_GUI_QT_DEFAULT_BACKGROUND_GREEN LAMNA_APP_GUI_QT_DEFAULT_BACKGROUND_GREEN
+#define VEDERE_APP_GUI_QT_DEFAULT_BACKGROUND_BLUE  LAMNA_APP_GUI_QT_DEFAULT_BACKGROUND_BLUE
 
 namespace vedere {
 namespace gui {

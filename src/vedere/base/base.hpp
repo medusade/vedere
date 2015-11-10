@@ -21,13 +21,35 @@
 #ifndef _VEDERE_BASE_BASE_HPP
 #define _VEDERE_BASE_BASE_HPP
 
-#include "xos/base/base.hpp"
+#include "lamna/base/base.hpp"
+#include "xos/mt/queue.hpp"
+#include "xos/io/write/file.hpp"
+#include "xos/io/read/file.hpp"
+#include "xos/io/writer.hpp"
+#include "xos/io/reader.hpp"
 
 namespace vedere {
 
-typedef xos::base::implement_base implement_base;
-typedef xos::base::base base;
+typedef lamna::implement_base implement_base;
+typedef lamna::base base;
 
-} // namespace vedere 
+typedef xos::base::chars_t chars_t;
+typedef xos::base::tchars_t tchars_t;
+typedef xos::base::wchars_t wchars_t;
+
+typedef xos::base::string string;
+typedef xos::base::tstring tstring;
+typedef xos::base::wstring wstring;
+
+typedef xos::base::date_implements date_implements;
+typedef xos::base::date date;
+
+typedef xos::io::reader reader;
+typedef xos::io::writer writer;
+
+typedef xos::io::byte_reader byte_reader;
+typedef xos::io::byte_writer byte_writer;
+
+} // namespace vedere
 
 #endif // _VEDERE_BASE_BASE_HPP 

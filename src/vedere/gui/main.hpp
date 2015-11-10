@@ -22,11 +22,14 @@
 #define _VEDERE_GUI_MAIN_HPP
 
 #include "vedere/console/main.hpp"
+#include "lamna/gui/main.hpp"
 
 namespace vedere {
 namespace gui {
 
-typedef console::main_implements main_implements;
+typedef lamna::gui::main_implements main_implements;
+typedef lamna::gui::main main;
+/*typedef console::main_implements main_implements;
 typedef console::main main_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: main
@@ -101,7 +104,7 @@ protected:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-};
+};*/
 
 } // namespace gui 
 } // namespace vedere 

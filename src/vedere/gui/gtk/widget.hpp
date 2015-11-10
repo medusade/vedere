@@ -21,18 +21,25 @@
 #ifndef _VEDERE_GUI_GTK_WIDGET_HPP
 #define _VEDERE_GUI_GTK_WIDGET_HPP
 
+#include "lamna/gui/gtk/widget.hpp"
 #include "vedere/io/logger.hpp"
-#include "xos/base/created.hpp"
+/*#include "xos/base/created.hpp"
 #include "xos/base/creator.hpp"
 #include "xos/base/attached.hpp"
 #include "xos/base/attacher.hpp"
-#include <gtk/gtk.h>
+#include <gtk/gtk.h>*/
 
 namespace vedere {
 namespace gui {
 namespace gtk {
 
-typedef GtkWidget* widget_attached_t;
+typedef lamna::gui::gtk::widget_attached_t widget_attached_t;
+typedef lamna::gui::gtk::widget_signals widget_signals;
+typedef lamna::gui::gtk::widget_attacher widget_attacher;
+typedef lamna::gui::gtk::widget_implements widget_implements;
+typedef lamna::gui::gtk::widget widget;
+
+/*typedef GtkWidget* widget_attached_t;
 typedef xos::base::creatort<implement_base> widget_creator;
 typedef xos::base::attachert<widget_attached_t, int, 0, widget_creator> widget_attacher;
 typedef xos::base::attachedt<widget_attached_t, int, 0, widget_attacher, base> widget_attached;
@@ -173,7 +180,7 @@ protected:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-};
+};*/
 
 } // namespace gtk 
 } // namespace gui 

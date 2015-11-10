@@ -24,14 +24,12 @@
 #include "vedere/console/main_opt.hpp"
 #include "vedere/io/logger.hpp"
 #include "vedere/base/base.hpp"
-#include "xos/base/getopt/main.hpp"
-#include "xos/base/main.hpp"
 
 namespace vedere {
 namespace console {
 
-typedef xos::base::getopt::main_implement main_implements;
-typedef xos::base::getopt::main main;
+typedef lamna::console::main_implements main_implements;
+typedef lamna::console::main main;
 
 } // namespace console
 } // namespace vedere 

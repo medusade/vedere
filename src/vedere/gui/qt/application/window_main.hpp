@@ -22,13 +22,16 @@
 #define _VEDERE_GUI_QT_APPLICATION_WINDOW_MAIN_HPP
 
 #include "vedere/gui/qt/application/main.hpp"
+#include "lamna/gui/qt/application/window_main.hpp"
 
 namespace vedere {
 namespace gui {
 namespace qt {
 namespace application {
 
-typedef vedere::gui::qt::application::main_implements window_main_implements;
+typedef lamna::gui::qt::application::window_main_implements window_main_implements;
+typedef lamna::gui::qt::application::window_main window_main;
+/*typedef vedere::gui::qt::application::main_implements window_main_implements;
 typedef vedere::gui::qt::application::main window_main_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: window_main
@@ -92,7 +95,7 @@ protected:
     ///////////////////////////////////////////////////////////////////////
 protected:
     QMainWindow* qMainWindow_;
-};
+};*/
 
 } // namespace application 
 } // namespace qt 

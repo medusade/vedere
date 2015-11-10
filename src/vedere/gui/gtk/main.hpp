@@ -21,14 +21,19 @@
 #ifndef _VEDERE_GUI_GTK_MAIN_HPP
 #define _VEDERE_GUI_GTK_MAIN_HPP
 
-#include "vedere/gui/main.hpp"
-#include <gtk/gtk.h>
+#include "lamna/gui/gtk/main.hpp"
+#include "vedere/io/logger.hpp"
+/*#include "vedere/gui/main.hpp"
+#include <gtk/gtk.h>*/
 
 namespace vedere {
 namespace gui {
 namespace gtk {
 
-typedef gui::main_implements main_implements;
+typedef lamna::gui::gtk::main_implements main_implements;
+typedef lamna::gui::gtk::main main_extends;
+
+/*typedef gui::main_implements main_implements;
 typedef gui::main main_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: main
@@ -78,7 +83,7 @@ protected:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-};
+};*/
 
 } // namespace gtk 
 } // namespace gui 

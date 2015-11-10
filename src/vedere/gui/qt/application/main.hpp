@@ -23,13 +23,16 @@
 
 #include "vedere/gui/qt/main.hpp"
 #include "vedere/gui/qt/gui.hpp"
+#include "lamna/gui/qt/application/main.hpp"
 
 namespace vedere {
 namespace gui {
 namespace qt {
 namespace application {
 
-typedef qt::main_implements main_implements;
+typedef lamna::gui::qt::main_implements main_implements;
+typedef lamna::gui::qt::main main;
+/*typedef qt::main_implements main_implements;
 typedef qt::main main_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: main
@@ -97,7 +100,7 @@ protected:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-};
+};*/
 
 } // namespace application 
 } // namespace qt 

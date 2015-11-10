@@ -21,15 +21,19 @@
 #ifndef _VEDERE_GUI_GTK_APPLICATION_WINDOW_MAIN_HPP
 #define _VEDERE_GUI_GTK_APPLICATION_WINDOW_MAIN_HPP
 
-#include "vedere/gui/gtk/application/main.hpp"
-#include "vedere/gui/gtk/application/window.hpp"
+#include "lamna/gui/gtk/application/window_main.hpp"
+/*#include "vedere/gui/gtk/application/main.hpp"
+#include "vedere/gui/gtk/application/window.hpp"*/
 
 namespace vedere {
 namespace gui {
 namespace gtk {
 namespace application {
 
-typedef application::main_implements window_main_implements;
+typedef lamna::gui::gtk::application::window_main_implements window_main_implements;
+typedef lamna::gui::gtk::application::window_main window_main;
+
+/*typedef application::main_implements window_main_implements;
 typedef application::main window_main_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: window_main
@@ -114,7 +118,7 @@ protected:
     ///////////////////////////////////////////////////////////////////////
 protected:
     GtkWidget* main_window_;
-};
+};*/
 
 } // namespace application 
 } // namespace gtk 
