@@ -38,9 +38,24 @@ $${XOS_SRC}/xos/io/file/reader.cpp \
 ########################################################################
 
 qvhello_HEADERS += \
+$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/image_reader.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/reader.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/reader_events.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/decompress.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/jpeg.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/reader.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/pixel.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/color.hpp \
 $${VEDERE_SRC}/vedere/graphic/rectangle.hpp \
 
 qvhello_SOURCES += \
+$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/image_reader.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/reader.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/reader_events.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/decompress.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/jpeg.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/pixel.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/color.cpp \
 $${VEDERE_SRC}/vedere/graphic/rectangle.cpp \
 
 ########################################################################
@@ -55,9 +70,11 @@ qvhello_SOURCES += \
 ########################################################################
 
 qvhello_HEADERS += \
+$${VEDERE_SRC}/vedere/app/gui/qt/hello/main.hpp \
+$${VEDERE_SRC}/vedere/app/gui/qt/hello/renderer.hpp \
+$${VEDERE_SRC}/vedere/app/gui/qt/hello/image_renderer.hpp \
 $${VEDERE_SRC}/vedere/app/gui/hello/window.hpp \
 $${VEDERE_SRC}/vedere/app/gui/hello/renderer.hpp \
-$${VEDERE_SRC}/vedere/app/gui/qt/hello/main.hpp \
 $${VEDERE_SRC}/vedere/app/gui/hello/main.hpp \
 $${VEDERE_SRC}/vedere/app/gui/hello/main_opt.hpp \
 $${VEDERE_SRC}/vedere/console/main.hpp \
@@ -65,9 +82,10 @@ $${VEDERE_SRC}/vedere/console/main_opt.hpp \
 $${VEDERE_SRC}/vedere/console/main_main.hpp \
 
 qvhello_SOURCES += \
-$${VEDERE_SRC}/vedere/app/gui/hello/window.cpp \
-$${VEDERE_SRC}/vedere/app/gui/hello/renderer.cpp \
 $${VEDERE_SRC}/vedere/app/gui/qt/hello/main.cpp \
+$${VEDERE_SRC}/vedere/app/gui/qt/hello/renderer.cpp \
+$${VEDERE_SRC}/vedere/app/gui/qt/hello/image_renderer.cpp \
+$${VEDERE_SRC}/vedere/app/gui/hello/window.cpp \
 $${VEDERE_SRC}/vedere/console/main_opt.cpp \
 $${VEDERE_SRC}/vedere/console/main_main.cpp \
 

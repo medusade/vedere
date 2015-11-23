@@ -41,8 +41,6 @@ gvhello_SOURCES += \
 
 ########################################################################
 gvhello_HEADERS += \
-$${VEDERE_SRC}/vedere/app/gui/gtk/hello/main.hpp \
-$${VEDERE_SRC}/vedere/app/gui/hello/window.hpp \
 $${VEDERE_SRC}/vedere/gui/gtk/application/window_main.hpp \
 $${VEDERE_SRC}/vedere/gui/gtk/application/main.hpp \
 $${VEDERE_SRC}/vedere/gui/gtk/application/window.hpp \
@@ -52,6 +50,19 @@ $${VEDERE_SRC}/vedere/gui/gtk/widget.hpp \
 $${VEDERE_SRC}/vedere/gui/gtk/main.hpp \
 $${VEDERE_SRC}/vedere/gui/gtk/gtk.hpp \
 $${VEDERE_SRC}/vedere/gui/main.hpp \
+
+gvhello_SOURCES += \
+$${VEDERE_SRC}/vedere/gui/gtk/application/window_main.cpp \
+$${VEDERE_SRC}/vedere/gui/gtk/application/window.cpp \
+$${VEDERE_SRC}/vedere/gui/gtk/drawing_area.cpp \
+$${VEDERE_SRC}/vedere/gui/gtk/widget.cpp \
+
+########################################################################
+gvhello_HEADERS += \
+$${VEDERE_SRC}/vedere/app/gui/gtk/hello/main.hpp \
+$${VEDERE_SRC}/vedere/app/gui/gtk/hello/renderer.hpp \
+$${VEDERE_SRC}/vedere/app/gui/gtk/hello/image_renderer.hpp \
+$${VEDERE_SRC}/vedere/app/gui/hello/window.hpp \
 $${VEDERE_SRC}/vedere/console/main.hpp \
 $${VEDERE_SRC}/vedere/console/main_opt.hpp \
 $${VEDERE_SRC}/vedere/console/main_main.hpp \
@@ -59,11 +70,9 @@ $${VEDERE_SRC}/vedere/base/base.hpp \
 
 ########################################################################
 gvhello_SOURCES += \
-$${VEDERE_SRC}/vedere/gui/gtk/application/window_main.cpp \
-$${VEDERE_SRC}/vedere/gui/gtk/application/window.cpp \
-$${VEDERE_SRC}/vedere/gui/gtk/drawing_area.cpp \
-$${VEDERE_SRC}/vedere/gui/gtk/widget.cpp \
 $${VEDERE_SRC}/vedere/app/gui/gtk/hello/main.cpp \
+$${VEDERE_SRC}/vedere/app/gui/gtk/hello/renderer.cpp \
+$${VEDERE_SRC}/vedere/app/gui/gtk/hello/image_renderer.cpp \
 $${VEDERE_SRC}/vedere/console/main_opt.cpp \
 $${VEDERE_SRC}/vedere/console/main_main.cpp \
 
