@@ -33,6 +33,16 @@ namespace app {
 namespace gui {
 namespace hello {
 
+enum image_format_t {
+    image_format_raw,
+    image_format_jpeg,
+
+    next_image_format,
+    first_image_format = image_format_raw,
+    last_image_format = (next_image_format - 1),
+    image_formats = (last_image_format - first_image_format + 1)
+};
+
 typedef vedere::gui::main_implements main_implements;
 typedef vedere::gui::main main_extends;
 ///////////////////////////////////////////////////////////////////////
@@ -51,12 +61,32 @@ public:
     maint()
     : main_window_width_(VEDERE_APP_GUI_HELLO_MAIN_WINDOW_WIDTH),
       main_window_height_(VEDERE_APP_GUI_HELLO_MAIN_WINDOW_HEIGHT),
-      image_width_(0), image_height_(0), image_depth_(0) {
+      image_width_(0), image_height_(0), image_depth_(0),
+      image_format_(first_image_format) {
     }
     virtual ~maint() {
     }
 
     ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual const char_t* set_image_format(const char_t* to) {
+        if ((to) && (to[0])) {
+            VEDERE_LOG_MESSAGE_DEBUG("set image_format = \"" << to << "\"...");
+            if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_RAW_OPTARG_C))
+                || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_RAW_OPTARG_S))) {
+                VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_raw");
+                image_format_ = image_format_raw;
+            } else {
+                if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_JPEG_OPTARG_C))
+                    || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_JPEG_OPTARG_S))) {
+                    VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_jpeg");
+                    image_format_ = image_format_jpeg;
+                } else {
+                }
+            }
+        }
+        return to;
+    }
     ///////////////////////////////////////////////////////////////////////
     virtual const char_t* set_image_width(const char_t* to) {
         if ((to) && (to[0])) {
@@ -101,6 +131,7 @@ public:
 protected:
     size_t main_window_width_, main_window_height_,
            image_width_, image_height_, image_depth_;
+    image_format_t image_format_;
     string image_file_;
 };
 

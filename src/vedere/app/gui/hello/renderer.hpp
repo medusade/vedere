@@ -238,6 +238,27 @@ public:
         }
         return 0;
     }
+    virtual void* set_image
+    (byte_t* bytes, size_t size, size_t width, size_t height) {
+        const image_format_t& format = image_format();
+        return set_image(bytes, size, width, height, format);
+    }
+    virtual void* set_image
+    (byte_t* bytes, size_t size,
+     size_t width, size_t height, const image_format_t& format) {
+        free_image();
+        if ((bytes) && (0 < (size))) {
+            image_ = bytes;
+            image_size_ = size;
+            image_width_ = width;
+            image_height_ = height;
+            if (&format != &image_format_) {
+                image_format_ = format;
+            }
+            return image_;
+        }
+        return 0;
+    }
     virtual void free_image() {
         byte_t* bytes = 0;
         if ((bytes = ((byte_t*)image_))) {
