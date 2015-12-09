@@ -33,6 +33,7 @@ typedef int pixel_value_interpretation_t;
 enum {
     pixel_value_interpretation_none,
     pixel_value_interpretation_palette,
+    pixel_value_interpretation_greyscale,
     pixel_value_interpretation_rgb,
     pixel_value_interpretation_bgr,
     pixel_value_interpretation_rgba,

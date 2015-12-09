@@ -75,10 +75,17 @@ public:
     (const void* image, size_t image_width, size_t image_height) {
      return false;
     }
+    virtual bool render_raw
+    (const void* image, size_t image_width, size_t image_height) {
+     return false;
+    }
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual format_t format() const {
         return 0;
+    }
+    virtual bool transform_smooth(bool on = true) {
+        return false;
     }
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
@@ -196,17 +203,39 @@ public:
         }
         return false;
     }
+    virtual bool render_raw() {
+        image_renderer_t* renderer = 0;
+        if ((image_) && (renderer = image_renderer(image_format()))) {
+            if ((renderer->render_raw(image_, image_width_, image_height_))) {
+                return renderer->realize();
+            }
+        }
+        return false;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual bool transform_smooth(bool on = true) {
+        image_renderer_t* renderer = 0;
+        if ((renderer = image_renderer(image_format()))) {
+            return renderer->transform_smooth(on);
+        }
+        return false;
+    }
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual void switch_render() {
         if ((render_ != &Derives::render_stretched)) {
             if ((render_ != &Derives::render_in)) {
-                render_ = &Derives::render_in;
+                if ((render_ != &Derives::render_raw)) {
+                    render_ = &Derives::render_in;
+                } else {
+                    render_ = &Derives::render;
+                }
             } else {
                 render_ = &Derives::render_stretched;
             }
         } else {
-            render_ = &Derives::render;
+            render_ = &Derives::render_raw;
         }
     }
     ///////////////////////////////////////////////////////////////////////

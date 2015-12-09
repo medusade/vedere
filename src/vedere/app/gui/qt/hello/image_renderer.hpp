@@ -24,6 +24,17 @@
 #include "vedere/gui/qt/gui.hpp"
 #include "vedere/app/gui/hello/renderer.hpp"
 
+#define VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE_FAST Qt::FastTransformation
+#define VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE_SMOOTH Qt::SmoothTransformation
+
+#if defined(MACOSX)
+#define VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE \
+    VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE_FAST
+#else // defined()
+#define VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE \
+    VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE_SMOOTH
+#endif // defined()
+
 namespace vedere {
 namespace app {
 namespace gui {
@@ -43,7 +54,10 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    image_renderer(QWidget* widget = 0): widget_(widget) {
+    image_renderer(QWidget* widget = 0)
+    : widget_(widget),
+      transformation_mode_
+      (VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE) {
     }
     virtual ~image_renderer() {
     }
@@ -118,6 +132,16 @@ public:
         }
         return false;
     }
+    virtual bool render_raw
+    (const void* image, size_t image_width, size_t image_height) {
+        if ((render
+             (image, image_width,image_height,
+              image_width,image_height, 0,0, image_format(),
+              Qt::IgnoreAspectRatio, transformation_mode()))) {
+            return true;
+        }
+        return false;
+    }
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
@@ -139,21 +163,29 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+    virtual bool transform_smooth(bool on = true) {
+        if ((on)) {
+            transformation_mode_ = VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE_SMOOTH;
+        } else {
+            transformation_mode_ = VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE_FAST;
+        }
+        return on;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual QImage::Format image_format() const {
         return QImage::Format_ARGB32;
     }
     virtual Qt::TransformationMode transformation_mode() const {
-#if defined(MACOSX)
-        return Qt::FastTransformation;
-#else // defined(MACOSX)
-        return Qt::SmoothTransformation;
-#endif // defined(MACOSX)
+        return transformation_mode_;
     }
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
 protected:
     QWidget* widget_;
+    Qt::TransformationMode transformation_mode_;
 };
 
 } // namespace hello

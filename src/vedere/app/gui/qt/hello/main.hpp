@@ -23,6 +23,8 @@
 
 #include "vedere/graphic/image/format/jpeg/libjpeg/image_reader.hpp"
 #include "vedere/graphic/image/format/jpeg/libjpeg/reader.hpp"
+#include "vedere/graphic/image/format/bmp/implement/image_reader.hpp"
+#include "vedere/graphic/image/format/bmp/implement/reader.hpp"
 #include "vedere/app/gui/qt/hello/renderer.hpp"
 #include "vedere/app/gui/qt/hello/image_renderer.hpp"
 #include "vedere/gui/qt/application/window_main.hpp"
@@ -53,8 +55,10 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual bool init() {
+    virtual bool init(gui::hello::image_transform_t image_transform) {
         renderer_.init(this);
+        renderer_.transform_smooth
+        (!(gui::hello::image_transform_smooth != image_transform));
         return true;
     }
     virtual bool finish() {
@@ -175,13 +179,17 @@ public:
     ///////////////////////////////////////////////////////////////////////
     virtual bool init
     (size_t image_width, size_t image_height, size_t image_depth,
-     gui::hello::image_format_t image_format, const char_t* image_file) {
+     gui::hello::image_format_t image_format, const char_t* image_file,
+     gui::hello::image_transform_t image_transform) {
         if ((main_widget_ = new main_widget(this))) {
-            if ((main_widget_->init())) {
+            if ((main_widget_->init(image_transform))) {
                 this->setCentralWidget(main_widget_);
                 switch (image_format) {
                 case gui::hello::image_format_jpeg:
                     load_jpeg_image(image_file);
+                    break;
+                case gui::hello::image_format_bmp:
+                    load_bmp_image(image_file);
                     break;
                 default:
                     load_raw_image
@@ -204,24 +212,26 @@ public:
     ///////////////////////////////////////////////////////////////////////
     virtual bool load_jpeg_image(const char_t* image_file) {
         if ((main_widget_) && (image_file)) {
-            graphic::image::format::jpeg::libjpeg::bgra_image_reader reader;
-            bool success = false;
+            graphic::image::format::jpeg::libjpeg::to_bgra_image_reader reader;
             if ((reader.read(image_file))) {
-                size_t image_width = 0, image_height = 0,
-                       image_depth = 0, image_size = 0;
-                byte_t* bytes = 0;
-
-                if ((bytes = reader.detach_image
-                     (image_width, image_height, image_depth, image_size))) {
-                    if ((main_widget_->set_image
-                        (bytes, image_size, image_width, image_height))) {
-                        success = true;
-                    } else {
-                        delete[] bytes;
-                    }
+                if ((load_image(reader))) {
+                    return true;
                 }
             }
-            return success;
+        }
+        return false;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual bool load_bmp_image(const char_t* image_file) {
+        if ((main_widget_) && (image_file)) {
+            graphic::image::format::bmp::implement::to_bgra_image_reader reader;
+            if ((reader.read(image_file))) {
+                if ((load_image(reader))) {
+                    return true;
+                }
+            }
         }
         return false;
     }
@@ -247,6 +257,25 @@ public:
                 return success;
             } else {
                 VEDERE_LOG_MESSAGE_ERROR("...failed on fopen(" << image_file << ", \"rb\")");
+            }
+        }
+        return false;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual bool load_image(graphic::image::to_bytes_reader& reader) {
+        size_t image_width = 0, image_height = 0,
+               image_depth = 0, image_size = 0;
+        byte_t* bytes = 0;
+
+        if ((bytes = reader.detach_image
+             (image_width, image_height, image_depth, image_size))) {
+            if ((main_widget_->set_image
+                (bytes, image_size, image_width, image_height))) {
+                return true;
+            } else {
+                delete[] bytes;
             }
         }
         return false;
@@ -287,7 +316,7 @@ protected:
             mw->resize(main_window_width_, main_window_height_);
             if ((mw->init
                  (image_width_, image_height_, image_depth_,
-                  image_format_, image_file_.has_chars()))) {
+                  image_format_, image_file_.has_chars(), image_transform_))) {
                 main_window_ = mw;
                 return main_window_;
             } else {
