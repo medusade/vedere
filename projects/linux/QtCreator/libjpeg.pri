@@ -13,37 +13,19 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qvhello.pro
+#   File: libjpeg.pri
 #
 # Author: $author$
-#   Date: 5/29/2015
+#   Date: 11/27/2015
 ########################################################################
-include(../../../../../build/QtCreator/libjpeg.pri)
-include(../../libjpeg.pri)
-include(../../qt.pri)
-include(../../../../QtCreator/vedere.pri)
-include(../../vedere.pri)
-include(../../../../QtCreator/app/qvhello/qvhello.pri)
 
-TARGET = qvhello
+########################################################################
+# libjpeg
+libjpeg_INCLUDEPATH += \
+$${build_libjpeg_INCLUDEPATH} \
 
-INCLUDEPATH += \
-$${qvhello_INCLUDEPATH} \
-$${qt_INCLUDEPATH} \
-$${libjpeg_INCLUDEPATH} \
+libjpeg_DEFINES += \
+$${build_libjpeg_DEFINES} \
 
-DEFINES += \
-$${qvhello_DEFINES} \
-$${qt_DEFINES} \
-
-HEADERS += \
-$${qvhello_HEADERS} \
-
-SOURCES += \
-$${qvhello_SOURCES} \
-
-LIBS += \
-$${qvhello_LIBS} \
-$${qt_LIBS} \
-$${libjpeg_LIBS} \
-
+libjpeg_LIBS += \
+$${build_libjpeg_LIBS} \

@@ -43,20 +43,32 @@ $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/reader.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/reader_events.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/decompress.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/jpeg.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/image_reader.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/reader.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/reader_events.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/bmp.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/to_bytes_reader.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/reader.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/pixel.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/color.hpp \
 $${VEDERE_SRC}/vedere/graphic/rectangle.hpp \
 
 qvhello_SOURCES += \
-$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/image_reader.cpp \
-$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/reader.cpp \
-$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/reader_events.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/decompress.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/jpeg.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/image_reader.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/reader.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/reader_events.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/bmp.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/to_bytes_reader.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/pixel.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/color.cpp \
 $${VEDERE_SRC}/vedere/graphic/rectangle.cpp \
+
+_qvhello_SOURCES += \
+$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/image_reader.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/reader.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/reader_events.cpp \
 
 ########################################################################
 
@@ -93,5 +105,3 @@ $${VEDERE_SRC}/vedere/console/main_main.cpp \
 
 qvhello_LIBS += \
 $${vedere_LIBS} \
-
-
