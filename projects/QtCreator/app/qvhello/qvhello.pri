@@ -43,6 +43,7 @@ $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/reader.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/reader_events.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/decompress.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/jpeg.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/png.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/image_reader.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/reader.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/reader_events.hpp \
@@ -56,6 +57,7 @@ $${VEDERE_SRC}/vedere/graphic/rectangle.hpp \
 qvhello_SOURCES += \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/decompress.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/jpeg.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/png.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/image_reader.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/reader.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/reader_events.cpp \

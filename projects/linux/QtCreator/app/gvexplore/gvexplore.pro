@@ -13,40 +13,35 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qvhello.pro
+#   File: gvexplore.pro
 #
 # Author: $author$
-#   Date: 5/29/2015
+#   Date: 6/28/2015
 ########################################################################
-include(../../../../../build/QtCreator/libjpeg.pri)
-include(../../libjpeg.pri)
-include(../../../../../build/QtCreator/libpng.pri)
-include(../../libpng.pri)
-include(../../qt.pri)
+include(../../../../../build/QtCreator/gtk.pri)
+include(../../gtk.pri)
 include(../../../../QtCreator/vedere.pri)
 include(../../vedere.pri)
-include(../../../../QtCreator/app/qvhello/qvhello.pri)
+include(../../../../QtCreator/app/gvexplore/gvexplore.pri)
 
-TARGET = qvhello
+TARGET = gvexplore
 
 INCLUDEPATH += \
-$${qvhello_INCLUDEPATH} \
-$${qt_INCLUDEPATH} \
-$${libjpeg_INCLUDEPATH} \
-$${libpng_INCLUDEPATH} \
+$${gvexplore_INCLUDEPATH} \
+$${gtk_INCLUDEPATH} \
 
 DEFINES += \
-$${qvhello_DEFINES} \
-$${qt_DEFINES} \
+$${gvexplore_DEFINES} \
+$${gtk_DEFINES} \
 
 HEADERS += \
-$${qvhello_HEADERS} \
+$${gvexplore_HEADERS} \
 
 SOURCES += \
-$${qvhello_SOURCES} \
+$${gvexplore_SOURCES} \
 
 LIBS += \
-$${qvhello_LIBS} \
-$${qt_LIBS} \
-$${libjpeg_LIBS} \
-$${libpng_LIBS} \
+$${gvexplore_LIBS} \
+$${gtk_LIBS} \
+
+
