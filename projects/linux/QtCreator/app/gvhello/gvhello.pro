@@ -18,6 +18,10 @@
 # Author: $author$
 #   Date: 5/27/2015
 ########################################################################
+include(../../../../../build/QtCreator/libjpeg.pri)
+include(../../libjpeg.pri)
+include(../../../../../build/QtCreator/libpng.pri)
+include(../../libpng.pri)
 include(../../../../../build/QtCreator/gtk.pri)
 include(../../gtk.pri)
 include(../../../../QtCreator/vedere.pri)
@@ -29,6 +33,8 @@ TARGET = gvhello
 INCLUDEPATH += \
 $${gvhello_INCLUDEPATH} \
 $${gtk_INCLUDEPATH} \
+$${libjpeg_INCLUDEPATH} \
+$${libpng_INCLUDEPATH} \
 
 DEFINES += \
 $${gvhello_DEFINES} \
@@ -42,4 +48,6 @@ $${gvhello_SOURCES} \
 LIBS += \
 $${gvhello_LIBS} \
 $${gtk_LIBS} \
+$${libjpeg_LIBS} \
+$${libpng_LIBS} \
 

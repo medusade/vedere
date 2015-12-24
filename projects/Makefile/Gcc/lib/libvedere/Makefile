@@ -13,39 +13,57 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qvhello.pro
+#   File: Makefile
 #
 # Author: $author$
-#   Date: 5/29/2015
+#   Date: 12/23/2015
+#
+# Generic Gcc Makefile for vedere libvedere Static Library
 ########################################################################
-include(../../../../../build/QtCreator/libjpeg.pri)
-include(../../libjpeg.pri)
-include(../../../../../build/QtCreator/libpng.pri)
-include(../../libpng.pri)
-include(../../qt.pri)
-include(../../../../QtCreator/vedere.pri)
-include(../../vedere.pri)
-include(../../../../QtCreator/app/qvhello/qvhello.pri)
 
-TARGET = qvhello
+#
+# user c++ flags
+#
+libvedere_USRCXXFLAGS += \
+${vedere_USRCXXFLAGS} \
 
-INCLUDEPATH += \
-$${qvhello_INCLUDEPATH} \
-$${qt_INCLUDEPATH} \
-$${libjpeg_INCLUDEPATH} \
+#
+# user defines
+#
+libvedere_USRDEFINES = \
+${vedere_USRDEFINES} \
 
-DEFINES += \
-$${qvhello_DEFINES} \
-$${qt_DEFINES} \
+#
+# user includes
+#
+libvedere_USRINCLUDES = \
+${vedere_USRINCLUDES} \
 
-HEADERS += \
-$${qvhello_HEADERS} \
+#
+# user libdirs
+#
+libvedere_USRLIBDIRS = \
+${vedere_USRLIBDIRS} \
 
-SOURCES += \
-$${qvhello_SOURCES} \
+#
+# C .c sources
+#
+libvedere_LIB_C_SOURCES = \
 
-LIBS += \
-$${qvhello_LIBS} \
-$${qt_LIBS} \
-$${libjpeg_LIBS} \
+#
+# C++ .cxx sources
+#
+libvedere_LIB_CXX_SOURCES = \
 
+#
+# C++ .cpp sources
+#
+libvedere_LIB_CPP_SOURCES += \
+${VEDERE_SRC}/vedere/base/base.cpp \
+
+#
+# libs
+#
+libvedere_LIBS = \
+-lvedere \
+${vedere_LIBS} \

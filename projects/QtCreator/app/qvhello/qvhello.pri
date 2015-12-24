@@ -58,7 +58,7 @@ qvhello_SOURCES += \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/decompress.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/jpeg.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/png.cpp \
-$${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/image_reader.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/image_reader.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/reader.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/reader_events.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/bmp.cpp \

@@ -13,39 +13,28 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qvhello.pro
+#   File: Makefile
 #
 # Author: $author$
-#   Date: 5/29/2015
+#   Date: 12/23/2015
+#
+# Linux Gcc Makefile for vedere applications
 ########################################################################
-include(../../../../../build/QtCreator/libjpeg.pri)
-include(../../libjpeg.pri)
-include(../../../../../build/QtCreator/libpng.pri)
-include(../../libpng.pri)
-include(../../qt.pri)
-include(../../../../QtCreator/vedere.pri)
-include(../../vedere.pri)
-include(../../../../QtCreator/app/qvhello/qvhello.pri)
+PKG = ../../../../..
 
-TARGET = qvhello
+PRJ = projects/linux/Makefile/Gcc
+SRC = src
 
-INCLUDEPATH += \
-$${qvhello_INCLUDEPATH} \
-$${qt_INCLUDEPATH} \
-$${libjpeg_INCLUDEPATH} \
+include $(PKG)/$(PRJ)/Makedefines
 
-DEFINES += \
-$${qvhello_DEFINES} \
-$${qt_DEFINES} \
+#
+# Source subdirs
+#
+#SRC_DIRS = \
+#$(PKG)/$(PRJ)/somedir \
+#
+SRC_DIRS = \
+$(PKG)/$(PRJ)/app/gvhello \
 
-HEADERS += \
-$${qvhello_HEADERS} \
-
-SOURCES += \
-$${qvhello_SOURCES} \
-
-LIBS += \
-$${qvhello_LIBS} \
-$${qt_LIBS} \
-$${libjpeg_LIBS} \
+include $(PKG)/$(PRJ)/Makedirs
 

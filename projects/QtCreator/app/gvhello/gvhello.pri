@@ -62,6 +62,7 @@ gvhello_HEADERS += \
 $${VEDERE_SRC}/vedere/app/gui/gtk/hello/main.hpp \
 $${VEDERE_SRC}/vedere/app/gui/gtk/hello/renderer.hpp \
 $${VEDERE_SRC}/vedere/app/gui/gtk/hello/image_renderer.hpp \
+$${VEDERE_SRC}/vedere/app/gui/hello/main_window.hpp \
 $${VEDERE_SRC}/vedere/app/gui/hello/window.hpp \
 $${VEDERE_SRC}/vedere/console/main.hpp \
 $${VEDERE_SRC}/vedere/console/main_opt.hpp \
@@ -73,6 +74,7 @@ gvhello_SOURCES += \
 $${VEDERE_SRC}/vedere/app/gui/gtk/hello/main.cpp \
 $${VEDERE_SRC}/vedere/app/gui/gtk/hello/renderer.cpp \
 $${VEDERE_SRC}/vedere/app/gui/gtk/hello/image_renderer.cpp \
+$${VEDERE_SRC}/vedere/app/gui/hello/main_window.cpp \
 $${VEDERE_SRC}/vedere/console/main_opt.cpp \
 $${VEDERE_SRC}/vedere/console/main_main.cpp \
 

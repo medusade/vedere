@@ -13,39 +13,11 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qvhello.pro
+#   File: Makedefines
 #
 # Author: $author$
-#   Date: 5/29/2015
+#   Date: 12/23/2015
+#
+# Generic Gcc Makedefines for vedere
 ########################################################################
-include(../../../../../build/QtCreator/libjpeg.pri)
-include(../../libjpeg.pri)
-include(../../../../../build/QtCreator/libpng.pri)
-include(../../libpng.pri)
-include(../../qt.pri)
-include(../../../../QtCreator/vedere.pri)
-include(../../vedere.pri)
-include(../../../../QtCreator/app/qvhello/qvhello.pri)
-
-TARGET = qvhello
-
-INCLUDEPATH += \
-$${qvhello_INCLUDEPATH} \
-$${qt_INCLUDEPATH} \
-$${libjpeg_INCLUDEPATH} \
-
-DEFINES += \
-$${qvhello_DEFINES} \
-$${qt_DEFINES} \
-
-HEADERS += \
-$${qvhello_HEADERS} \
-
-SOURCES += \
-$${qvhello_SOURCES} \
-
-LIBS += \
-$${qvhello_LIBS} \
-$${qt_LIBS} \
-$${libjpeg_LIBS} \
-
+INS = $(HOME)/build/vedere
