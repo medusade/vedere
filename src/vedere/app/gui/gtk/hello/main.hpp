@@ -23,6 +23,7 @@
 
 #include "vedere/app/gui/gtk/hello/renderer.hpp"
 #include "vedere/app/gui/gtk/hello/image_renderer.hpp"
+#include "vedere/app/gui/hello/main_window.hpp"
 #include "vedere/app/gui/hello/main.hpp"
 #include "vedere/app/gui/hello/renderer.hpp"
 #include "vedere/app/gui/hello/window.hpp"
@@ -62,6 +63,10 @@ public:
     virtual void* load_image
     (byte_reader& reader, size_t size, size_t width, size_t height) {
         return renderer_.load_image(reader, size, width, height);
+    }
+    virtual void* set_image
+    (byte_t* bytes, size_t size, size_t width, size_t height) {
+        return renderer_.set_image(bytes, size, width, height);
     }
 
     ///////////////////////////////////////////////////////////////////////
@@ -160,7 +165,8 @@ protected:
     message_queue_t message_queue_;
 };
 
-typedef vedere::gui::gtk::application::window window_extends;
+typedef app::gui::hello::main_windowt
+<vedere::gui::gtk::application::window> window_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: window
 ///////////////////////////////////////////////////////////////////////
@@ -179,7 +185,8 @@ public:
     ///////////////////////////////////////////////////////////////////////
     virtual bool init
     (size_t image_width, size_t image_height,
-     size_t image_depth, const char_t* image_file) {
+     size_t image_depth, const char_t* image_file,
+     gui::hello::image_format_t image_format = gui::hello::image_format_raw) {
         GtkWidget* parent = this->attached_to();
         if ((parent)) {
             GtkWidget* child = 0;
@@ -188,20 +195,9 @@ public:
                 d_.connect_signal_draw();
                 d_.connect_signal_button_events();
                 gtk_container_add(GTK_CONTAINER(parent), child);
-                if ((image_file) && (image_width) && (image_height) && (image_depth)) {
-                    size_t image_pixel_size = ((image_depth+7)/8),
-                           image_size = (image_width*image_height*image_pixel_size);
-                    FILE* file = 0;
-                    if ((file = fopen(image_file, "rb"))) {
-                        xos::io::read::byte_file f(file);
-                        if ((d_.load_image
-                            (f, image_size, image_width, image_height))) {
-                        }
-                        fclose(file);
-                    } else {
-                        VEDERE_LOG_MESSAGE_ERROR("...failed on fopen(" << image_file << ", \"rb\")");
-                    }
-                }
+                load_image
+                (image_width, image_height, image_depth,
+                 image_file, image_format);
             }
         }
         return true;
@@ -253,7 +249,8 @@ protected:
                 main_window_.connect_signal_configure_event();
                 main_window_.init
                 (image_width_, image_height_,
-                 image_depth_, image_file_.has_chars());
+                 image_depth_, image_file_.has_chars(),
+                 image_format_);
                 return main_window;
             }
         }
