@@ -74,7 +74,7 @@ public:
     virtual bool render
     (const void* image, size_t image_width, size_t image_height,
      const void* in_image, size_t in_image_width, size_t in_image_height) {
-        graphic::size_t size(image_width, image_height),
+        graphic::surface::size_t size(image_width, image_height),
                         to_size(width_, height_);
         graphic::rectangle_t r(size, to_size);
         if ((render
@@ -86,7 +86,7 @@ public:
                 int y = r.origin.y + r.size.height - in_offset_y_;
                 int width = (r.size.width*in_ratio_to_)/in_ratio_;
                 int height = (r.size.height*in_ratio_to_)/in_ratio_;
-                graphic::size_t in_size(in_image_width, in_image_height),
+                graphic::surface::size_t in_size(in_image_width, in_image_height),
                                 to_in_size(width, height);
                 graphic::rectangle_t in_r(in_size, to_in_size);
                 if ((render
@@ -103,7 +103,7 @@ public:
     }
     virtual bool render
     (const void* image, size_t image_width, size_t image_height) {
-        graphic::size_t size(image_width, image_height),
+        graphic::surface::size_t size(image_width, image_height),
                         to_size(width_, height_);
         graphic::rectangle_t r(size, to_size);
         if ((render

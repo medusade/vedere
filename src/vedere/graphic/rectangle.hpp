@@ -26,6 +26,8 @@
 namespace vedere {
 namespace graphic {
 
+namespace surface {
+
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 template <typename TNumber>
@@ -54,12 +56,14 @@ struct sizet {
 };
 typedef sizet<int> size_t;
 
+} // namespace surface
+
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 template
 <typename TNumber,
- typename TPoint = pointt<TNumber>,
- typename TSize = sizet<TNumber> >
+ typename TPoint = surface::pointt<TNumber>,
+ typename TSize = surface::sizet<TNumber> >
 
 struct rectanglet {
     TPoint origin;
@@ -120,7 +124,7 @@ struct rectanglet {
         return rect;
     }
 };
-typedef rectanglet<int, point_t, size_t> rectangle_t;
+typedef rectanglet<int, surface::point_t, surface::size_t> rectangle_t;
 
 } // namespace graphic
 } // namespace vedere 

@@ -144,6 +144,15 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+    virtual pixelt& operator()
+    (color::space::axis_t red, color::space::axis_t green, color::space::axis_t blue,
+     color::space::axis_t alpha = 255, color::space::axis_t max = 255) {
+        red_ = red; green_ = green; blue_ = blue; alpha_ = alpha; max_ = max;
+        return *this;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 protected:
     color::space::axis_t red_, green_, blue_, alpha_, max_;
 };
