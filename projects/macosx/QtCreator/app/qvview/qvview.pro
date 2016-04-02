@@ -1,5 +1,5 @@
 ########################################################################
-# Copyright (c) 1988-2015 $organization$
+# Copyright (c) 1988-2016 $organization$
 #
 # This software is provided by the author and contributors ``as is''
 # and any express or implied warranties, including, but not limited to,
@@ -13,43 +13,33 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: gvhello.pro
+#   File: qvview.pro
 #
 # Author: $author$
-#   Date: 5/27/2015
+#   Date: 3/27/2016
 ########################################################################
-include(../../../../../build/QtCreator/libjpeg.pri)
-include(../../libjpeg.pri)
-include(../../../../../build/QtCreator/libpng.pri)
-include(../../libpng.pri)
-include(../../../../../build/QtCreator/gtk.pri)
-include(../../gtk.pri)
+include(../../../../../build/QtCreator/libraw.pri)
+include(../../libraw.pri)
+include(../../../../../build/QtCreator/libtiff.pri)
+include(../../libtiff.pri)
+include(../../qt.pri)
 include(../../../../QtCreator/vedere.pri)
 include(../../vedere.pri)
-include(../../../../QtCreator/app/gvhello/gvhello.pri)
+include(../../../../QtCreator/app/qvview/qvview.pri)
 
-TARGET = gvhello
+TARGET = qvview
 
 INCLUDEPATH += \
-$${gvhello_INCLUDEPATH} \
-$${gtk_INCLUDEPATH} \
-$${libjpeg_INCLUDEPATH} \
-$${libpng_INCLUDEPATH} \
-$${libraw_INCLUDEPATH} \
+$${qvview_INCLUDEPATH} \
 
 DEFINES += \
-$${gvhello_DEFINES} \
+$${qvview_DEFINES} \
 
 HEADERS += \
-$${gvhello_HEADERS} \
+$${qvview_HEADERS} \
 
 SOURCES += \
-$${gvhello_SOURCES} \
+$${qvview_SOURCES} \
 
 LIBS += \
-$${gvhello_LIBS} \
-$${gtk_LIBS} \
-$${libjpeg_LIBS} \
-$${libpng_LIBS} \
-$${libraw_LIBS} \
-
+$${qvview_LIBS} \

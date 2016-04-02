@@ -33,6 +33,8 @@ INCLUDEPATH += \
 $${qvhello_INCLUDEPATH} \
 $${qt_INCLUDEPATH} \
 $${libjpeg_INCLUDEPATH} \
+$${libpng_INCLUDEPATH} \
+$${libraw_INCLUDEPATH} \
 
 DEFINES += \
 $${qvhello_DEFINES} \
@@ -48,4 +50,6 @@ LIBS += \
 $${qvhello_LIBS} \
 $${qt_LIBS} \
 $${libjpeg_LIBS} \
+$${libpng_LIBS} \
+$${libraw_LIBS} \
 

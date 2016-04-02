@@ -51,6 +51,9 @@ ${build_gtk_USRDEFINES} \
 #
 USRINCLUDES = \
 ${libvedere_USRINCLUDES} \
+${build_libjpeg_USRINCLUDES} \
+${build_libpng_USRINCLUDES} \
+${build_libraw_USRINCLUDES} \
 ${build_gtk_USRINCLUDES} \
 
 #
@@ -58,6 +61,9 @@ ${build_gtk_USRINCLUDES} \
 #
 USRLIBDIRS = \
 ${libvedere_USRLIBDIRS} \
+${build_libjpeg_USRLIBDIRS} \
+${build_libpng_USRLIBDIRS} \
+${build_libraw_USRLIBDIRS} \
 ${build_gtk_USRLIBDIRS} \
 
 #
@@ -116,6 +122,9 @@ EXE_MM_SOURCES = \
 #
 LIBS = \
 ${libvedere_LIBS} \
+${build_libjpeg_LIBS} \
+${build_libpng_LIBS} \
+${build_libraw_LIBS} \
 ${build_gtk_LIBS} \
 
 #

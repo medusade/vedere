@@ -1,5 +1,5 @@
 ########################################################################
-# Copyright (c) 1988-2015 $organization$
+# Copyright (c) 1988-2016 $organization$
 #
 # This software is provided by the author and contributors ``as is''
 # and any express or implied warranties, including, but not limited to,
@@ -13,43 +13,22 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: gvhello.pro
+#   File: libtiff.pri
 #
 # Author: $author$
-#   Date: 5/27/2015
+#   Date: 3/29/2016
 ########################################################################
-include(../../../../../build/QtCreator/libjpeg.pri)
-include(../../libjpeg.pri)
-include(../../../../../build/QtCreator/libpng.pri)
-include(../../libpng.pri)
-include(../../../../../build/QtCreator/gtk.pri)
-include(../../gtk.pri)
-include(../../../../QtCreator/vedere.pri)
-include(../../vedere.pri)
-include(../../../../QtCreator/app/gvhello/gvhello.pri)
 
-TARGET = gvhello
+libtiff_INCLUDEPATH += \
+$${build_libtiff_INCLUDEPATH} \
 
-INCLUDEPATH += \
-$${gvhello_INCLUDEPATH} \
-$${gtk_INCLUDEPATH} \
-$${libjpeg_INCLUDEPATH} \
-$${libpng_INCLUDEPATH} \
-$${libraw_INCLUDEPATH} \
+libtiff_DEFINES += \
+$${build_libtiff_DEFINES} \
 
-DEFINES += \
-$${gvhello_DEFINES} \
+libtiff_HEADERS += \
 
-HEADERS += \
-$${gvhello_HEADERS} \
+libtiff_SOURCES += \
 
-SOURCES += \
-$${gvhello_SOURCES} \
-
-LIBS += \
-$${gvhello_LIBS} \
-$${gtk_LIBS} \
-$${libjpeg_LIBS} \
-$${libpng_LIBS} \
-$${libraw_LIBS} \
+libtiff_LIBS += \
+$${build_libtiff_LIBS} \
 

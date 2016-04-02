@@ -29,3 +29,14 @@ $${build_libpng_DEFINES} \
 
 libpng_LIBS += \
 $${build_libpng_LIBS} \
+
+########################################################################
+# libraw
+libraw_INCLUDEPATH += \
+$${build_libraw_INCLUDEPATH} \
+
+libraw_DEFINES += \
+$${build_libraw_DEFINES} \
+
+libraw_LIBS += \
+$${build_libraw_LIBS} \

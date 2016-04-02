@@ -18,6 +18,8 @@
 # Author: $author$
 #   Date: 5/29/2015
 ########################################################################
+include(../../../../../build/QtCreator/libtiff.pri)
+include(../../libtiff.pri)
 include(../../../../../build/QtCreator/libjpeg.pri)
 include(../../libjpeg.pri)
 include(../../../../../build/QtCreator/libpng.pri)
@@ -32,8 +34,10 @@ TARGET = qvhello
 INCLUDEPATH += \
 $${qvhello_INCLUDEPATH} \
 $${qt_INCLUDEPATH} \
+$${libtiff_INCLUDEPATH} \
 $${libjpeg_INCLUDEPATH} \
 $${libpng_INCLUDEPATH} \
+$${libraw_INCLUDEPATH} \
 
 DEFINES += \
 $${qvhello_DEFINES} \
@@ -48,5 +52,7 @@ $${qvhello_SOURCES} \
 LIBS += \
 $${qvhello_LIBS} \
 $${qt_LIBS} \
+$${libtiff_LIBS} \
 $${libjpeg_LIBS} \
 $${libpng_LIBS} \
+$${libraw_LIBS} \
