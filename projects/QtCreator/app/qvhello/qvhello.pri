@@ -30,13 +30,60 @@ $${vedere_DEFINES} \
 qvhello_HEADERS += \
 $${XOS_SRC}/xos/base/matrix.hpp \
 $${XOS_SRC}/xos/base/vector.hpp \
+$${XOS_SRC}/xos/io/read/file_or_buffer.hpp \
 $${XOS_SRC}/xos/io/read/file.hpp \
 $${XOS_SRC}/xos/io/file/reader.hpp \
+$${XOS_SRC}/xos/io/read/buffer.hpp \
+$${XOS_SRC}/xos/io/buffer.hpp \
+$${XOS_SRC}/xos/io/seeker.hpp \
+$${XOS_SRC}/xos/io/teller.hpp \
+$${XOS_SRC}/xos/io/whencer.hpp \
+$${XOS_SRC}/xos/io/whence.hpp \
 
 qvhello_SOURCES += \
 $${XOS_SRC}/xos/base/matrix.cpp \
 $${XOS_SRC}/xos/base/vector.cpp \
+$${XOS_SRC}/xos/io/read/file_or_buffer.cpp \
 $${XOS_SRC}/xos/io/read/file.cpp \
+$${XOS_SRC}/xos/io/read/buffer.cpp \
+$${XOS_SRC}/xos/io/seeker.cpp \
+$${XOS_SRC}/xos/io/teller.cpp \
+$${XOS_SRC}/xos/io/whencer.cpp \
+$${XOS_SRC}/xos/io/whence.cpp \
+
+########################################################################
+# libpng
+
+qvhello_HEADERS += \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_reader.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_created.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/read_struct.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/struct.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/struct_created.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/palette.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/color.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/png.hpp \
+
+qvhello_SOURCES += \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_reader.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_created.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/read_struct.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/struct.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/struct_created.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/palette.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/color.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/png.cpp \
+
+########################################################################
+# libpng
+
+_qvhello_HEADERS += \
+$${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/png.hpp \
+
+_qvhello_SOURCES += \
+$${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/png.cpp \
 
 ########################################################################
 # libtiff
@@ -60,15 +107,6 @@ $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/jpeg.hpp \
 qvhello_SOURCES += \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/decompress.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/jpeg.cpp \
-
-########################################################################
-# libpng
-
-qvhello_HEADERS += \
-$${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/png.hpp \
-
-qvhello_SOURCES += \
-$${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/png.cpp \
 
 ########################################################################
 # libraw
@@ -117,8 +155,10 @@ $${VEDERE_SRC}/vedere/graphic/rectangle.hpp \
 qvhello_SOURCES += \
 $${VEDERE_SRC}/vedere/graphic/image/to_bytes_reader.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/pixel.cpp \
-$${VEDERE_SRC}/vedere/graphic/image/color.cpp \
 $${VEDERE_SRC}/vedere/graphic/rectangle.cpp \
+
+_qvhello_SOURCES += \
+$${VEDERE_SRC}/vedere/graphic/image/color.cpp \
 
 ########################################################################
 

@@ -30,6 +30,31 @@ $${LAMNA_SRC}/lamna/graphic/image/pixel.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/color_channels.cpp \
 
 ########################################################################
+# libpng
+qvview_HEADERS += \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_reader.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_created.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/read_struct.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/struct.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/struct_created.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/palette.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/color.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/png.hpp \
+
+qvview_SOURCES += \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_reader.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_created.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/read_struct.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/struct.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/struct_created.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/palette.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/color.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/png.cpp \
+
+########################################################################
+# libtiff
 qvview_HEADERS += \
 $${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/reader.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/reader_events.hpp \
@@ -43,6 +68,7 @@ $${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/opened.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/libtiff.cpp \
 
 ########################################################################
+# libraw
 qvview_HEADERS += \
 $${LAMNA_SRC}/lamna/graphic/image/format/raw/bayer/rgb/map.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/raw/bayer/rgb/filter.hpp \
@@ -87,16 +113,19 @@ $${vedere_INCLUDEPATH} \
 $${qt_INCLUDEPATH} \
 $${libraw_INCLUDEPATH} \
 $${libtiff_INCLUDEPATH} \
+$${libpng_INCLUDEPATH} \
 
 qvview_DEFINES += \
 $${vedere_DEFINES} \
 $${qt_DEFINES} \
 $${libraw_DEFINES} \
 $${libtiff_DEFINES} \
+$${libpng_DEFINES} \
 
 qvview_LIBS += \
 $${vedere_LIBS} \
 $${qt_LIBS} \
 $${libraw_LIBS} \
 $${libtiff_LIBS} \
+$${libpng_LIBS} \
 

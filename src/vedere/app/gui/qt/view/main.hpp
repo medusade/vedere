@@ -26,6 +26,7 @@
 #include "lamna/graphic/image/format/raw/bayer/rgb/pattern.hpp"
 #include "lamna/graphic/image/format/tiff/libtiff/reader.hpp"
 #include "lamna/graphic/image/format/tiff/libtiff/opened.hpp"
+#include "lamna/graphic/image/format/png/libpng/info_reader.hpp"
 
 namespace vedere {
 namespace app {
@@ -57,18 +58,26 @@ protected:
     int run(int argc, char** argv, char** env) {
         int err = 0;
         const char* chars = 0;
-        /*lamna::graphic::image::format::raw::bayer::rgb::filters_which_t f =
-            {lamna::graphic::image::format::raw::bayer::rgb::filter_red,
-             lamna::graphic::image::format::raw::bayer::rgb::filter_green,
-             lamna::graphic::image::format::raw::bayer::rgb::filter_green2,
-             lamna::graphic::image::format::raw::bayer::rgb::filter_blue};
-        lamna::graphic::image::format::raw::bayer::rgb::pattern p;
-        p.set_filters(f);
-        LAMNA_LOG_MESSAGE_DEBUG("" << p.name(p.which()) << "");
-        p.set_which(p.RGGB);*/
         if ((chars = this->image_file_.has_chars())) {
-            lamna::graphic::image::format::tiff::libtiff::reader t;
+            /*lamna::graphic::image::format::raw::bayer::rgb::filters_which_t f =
+                {lamna::graphic::image::format::raw::bayer::rgb::filter_red,
+                 lamna::graphic::image::format::raw::bayer::rgb::filter_green,
+                 lamna::graphic::image::format::raw::bayer::rgb::filter_green2,
+                 lamna::graphic::image::format::raw::bayer::rgb::filter_blue};
+            lamna::graphic::image::format::raw::bayer::rgb::pattern p;
+            p.set_filters(f);
+            LAMNA_LOG_MESSAGE_DEBUG("" << p.name(p.which()) << "");
+            p.set_which(p.RGGB);*/
+            /*lamna::graphic::image::format::tiff::libtiff::reader t;
             if ((t.read(chars))) {
+            }*/
+            lamna::graphic::image::format::png::libpng::read_struct s;
+            lamna::graphic::image::format::png::libpng::info_reader r(s);
+            if ((r.create())) {
+                if ((r.open(chars))) {
+                    r.close();
+                }
+                r.destroy();
             }
         }
         return err;
