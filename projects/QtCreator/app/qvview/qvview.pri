@@ -32,6 +32,8 @@ $${LAMNA_SRC}/lamna/graphic/image/color_channels.cpp \
 ########################################################################
 # libpng
 qvview_HEADERS += \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/reader.hpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/reader_events.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_reader.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_created.hpp \
@@ -43,6 +45,8 @@ $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/color.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/png.hpp \
 
 qvview_SOURCES += \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/reader.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/reader_events.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_reader.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_created.cpp \
@@ -51,7 +55,17 @@ $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/struct.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/struct_created.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/palette.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/color.cpp \
+
+_qvview_SOURCES += \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/png.cpp \
+
+qvview_HEADERS += \
+$${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/image_reader.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/png.hpp \
+
+qvview_SOURCES += \
+$${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/image_reader.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/png.cpp \
 
 ########################################################################
 # libtiff
@@ -62,10 +76,12 @@ $${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/opened.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/libtiff.hpp \
 
 qvview_SOURCES += \
-$${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/reader.cpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/reader_events.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/opened.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/libtiff.cpp \
+
+_qvview_SOURCES += \
+$${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/reader.cpp \
+$${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/reader_events.cpp \
 
 ########################################################################
 # libraw
