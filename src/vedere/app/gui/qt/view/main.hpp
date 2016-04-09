@@ -23,9 +23,11 @@
 
 #include "vedere/app/gui/view/main.hpp"
 #include "vedere/gui/qt/application/window_main.hpp"
+#include "vedere/graphic/image/format/png/libpng/image_reader.hpp"
 #include "lamna/graphic/image/format/raw/bayer/rgb/pattern.hpp"
 #include "lamna/graphic/image/format/tiff/libtiff/reader.hpp"
 #include "lamna/graphic/image/format/tiff/libtiff/opened.hpp"
+#include "lamna/graphic/image/format/png/libpng/reader.hpp"
 #include "lamna/graphic/image/format/png/libpng/info_reader.hpp"
 
 namespace vedere {
@@ -71,14 +73,23 @@ protected:
             /*lamna::graphic::image::format::tiff::libtiff::reader t;
             if ((t.read(chars))) {
             }*/
-            lamna::graphic::image::format::png::libpng::read_struct s;
+            /*lamna::graphic::image::format::png::libpng::read_struct s;
             lamna::graphic::image::format::png::libpng::info_reader r(s);
             if ((r.create())) {
                 if ((r.open(chars))) {
+                    try {
+                        if ((r.ReadBegin())) {
+                            r.ReadEnd();
+                        }
+                    } catch (const lamna::graphic::image::format::png::libpng::error_string e) {
+                    }
                     r.close();
                 }
                 r.destroy();
-            }
+            }*/
+            //lamna::graphic::image::format::png::libpng::reader r;
+            vedere::graphic::image::format::png::libpng::image_reader r;
+            r.read(chars);
         }
         return err;
     }

@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2015 $organization$
+/// Copyright (c) 1988-2016 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -13,15 +13,12 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: png.hpp
+///   File: image_reader.cpp
 ///
 /// Author: $author$
-///   Date: 12/7/2015
+///   Date: 4/9/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_LIBPNG_PNG_HPP
-#define _VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_LIBPNG_PNG_HPP
-
-#include "lamna/graphic/image/format/png/libpng/png.hpp"
+#include "vedere/graphic/image/format/png/libpng/image_reader.hpp"
 
 namespace vedere {
 namespace graphic {
@@ -30,11 +27,13 @@ namespace format {
 namespace png {
 namespace libpng {
 
+///////////////////////////////////////////////////////////////////////
+///  Class: image_readert
+///////////////////////////////////////////////////////////////////////
+
 } // namespace libpng 
 } // namespace png 
 } // namespace format 
 } // namespace image 
 } // namespace graphic 
 } // namespace vedere 
-
-#endif // _VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_LIBPNG_PNG_HPP 
