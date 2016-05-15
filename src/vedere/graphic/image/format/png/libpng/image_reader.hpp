@@ -21,6 +21,7 @@
 #ifndef _VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_LIBPNG_IMAGE_READER_HPP
 #define _VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_LIBPNG_IMAGE_READER_HPP
 
+#include "lamna/graphic/image/format/png/libpng/png.hpp"
 #include "vedere/graphic/image/to_bytes_reader.hpp"
 #include "vedere/graphic/image/reader.hpp"
 #include "lamna/graphic/image/format/png/libpng/reader.hpp"

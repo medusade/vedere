@@ -21,16 +21,11 @@
 #ifndef _VEDERE_APP_GUI_HELLO_MAIN_WINDOW_HPP
 #define _VEDERE_APP_GUI_HELLO_MAIN_WINDOW_HPP
 
-#include "vedere/graphic/image/format/raw/libraw/image_reader.hpp"
-#include "vedere/graphic/image/format/raw/libraw/reader.hpp"
 #include "vedere/graphic/image/format/jpeg/libjpeg/image_reader.hpp"
-#include "vedere/graphic/image/format/jpeg/libjpeg/reader.hpp"
 #include "vedere/graphic/image/format/tiff/libtiff/image_reader.hpp"
 #include "vedere/graphic/image/format/png/libpng/image_reader.hpp"
 #include "vedere/graphic/image/format/bmp/implement/image_reader.hpp"
-#include "vedere/graphic/image/format/bmp/implement/reader.hpp"
-#include "vedere/graphic/image/to_bytes_reader.hpp"
-#include "vedere/graphic/image/reader.hpp"
+#include "vedere/graphic/image/format/raw/libraw/image_reader.hpp"
 #include "vedere/app/gui/hello/main.hpp"
 
 namespace vedere {

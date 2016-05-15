@@ -35,6 +35,8 @@ typedef lamna::gui::gtk::string_t string_t;
 typedef lamna::gui::gtk::gchars gchars;
 typedef lamna::gui::gtk::gstring gstring;
 
+typedef lamna::gui::gtk::gpointer_to_string gpointer_to_string;
+
 } // namespace gtk
 } // namespace gui 
 } // namespace vedere 

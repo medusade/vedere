@@ -50,6 +50,8 @@ typedef xos::io::writer writer;
 typedef xos::io::byte_reader byte_reader;
 typedef xos::io::byte_writer byte_writer;
 
+typedef lamna::pointer_to_string pointer_to_string;
+
 } // namespace vedere
 
 #endif // _VEDERE_BASE_BASE_HPP 
