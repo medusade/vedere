@@ -18,10 +18,14 @@
 # Author: $author$
 #   Date: 5/27/2015
 ########################################################################
+include(../../../../../build/QtCreator/libtiff.pri)
+include(../../libtiff.pri)
 include(../../../../../build/QtCreator/libjpeg.pri)
 include(../../libjpeg.pri)
 include(../../../../../build/QtCreator/libpng.pri)
 include(../../libpng.pri)
+include(../../../../../build/QtCreator/libraw.pri)
+include(../../libraw.pri)
 include(../../../../../build/QtCreator/gtk.pri)
 include(../../gtk.pri)
 include(../../../../QtCreator/vedere.pri)
@@ -33,6 +37,7 @@ TARGET = gvhello
 INCLUDEPATH += \
 $${gvhello_INCLUDEPATH} \
 $${gtk_INCLUDEPATH} \
+$${libtiff_INCLUDEPATH} \
 $${libjpeg_INCLUDEPATH} \
 $${libpng_INCLUDEPATH} \
 $${libraw_INCLUDEPATH} \
@@ -49,7 +54,10 @@ $${gvhello_SOURCES} \
 LIBS += \
 $${gvhello_LIBS} \
 $${gtk_LIBS} \
+$${libtiff_LIBS} \
 $${libjpeg_LIBS} \
 $${libpng_LIBS} \
 $${libraw_LIBS} \
-
+-llcms2 \
+-lgomp \
+-lz \

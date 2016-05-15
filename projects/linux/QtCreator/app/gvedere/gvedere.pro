@@ -1,5 +1,5 @@
 ########################################################################
-# Copyright (c) 1988-2015 $organization$
+# Copyright (c) 1988-2016 $organization$
 #
 # This software is provided by the author and contributors ``as is''
 # and any express or implied warranties, including, but not limited to,
@@ -13,51 +13,35 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qvhello.pro
+#   File: gvedere.pro
 #
 # Author: $author$
-#   Date: 5/29/2015
+#   Date: 5/7/2016
 ########################################################################
-include(../../../../../build/QtCreator/libtiff.pri)
-include(../../libtiff.pri)
-include(../../../../../build/QtCreator/libjpeg.pri)
-include(../../libjpeg.pri)
-include(../../../../../build/QtCreator/libpng.pri)
-include(../../libpng.pri)
-include(../../../../../build/QtCreator/libraw.pri)
-include(../../libraw.pri)
-include(../../qt.pri)
+include(../../../../../build/QtCreator/gtk.pri)
+include(../../gtk.pri)
 include(../../../../QtCreator/vedere.pri)
 include(../../vedere.pri)
-include(../../../../QtCreator/app/qvhello/qvhello.pri)
+include(../../../../QtCreator/app/gvedere/gvedere.pri)
 
-TARGET = qvhello
+TARGET = gvedere
 
 INCLUDEPATH += \
-$${qvhello_INCLUDEPATH} \
-$${qt_INCLUDEPATH} \
-$${libtiff_INCLUDEPATH} \
-$${libjpeg_INCLUDEPATH} \
-$${libpng_INCLUDEPATH} \
-$${libraw_INCLUDEPATH} \
+$${gvedere_INCLUDEPATH} \
+$${gtk_INCLUDEPATH} \
 
 DEFINES += \
-$${qvhello_DEFINES} \
-$${qt_DEFINES} \
+$${gvedere_DEFINES} \
+$${gtk_DEFINES} \
 
 HEADERS += \
-$${qvhello_HEADERS} \
+$${gvedere_HEADERS} \
 
 SOURCES += \
-$${qvhello_SOURCES} \
+$${gvedere_SOURCES} \
 
 LIBS += \
-$${qvhello_LIBS} \
-$${qt_LIBS} \
-$${libtiff_LIBS} \
-$${libjpeg_LIBS} \
-$${libpng_LIBS} \
-$${libraw_LIBS} \
--llcms2 \
--lgomp \
--lz \
+$${gvedere_LIBS} \
+$${gtk_LIBS} \
+
+

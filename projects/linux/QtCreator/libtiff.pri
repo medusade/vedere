@@ -1,5 +1,5 @@
 ########################################################################
-# Copyright (c) 1988-2015 $organization$
+# Copyright (c) 1988-2016 $organization$
 #
 # This software is provided by the author and contributors ``as is''
 # and any express or implied warranties, including, but not limited to,
@@ -13,19 +13,22 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: libpng.pri
+#   File: libtiff.pri
 #
 # Author: $author$
-#   Date: 12/7/2015
+#   Date: 3/29/2016
 ########################################################################
 
-########################################################################
-# libpng
-libpng_INCLUDEPATH += \
-$${build_libpng_INCLUDEPATH} \
+libtiff_INCLUDEPATH += \
+$${build_libtiff_INCLUDEPATH} \
 
-libpng_DEFINES += \
-$${build_libpng_DEFINES} \
+libtiff_DEFINES += \
+$${build_libtiff_DEFINES} \
 
-libpng_LIBS += \
-$${build_libpng_LIBS} \
+libtiff_HEADERS += \
+
+libtiff_SOURCES += \
+
+libtiff_LIBS += \
+$${build_libtiff_LIBS} \
+

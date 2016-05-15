@@ -19,6 +19,12 @@
 #   Date: 5/29/2015
 ########################################################################
 
+lessThan(QT_MAJOR_VERSION, 5) {
+qt_FRAMEWORKS += -framework QtGui
+} else {
+qt_FRAMEWORKS += -framework QtWidgets
+}
+
 ########################################################################
 # qt
 qt_INCLUDEPATH += \
@@ -30,5 +36,5 @@ qt_HEADERS += \
 qt_SOURCES += \
 
 qt_LIBS += \
--framework QtWidgets \
+$${qt_FRAMEWORKS} \
 

@@ -55,6 +55,7 @@ $${XOS_SRC}/xos/io/whence.cpp \
 # libpng
 
 qvhello_HEADERS += \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/reader.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_reader.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_created.hpp \
@@ -66,6 +67,7 @@ $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/color.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/png.hpp \
 
 qvhello_SOURCES += \
+$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/reader.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_reader.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_created.cpp \
@@ -92,6 +94,8 @@ qvhello_HEADERS += \
 $${VEDERE_SRC}/vedere/graphic/image/format/tiff/libtiff/image_reader.hpp \
 
 qvhello_SOURCES += \
+
+_qvhello_SOURCES += \
 $${VEDERE_SRC}/vedere/graphic/image/format/tiff/libtiff/image_reader.cpp \
 
 ########################################################################
@@ -119,13 +123,13 @@ $${VEDERE_SRC}/vedere/graphic/image/format/raw/libraw/filter.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/raw/libraw/libraw.hpp \
 
 qvhello_SOURCES += \
-$${VEDERE_SRC}/vedere/graphic/image/format/raw/libraw/reader.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/raw/libraw/reader_events.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/raw/libraw/filter.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/raw/libraw/libraw.cpp \
 
 _qvhello_SOURCES += \
 $${VEDERE_SRC}/vedere/graphic/image/format/raw/libraw/image_reader.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/raw/libraw/reader.cpp \
 
 ########################################################################
 # bmp
@@ -196,3 +200,4 @@ $${VEDERE_SRC}/vedere/console/main_main.cpp \
 
 qvhello_LIBS += \
 $${vedere_LIBS} \
+
