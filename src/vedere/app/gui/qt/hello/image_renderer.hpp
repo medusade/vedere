@@ -22,18 +22,36 @@
 #define _VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_HPP
 
 #include "vedere/gui/qt/gui.hpp"
-#include "vedere/app/gui/hello/renderer.hpp"
+#include "vedere/app/gui/hello/image_renderer.hpp"
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+#define VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_IMAGE_FORMAT_ARGB32 QImage::Format_ARGB32
+
+#define VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_ASPECT_RATIO_IGNORE Qt::IgnoreAspectRatio
+#define VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_ASPECT_RATIO_KEEP Qt::KeepAspectRatio
 
 #define VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE_FAST Qt::FastTransformation
 #define VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE_SMOOTH Qt::SmoothTransformation
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+#define VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_IMAGE_FORMAT \
+    VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_IMAGE_FORMAT_ARGB32
+
+#define VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_ASPECT_RATIO \
+    VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_ASPECT_RATIO_IGNORE
+
 #if defined(MACOSX)
 #define VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE \
     VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE_FAST
-#else // defined()
+#else // defined(MACOSX)
 #define VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE \
     VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE_SMOOTH
-#endif // defined()
+#endif // defined(MACOSX)
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 namespace vedere {
 namespace app {
@@ -41,8 +59,18 @@ namespace gui {
 namespace qt {
 namespace hello {
 
-typedef gui::hello::image_renderer image_renderer_implements;
-typedef gui::hello::image_renderer_extend image_renderer_extends;
+typedef QImage::Format image_format_t;
+typedef Qt::AspectRatioMode aspect_ratio_mode_t;
+typedef Qt::TransformationMode transformation_mode_t;
+
+typedef gui::hello::image_renderert
+<image_format_t, VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_IMAGE_FORMAT,
+ aspect_ratio_mode_t, VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_ASPECT_RATIO,
+ transformation_mode_t, VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE>
+image_renderer_implements;
+
+typedef gui::hello::image_renderer_extendt
+<image_renderer_implements> image_renderer_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: image_renderer
 ///////////////////////////////////////////////////////////////////////
@@ -75,76 +103,7 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual bool render
-    (const void* image, size_t image_width, size_t image_height,
-     const void* in_image, size_t in_image_width, size_t in_image_height) {
-        graphic::surface::size_t size(image_width, image_height),
-                                 to_size(width_, height_);
-        graphic::rectangle_t r(size, to_size);
-
-        if ((render
-             (image, image_width,image_height,
-              width_,height_, r.origin.x,r.origin.y, image_format(),
-              Qt::KeepAspectRatio, transformation_mode()))) {
-
-            if ((width_ >= in_min_width_) && (height_ >= in_min_height_)) {
-                int x = r.origin.x + r.size.width - in_offset_x_;
-                int y = r.origin.y + r.size.height - in_offset_y_;
-                int width = (r.size.width*in_ratio_to_)/in_ratio_;
-                int height = (r.size.height*in_ratio_to_)/in_ratio_;
-                graphic::surface::size_t in_size(in_image_width, in_image_height),
-                                         to_in_size(width, height);
-                graphic::rectangle_t in_r(in_size, to_in_size);
-
-                if ((render
-                     (in_image, in_image_width,in_image_height,
-                      in_r.size.width,in_r.size.height,
-                      x-in_r.size.width,y-in_r.size.height, image_format(),
-                      Qt::KeepAspectRatio, transformation_mode()))) {
-                    return true;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-    virtual bool render
-    (const void* image, size_t image_width, size_t image_height) {
-        graphic::surface::size_t size(image_width, image_height),
-                                 to_size(width_, height_);
-        graphic::rectangle_t r(size, to_size);
-
-        if ((render
-             (image, image_width,image_height,
-              width_,height_, r.origin.x,r.origin.y, image_format(),
-              Qt::KeepAspectRatio, transformation_mode()))) {
-            return true;
-        }
-        return false;
-    }
-    virtual bool render_stretched
-    (const void* image, size_t image_width, size_t image_height) {
-        if ((render
-             (image, image_width,image_height,
-              width_,height_, 0,0, image_format(),
-              Qt::IgnoreAspectRatio, transformation_mode()))) {
-            return true;
-        }
-        return false;
-    }
-    virtual bool render_raw
-    (const void* image, size_t image_width, size_t image_height) {
-        if ((render
-             (image, image_width,image_height,
-              image_width,image_height, 0,0, image_format(),
-              Qt::IgnoreAspectRatio, transformation_mode()))) {
-            return true;
-        }
-        return false;
-    }
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
+    using Extends::render;
     virtual bool render
     (const void* image, size_t image_width, size_t image_height,
      size_t width, size_t height, size_t x, size_t y, QImage::Format image_format,
@@ -163,6 +122,12 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+    virtual aspect_ratio_mode_t aspect_ratio_mode() const {
+        return VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_ASPECT_RATIO_KEEP;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual bool transform_smooth(bool on = true) {
         if ((on)) {
             transformation_mode_ = VEDERE_APP_GUI_QT_HELLO_IMAGE_RENDERER_TRANSFORMATION_MODE_SMOOTH;
@@ -174,9 +139,6 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual QImage::Format image_format() const {
-        return QImage::Format_ARGB32;
-    }
     virtual Qt::TransformationMode transformation_mode() const {
         return transformation_mode_;
     }

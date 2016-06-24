@@ -22,6 +22,7 @@
 #define _VEDERE_APP_GUI_QT_HELLO_RENDERER_HPP
 
 #include "vedere/app/gui/qt/hello/image_renderer.hpp"
+#include "vedere/app/gui/hello/renderer_extend.hpp"
 
 namespace vedere {
 namespace app {
@@ -29,8 +30,12 @@ namespace gui {
 namespace qt {
 namespace hello {
 
-typedef gui::hello::renderer_implements renderer_implements;
-typedef gui::hello::renderer renderer_extends;
+/*typedef gui::hello::renderer_implements renderer_implements;
+typedef gui::hello::renderer renderer_extends;*/
+typedef implement_base renderer_implements;
+typedef gui::hello::renderer_extendt
+<image_renderer::image_format_t,
+ image_renderer::image_format_none, image_renderer> renderer_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: renderer
 ///////////////////////////////////////////////////////////////////////
@@ -55,17 +60,18 @@ public:
     virtual bool finish() {
         return image_renderer_.finish();
     }
-
+/*
     ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////*/
     virtual bool resize(size_t width, size_t height) {
         return image_renderer_.resize(width, height);
     }
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual image_renderer_t* image_renderer(const image_format_t& format) const {
-        if (!(format != image_renderer_.format())) {
+    virtual image_renderer_t*
+    image_renderer(const image_format_t& image_format) const {
+        if (!(image_format != image_renderer_.image_format())) {
             return ((image_renderer_t*)&image_renderer_);
         }
         return 0;
@@ -74,7 +80,7 @@ public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
 protected:
-    hello::image_renderer image_renderer_;
+    image_renderer_t image_renderer_;
 };
 
 } // namespace hello
