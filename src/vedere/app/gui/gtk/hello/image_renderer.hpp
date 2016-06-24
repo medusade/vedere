@@ -21,7 +21,7 @@
 #ifndef _VEDERE_APP_GUI_GTK_HELLO_IMAGE_RENDERER_HPP
 #define _VEDERE_APP_GUI_GTK_HELLO_IMAGE_RENDERER_HPP
 
-#include "vedere/app/gui/hello/renderer.hpp"
+#include "vedere/app/gui/hello/image_renderer.hpp"
 #include "vedere/gui/gtk/drawing_area.hpp"
 #include "vedere/base/base.hpp"
 
@@ -31,18 +31,24 @@ namespace gui {
 namespace gtk {
 namespace hello {
 
-enum aspect_ratio_mode_t {
-    ASPECT_RATIO_MODE_IGNORE,
-    ASPECT_RATIO_MODE_KEEP
-};
 enum transformation_mode_t {
     TRANSFORMATION_MODE_NONE,
     TRANSFORMATION_MODE_FAST,
     TRANSFORMATION_MODE_SMOOTH
 };
+enum aspect_ratio_mode_t {
+    ASPECT_RATIO_MODE_IGNORE,
+    ASPECT_RATIO_MODE_KEEP
+};
+typedef cairo_format_t image_format_t;
 
-typedef gui::hello::image_renderer image_renderer_implements;
-typedef gui::hello::image_renderer_extend image_renderer_extends;
+typedef gui::hello::image_renderert
+<image_format_t, CAIRO_FORMAT_ARGB32,
+ aspect_ratio_mode_t, ASPECT_RATIO_MODE_IGNORE,
+ transformation_mode_t, TRANSFORMATION_MODE_NONE> image_renderer_implements;
+
+typedef gui::hello::image_renderer_extendt
+<image_renderer_implements> image_renderer_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: image_renderer
 ///////////////////////////////////////////////////////////////////////
@@ -51,12 +57,14 @@ class _EXPORT_CLASS image_renderer
 public:
     typedef image_renderer_implements Implements;
     typedef image_renderer_extends Extends;
+
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     image_renderer(cairo_t* cr = 0): cr_(cr_) {
     }
     virtual ~image_renderer() {
     }
+
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual bool init(cairo_t* cr, size_t width, size_t height) {
@@ -69,63 +77,10 @@ public:
         cr_ = 0;
         return true;
     }
+
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual bool render
-    (const void* image, size_t image_width, size_t image_height,
-     const void* in_image, size_t in_image_width, size_t in_image_height) {
-        graphic::surface::size_t size(image_width, image_height),
-                        to_size(width_, height_);
-        graphic::rectangle_t r(size, to_size);
-        if ((render
-             (image, image_width,image_height,
-              r.size.width,r.size.height, r.origin.x,r.origin.y, image_format(),
-              ASPECT_RATIO_MODE_IGNORE, transformation_mode()))) {
-            if ((width_ >= in_min_width_) && (height_ >= in_min_height_)) {
-                int x = r.origin.x + r.size.width - in_offset_x_;
-                int y = r.origin.y + r.size.height - in_offset_y_;
-                int width = (r.size.width*in_ratio_to_)/in_ratio_;
-                int height = (r.size.height*in_ratio_to_)/in_ratio_;
-                graphic::surface::size_t in_size(in_image_width, in_image_height),
-                                to_in_size(width, height);
-                graphic::rectangle_t in_r(in_size, to_in_size);
-                if ((render
-                     (in_image, in_image_width,in_image_height,
-                      in_r.size.width,in_r.size.height,
-                      x-in_r.size.width,y-in_r.size.height, image_format(),
-                      ASPECT_RATIO_MODE_IGNORE, transformation_mode()))) {
-                    return true;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-    virtual bool render
-    (const void* image, size_t image_width, size_t image_height) {
-        graphic::surface::size_t size(image_width, image_height),
-                        to_size(width_, height_);
-        graphic::rectangle_t r(size, to_size);
-        if ((render
-             (image, image_width,image_height,
-              r.size.width,r.size.height, r.origin.x,r.origin.y, image_format(),
-              ASPECT_RATIO_MODE_IGNORE, transformation_mode()))) {
-            return true;
-        }
-        return false;
-    }
-    virtual bool render_stretched
-    (const void* image, size_t image_width, size_t image_height) {
-        if ((render
-             (image, image_width,image_height,
-              width_,height_, 0,0, image_format(),
-              ASPECT_RATIO_MODE_IGNORE, transformation_mode()))) {
-            return true;
-        }
-        return false;
-    }
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
+    using Extends::render;
     virtual bool render
     (const void* image, size_t image_width, size_t image_height,
      size_t width, size_t height, size_t x, size_t y, cairo_format_t image_format,
@@ -152,6 +107,7 @@ public:
         }
         return false;
     }
+
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual cairo_surface_t* image_create_from_data
@@ -183,6 +139,7 @@ public:
         }
         return 0;
     }
+
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual cairo_surface_t* image_copy_data
@@ -213,14 +170,7 @@ public:
         }
         return 0;
     }
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    virtual cairo_format_t image_format() const {
-        return CAIRO_FORMAT_ARGB32;
-    }
-    virtual transformation_mode_t transformation_mode() const {
-        return TRANSFORMATION_MODE_NONE;
-    }
+
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
 protected:

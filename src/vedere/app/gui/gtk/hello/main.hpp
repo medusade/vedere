@@ -91,6 +91,18 @@ public:
         }
         return false;
     }
+    virtual bool disconnect_signal_idle() {
+        guint& the_id = the_signal_idle_id();
+        if ((the_id)) {
+            the_id = 0;
+            if ((g_idle_remove_by_data(((gpointer*)this)))) {
+                return true;
+            } else {
+                VEDERE_LOG_MESSAGE_ERROR("failed on g_idle_remove_by_data()");
+            }
+        }
+        return false;
+    }
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
@@ -203,13 +215,29 @@ public:
         return true;
     }
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    using Extends::load_image;
+    virtual void* load_image
+    (byte_reader& reader, size_t size, size_t width, size_t height) {
+        return d_.load_image(reader, size, width, height);
+    }
+    virtual void* set_image
+    (byte_t* bytes, size_t size, size_t width, size_t height) {
+        return d_.set_image(bytes, size, width, height);
+    }
+
 protected:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual void on_signal_configure
     (GtkWidget* widget, GdkWindow *window, gint x,gint y,
      gint width,gint height, gboolean sent_explicitly) {
-        LAMNA_LOG_MESSAGE_DEBUG("on_signal_configure(..., x=" << x << ",y=" << y << ", width=" << width << ",height=" << height << ")...");
+        VEDERE_LOG_MESSAGE_DEBUG("on_signal_configure(..., x=" << x << ",y=" << y << ", width=" << width << ",height=" << height << ")...");
+    }
+    virtual void on_signal_destroy(GtkWidget* widget) {
+        VEDERE_LOG_MESSAGE_DEBUG("on_signal_destroy()...");
+        d_.disconnect_signal_idle();
     }
 
     ///////////////////////////////////////////////////////////////////////
@@ -247,6 +275,7 @@ protected:
             if ((main_window = main_window_.create_attached(application))) {
                 main_window_.set_default_size(main_window_width_, main_window_height_);
                 main_window_.connect_signal_configure_event();
+                main_window_.connect_signal_destroy();
                 main_window_.init
                 (image_width_, image_height_,
                  image_depth_, image_file_.has_chars(),
