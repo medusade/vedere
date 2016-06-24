@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!--========================================================================-->
+<!-- Copyright (c) 1988-2015 $organization$                                 -->
+<!--                                                                        -->
+<!-- This software is provided by the author and contributors ``as is''     -->
+<!-- and any express or implied warranties, including, but not limited to,  -->
+<!-- the implied warranties of merchantability and fitness for a particular -->
+<!-- purpose are disclaimed. In no event shall the author or contributors   -->
+<!-- be liable for any direct, indirect, incidental, special, exemplary,    -->
+<!-- or consequential damages (including, but not limited to, procurement   -->
+<!-- of substitute goods or services; loss of use, data, or profits; or     -->
+<!-- business interruption) however caused and on any theory of liability,  -->
+<!-- whether in contract, strict liability, or tort (including negligence   -->
+<!-- or otherwise) arising in any way out of the use of this software,      -->
+<!-- even if advised of the possibility of such damage.                     -->
+<!--                                                                        -->
+<!--   File: vedere.vsprops                                                 -->
+<!--                                                                        -->
+<!-- Author: $author$                                                       -->
+<!--   Date: 6/16/2015                                                       -->
+<!--========================================================================-->
+<VisualStudioPropertySheet
+    ProjectType="Visual C++"
+    Version="8.00"
+    Name="vedere">
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="SOURCE_ROOT_DIR"
+        Value="../../../../../.."
+    />
+
+    <UserMacro
+        Name="SOURCE_BUILD_DIR"
+        Value="$(SOURCE_ROOT_DIR)"
+    />
+
+  <!--===============================================-->
+
+  <UserMacro
+      Name="LIBRAW_GROUP"
+      Value="thirdparty/libc/libraw"
+    />
+  <UserMacro
+      Name="LIBRAW_NAME"
+      Value="/LibRaw"
+    />
+  <UserMacro
+      Name="LIBRAW_VERSION"
+      Value="-0.17.1"
+    />
+
+  <!--===============================================-->
+
+  <UserMacro
+      Name="LIBRAW_DIR"
+      Value="$(LIBRAW_GROUP)$(LIBRAW_NAME)$(LIBRAW_VERSION)"
+    />
+  <UserMacro
+      Name="LIBRAW_SOURCE_DIR"
+      Value="$(SOURCE_ROOT_DIR)/$(LIBRAW_DIR)"
+    />
+  <UserMacro
+      Name="LIBRAW_BUILD_DIR"
+      Value="$(SOURCE_BUILD_DIR)/$(LIBRAW_DIR)/build"
+    />
+
+  <!--===============================================-->
+
+  <UserMacro
+      Name="LIBRAW_BUILD"
+      Value="$(LIBRAW_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+    />
+  <UserMacro
+      Name="LIBRAW_OBJ"
+      Value="$(LIBRAW_BUILD)/obj/$(ProjectName)"
+    />
+  <UserMacro
+      Name="LIBRAW_LIB"
+      Value="$(LIBRAW_BUILD)/lib"
+    />
+  <UserMacro
+      Name="LIBRAW_BIN"
+      Value="$(LIBRAW_BUILD)/bin"
+    />
+
+  <!--===============================================-->
+
+  <UserMacro
+      Name="LIBRAW_DEFINES"
+      Value="LIBRAW_NODLL"
+    />
+  <UserMacro
+      Name="LIBRAW_INCLUDE_DIRS"
+      Value="$(LIBRAW_SOURCE_DIR)"
+    />
+  <UserMacro
+      Name="LIBRAW_LIB_DIRS"
+      Value="$(LIBRAW_LIB)"
+    />
+  <UserMacro
+      Name="LIBRAW_LIBS"
+      Value="libraw.lib"
+    />
+
+  <!--===============================================-->
+
+    <UserMacro
+        Name="NADIR_GROUP"
+        Value=""
+    />
+    <UserMacro
+        Name="NADIR_NAME"
+        Value="nadir"
+    />
+    <UserMacro
+        Name="NADIR_VERSION"
+        Value=""
+    />
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="NADIR_DIR"
+        Value="$(NADIR_GROUP)$(NADIR_NAME)$(NADIR_VERSION)"
+    />
+    <UserMacro
+        Name="NADIR_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(NADIR_DIR)/src"
+    />
+    <UserMacro
+        Name="NADIR_BUILD_DIR"
+        Value="$(SOURCE_BUILD_DIR)/$(NADIR_DIR)/build"
+    />
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="NADIR_BUILD"
+        Value="$(NADIR_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+    />
+    <UserMacro
+        Name="NADIR_OBJ"
+        Value="$(NADIR_BUILD)/obj/$(ProjectName)"
+    />
+    <UserMacro
+        Name="NADIR_LIB"
+        Value="$(NADIR_BUILD)/lib"
+    />
+    <UserMacro
+        Name="NADIR_BIN"
+        Value="$(NADIR_BUILD)/bin"
+    />
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="NADIR_DEFINES"
+        Value="WINSOCK_2"
+    />
+    <UserMacro
+        Name="NADIR_INCLUDE_DIRS"
+        Value="$(NADIR_SOURCE_DIR);$(NADIR_SOURCE_DIR)/platform/windows/unix;$(NADIR_SOURCE_DIR)/thirdparty/gnu/getopt"
+    />
+    <UserMacro
+        Name="NADIR_LIB_DIRS"
+        Value="$(NADIR_LIB)"
+    />
+    <UserMacro
+        Name="NADIR_LIBS"
+        Value="libnadir.lib Ws2_32.lib"
+    />
+
+  <!--===============================================-->
+
+  <UserMacro
+      Name="LAMNA_GROUP"
+      Value=""
+    />
+  <UserMacro
+      Name="LAMNA_NAME"
+      Value="lamna"
+    />
+  <UserMacro
+      Name="LAMNA_VERSION"
+      Value=""
+    />
+
+  <!--===============================================-->
+
+  <UserMacro
+      Name="LAMNA_DIR"
+      Value="$(LAMNA_GROUP)$(LAMNA_NAME)$(LAMNA_VERSION)"
+    />
+  <UserMacro
+      Name="LAMNA_SOURCE_DIR"
+      Value="$(SOURCE_ROOT_DIR)/$(LAMNA_DIR)/src"
+    />
+  <UserMacro
+      Name="LAMNA_BUILD_DIR"
+      Value="$(SOURCE_BUILD_DIR)/$(LAMNA_DIR)/build"
+    />
+
+  <!--===============================================-->
+
+  <UserMacro
+      Name="LAMNA_BUILD"
+      Value="$(LAMNA_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+    />
+  <UserMacro
+      Name="LAMNA_OBJ"
+      Value="$(LAMNA_BUILD)/obj/$(ProjectName)"
+    />
+  <UserMacro
+      Name="LAMNA_LIB"
+      Value="$(LAMNA_BUILD)/lib"
+    />
+  <UserMacro
+      Name="LAMNA_BIN"
+      Value="$(LAMNA_BUILD)/bin"
+    />
+
+  <!--===============================================-->
+
+  <UserMacro
+      Name="LAMNA_DEFINES"
+      Value=""
+    />
+  <UserMacro
+      Name="LAMNA_INCLUDE_DIRS"
+      Value="$(LAMNA_SOURCE_DIR)"
+    />
+  <UserMacro
+      Name="LAMNA_LIB_DIRS"
+      Value="$(LAMNA_LIB)"
+    />
+  <UserMacro
+      Name="LAMNA_LIBS"
+      Value="liblamna.lib"
+    />
+
+  <!--===============================================-->
+
+    <UserMacro
+        Name="VEDERE_GROUP"
+        Value=""
+    />
+    <UserMacro
+        Name="VEDERE_NAME"
+        Value="vedere"
+    />
+    <UserMacro
+        Name="VEDERE_VERSION"
+        Value=""
+    />
+  <!--===============================================-->
+
+  <UserMacro
+        Name="VEDERE_DIR"
+        Value="$(VEDERE_GROUP)$(VEDERE_NAME)$(VEDERE_VERSION)"
+    />
+  <UserMacro
+      Name="VEDERE_BASE_DIR"
+      Value="$(SOURCE_ROOT_DIR)/$(VEDERE_DIR)"
+    />
+  <UserMacro
+        Name="VEDERE_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(VEDERE_DIR)/src"
+    />
+    <UserMacro
+        Name="VEDERE_BUILD_DIR"
+        Value="$(SOURCE_BUILD_DIR)/$(VEDERE_DIR)/build"
+    />
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="VEDERE_BUILD"
+        Value="$(VEDERE_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+    />
+    <UserMacro
+        Name="VEDERE_OBJ"
+        Value="$(VEDERE_BUILD)/obj/$(ProjectName)"
+    />
+    <UserMacro
+        Name="VEDERE_LIB"
+        Value="$(VEDERE_BUILD)/lib"
+    />
+    <UserMacro
+        Name="VEDERE_BIN"
+        Value="$(VEDERE_BUILD)/bin"
+    />
+
+  <!--===============================================-->
+
+    <UserMacro
+        Name="VEDERE_DEFINES"
+        Value="$(NADIR_DEFINES);$(LAMNA_DEFINES)"
+    />
+    <UserMacro
+        Name="VEDERE_INCLUDE_DIRS"
+        Value="$(VEDERE_SOURCE_DIR);$(LAMNA_INCLUDE_DIRS);$(NADIR_INCLUDE_DIRS)"
+    />
+    <UserMacro
+        Name="VEDERE_LIB_DIRS"
+        Value="$(VEDERE_LIB);$(LAMNA_LIB);$(NADIR_LIB)"
+    />
+    <UserMacro
+        Name="VEDERE_LIBS"
+        Value="libvedere.lib $(LAMNA_LIBS) $(NADIR_LIBS)"
+    />
+
+    <!--===============================================-->
+
+</VisualStudioPropertySheet>
