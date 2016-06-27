@@ -22,7 +22,8 @@
 #define _VEDERE_APP_GUI_COCOA_HELLO_IMAGE_RENDERER_HH
 
 #include "vedere/gui/cocoa/iCocoa.hh"
-#include "vedere/app/gui/hello/renderer.hpp"
+#include "vedere/app/gui/hello/image_renderer.hpp"
+#include "vedere/io/logger.hpp"
 
 namespace vedere {
 namespace app {
@@ -37,9 +38,15 @@ enum aspect_ratio_mode_t {
     ASPECT_RATIO_MODE_IGNORE,
     ASPECT_RATIO_MODE_KEEP
 };
+typedef CGInterpolationQuality transformation_mode_t;
 
-typedef gui::hello::image_renderer image_renderer_implements;
-typedef gui::hello::image_renderer_extend image_renderer_extends;
+typedef gui::hello::image_renderert
+<image_format_t, IMAGE_FORMAT_ABGR32,
+ aspect_ratio_mode_t, ASPECT_RATIO_MODE_IGNORE,
+ transformation_mode_t, kCGInterpolationDefault> image_renderer_implements;
+
+typedef gui::hello::image_renderer_extendt
+<image_renderer_implements> image_renderer_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: image_renderer
 ///////////////////////////////////////////////////////////////////////
@@ -71,65 +78,7 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual bool render
-    (const void* image, size_t image_width, size_t image_height,
-     const void* in_image, size_t in_image_width, size_t in_image_height) {
-        graphic::size_t size(image_width, image_height),
-                        to_size(width_, height_);
-        graphic::rectangle_t r(size, to_size);
-
-        if ((render
-             (image, image_width,image_height,
-              r.size.width,r.size.height, r.origin.x,r.origin.y, image_format(),
-              ASPECT_RATIO_MODE_IGNORE, interpolation_quality()))) {
-
-            if ((width_ >= in_min_width_) && (height_ >= in_min_height_)) {
-                int x = r.origin.x + r.size.width - in_offset_x_;
-                int y = r.origin.y + r.size.height - in_offset_y_;
-                int width = (r.size.width*in_ratio_to_)/in_ratio_;
-                int height = (r.size.height*in_ratio_to_)/in_ratio_;
-                graphic::size_t in_size(in_image_width, in_image_height),
-                                to_in_size(width, height);
-                graphic::rectangle_t in_r(in_size, to_in_size);
-
-                if ((render
-                     (in_image, in_image_width,in_image_height,
-                      in_r.size.width,in_r.size.height,
-                      x-in_r.size.width,y-in_r.size.height, image_format(),
-                      ASPECT_RATIO_MODE_IGNORE, interpolation_quality()))) {
-                    return true;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-    virtual bool render
-    (const void* image, size_t image_width, size_t image_height) {
-        graphic::size_t size(image_width, image_height),
-                        to_size(width_, height_);
-        graphic::rectangle_t r(size, to_size);
-        if ((render
-             (image, image_width,image_height,
-              r.size.width,r.size.height, r.origin.x,r.origin.y, image_format(),
-              ASPECT_RATIO_MODE_IGNORE, interpolation_quality()))) {
-            return true;
-        }
-        return false;
-    }
-    virtual bool render_stretched
-    (const void* image, size_t image_width, size_t image_height) {
-        if ((render
-             (image, image_width,image_height,
-              width_,height_, 0,0, image_format(),
-              ASPECT_RATIO_MODE_IGNORE, interpolation_quality()))) {
-            return true;
-        }
-        return false;
-    }
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
+    using Extends::render;
     virtual bool render
     (const void* image, size_t image_width, size_t image_height,
      size_t width, size_t height, size_t x, size_t y, image_format_t image_format,
@@ -139,8 +88,9 @@ public:
 
             if ((cg_image = iCGImageCreateFromData
                  (image, image_width, image_height, image_format))) {
-                iRect rect = iMakeRect(x,height_-y-height, width,height);
-                iCGFloat x_scale = 1, y_scale = 1;
+                iCGFloat x_scale = 1, y_scale = 1,
+                         y_pos = (height <= height_)?(height_-y-height):(0);
+                iRect rect = iMakeRect(x,y_pos, width,height);
 
                 iCGContextSaveGState(context_);
                 iCGContextSetShouldAntialias(context_, false);
@@ -150,7 +100,9 @@ public:
                 iCGContextRestoreGState(context_);
                 iCGImageRelease(cg_image);
                 return true;
-             }
+            } else {
+                VEDERE_LOG_MESSAGE_ERROR("...failed on CGImageCreateFromData()");
+            }
         }
         return false;
     }
@@ -195,55 +147,8 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual image_format_t image_format() const {
-        return IMAGE_FORMAT_ABGR32;
-    }
-    virtual iCGInterpolationQuality interpolation_quality() const {
-        return kCGInterpolationDefault;
-    }
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
  protected:
     iCGContextRef context_;
-    /*virtual bool OnPaintImage
-    (const uint8* image, int width, int height, bool is_local)
-    {
-        bool handled = false;
-        if ((handled = (m_onPaintHandled = (m_cg != 0))))
-        {
-            CGContextRef cgContext = m_cg->m_cgContext;
-            CGContextSaveGState(cgContext);
-            int winWidth = m_cg->m_width;
-            int winHeight = m_cg->m_cheight;
-
-            if ((1 < winWidth) && (1 < winHeight))
-            {
-                CGContextSetShouldAntialias(cgContext, false);
-                CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-
-                CGImageRef cgImage = CGImageCreate
-                 (width, height, 8, 32, 4*width, colorSpace,
-                  kCGImageAlphaNoneSkipLast,
-                  CGDataProviderCreateWithData
-                  (NULL, image, width*height*4, NULL),
-                  NULL, false, kCGRenderingIntentDefault);
-
-                if ((cgImage))
-                {
-                    CGContextSetInterpolationQuality(cgContext, kCGInterpolationNone);
-                    CGContextTranslateCTM(cgContext, 0, winHeight);
-                    CGContextScaleCTM(cgContext, 1, -1);
-                    CGRect rect = { {0,0}, {width,height}};
-                    CGContextDrawImage(cgContext, rect, cgImage);
-                    CGImageRelease(cgImage);
-                }
-                CGColorSpaceRelease(colorSpace);
-            }
-            CGContextRestoreGState(cgContext);
-        }
-        return handled;
-    }*/
 };
 
 } // namespace hello 

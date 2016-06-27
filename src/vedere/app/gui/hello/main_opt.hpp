@@ -149,7 +149,7 @@ namespace hello {
 ///////////////////////////////////////////////////////////////////////
 #define VEDERE_APP_GUI_HELLO_MAIN_ARGS "[imagefile]"
 #define VEDERE_APP_GUI_HELLO_MAIN_ARGV "[imagefile] Image filename",
-#define VEDERE_APP_GUI_HELLO_MAIN_IMAHE_FILE_ARG 0
+#define VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FILE_ARG 0
 
 } // namespace hello
 } // namespace gui 

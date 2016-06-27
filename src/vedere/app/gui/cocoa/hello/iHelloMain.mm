@@ -137,6 +137,12 @@ namespace hello {
     - (int)onOption:(int)optval optarg:(const char*)optarg optname:(const char*)optname optind:(int)optind argc:(int)argc argv:(char**)argv env:(char**)env {
         int err = 0;
         switch(optval) {
+        case VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_OPTVAL_C:
+            renderer_->set_image_format_option(optarg);
+            break;
+        case VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_OPTVAL_C:
+            renderer_->set_image_transform_option(optarg);
+            break;
         case VEDERE_APP_GUI_HELLO_MAIN_IMAGE_WIDTH_OPTVAL_C:
             renderer_->set_image_width_option(optarg);
             break;
@@ -155,7 +161,7 @@ namespace hello {
     - (int)onArgument:(const char*)arg argind:(int)argind argc:(int)argc argv:(char**)argv env:(char**)env {
         int err = 0;
         switch(argind) {
-        case VEDERE_APP_GUI_HELLO_MAIN_IMAHE_FILE_ARG:
+        case VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FILE_ARG:
             renderer_->set_image_file_option(arg);
             break;
         default:
@@ -167,6 +173,14 @@ namespace hello {
     - (const char*)optionUsage:(const char*&)optarg longopt:(const struct option*)longopt {
         const char* chars = "";
         switch(longopt->val) {
+        case VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_OPTVAL_C:
+            optarg = VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_OPTARG;
+            chars = VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_OPTUSE;
+            break;
+        case VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_OPTVAL_C:
+            optarg = VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_OPTARG;
+            chars = VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_OPTUSE;
+            break;
         case VEDERE_APP_GUI_HELLO_MAIN_IMAGE_WIDTH_OPTVAL_C:
             optarg = VEDERE_APP_GUI_HELLO_MAIN_IMAGE_WIDTH_OPTARG;
             chars = VEDERE_APP_GUI_HELLO_MAIN_IMAGE_WIDTH_OPTUSE;

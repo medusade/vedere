@@ -137,7 +137,7 @@ namespace view {
 ///////////////////////////////////////////////////////////////////////
 #define VEDERE_APP_GUI_VIEW_MAIN_ARGS "[imagefile]"
 #define VEDERE_APP_GUI_VIEW_MAIN_ARGV "[imagefile] Image filename",
-#define VEDERE_APP_GUI_VIEW_MAIN_IMAHE_FILE_ARG 0
+#define VEDERE_APP_GUI_VIEW_MAIN_IMAGE_FILE_ARG 0
 
 } // namespace view
 } // namespace gui 

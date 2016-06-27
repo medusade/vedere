@@ -22,6 +22,8 @@
 #define _VEDERE_APP_GUI_COCOA_HELLO_RENDERER_HH
 
 #include "vedere/app/gui/cocoa/hello/image_renderer.hh"
+#include "vedere/app/gui/hello/renderer_extend.hpp"
+#include "vedere/app/gui/hello/main.hpp"
 #include "vedere/io/logger.hpp"
 
 namespace vedere {
@@ -30,8 +32,12 @@ namespace gui {
 namespace cocoa {
 namespace hello {
 
-typedef gui::hello::renderer_implements renderer_implements;
-typedef gui::hello::renderer renderer_extends;
+/*typedef gui::hello::renderer_implements renderer_implements;
+typedef gui::hello::renderer renderer_extends;*/
+typedef implement_base renderer_implements;
+typedef gui::hello::renderer_extendt
+<image_renderer::image_format_t,
+ image_renderer::image_format_none, image_renderer> renderer_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: renderer
 ///////////////////////////////////////////////////////////////////////
@@ -44,7 +50,9 @@ public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     renderer()
-    : image_width_option_(0), image_height_option_(0), image_depth_option_(0) {
+    : image_format_option_(gui::hello::image_format_raw),
+      image_transform_option_(gui::hello::image_transform_fast),
+      image_width_option_(0), image_height_option_(0), image_depth_option_(0) {
     }
     virtual ~renderer() {
     }
@@ -66,8 +74,9 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual image_renderer_t* image_renderer(const image_format_t& format) const {
-        if (!(format != image_renderer_.format())) {
+    virtual image_renderer_t*
+    image_renderer(const image_format_t& image_format) const {
+        if (!(image_format != image_renderer_.image_format())) {
             return ((image_renderer_t*)&image_renderer_);
         }
         return 0;
@@ -93,6 +102,68 @@ public:
     }
 
     ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual const char_t* set_image_format_option(const char_t* to) {
+        if ((to) && (to[0])) {
+            VEDERE_LOG_MESSAGE_DEBUG("image_format_option = \"" << to << "\"...");
+            if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_RAW_OPTARG_C))
+                || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_RAW_OPTARG_S))) {
+                VEDERE_LOG_MESSAGE_DEBUG("image_format_option_ = gui::hello::image_format_raw");
+                image_format_option_ = gui::hello::image_format_raw;
+            } else {
+                if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_JPEG_OPTARG_C))
+                    || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_JPEG_OPTARG_S))) {
+                    VEDERE_LOG_MESSAGE_DEBUG("image_format_option_ = gui::hello::image_format_jpeg");
+                    image_format_option_ = gui::hello::image_format_jpeg;
+                } else {
+                    if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_TIFF_OPTARG_C))
+                        || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_TIFF_OPTARG_S))) {
+                        VEDERE_LOG_MESSAGE_DEBUG("image_format_option_ = gui::hello::image_format_tiff");
+                        image_format_option_ = gui::hello::image_format_tiff;
+                    } else {
+                        if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_PNG_OPTARG_C))
+                            || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_PNG_OPTARG_S))) {
+                            VEDERE_LOG_MESSAGE_DEBUG("image_format_option_ = gui::hello::image_format_pmg");
+                            image_format_option_ = gui::hello::image_format_png;
+                        } else {
+                            if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_GIF_OPTARG_C))
+                                || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_GIF_OPTARG_S))) {
+                                VEDERE_LOG_MESSAGE_DEBUG("image_format_option_ = gui::hello::image_format_gif");
+                                image_format_option_ = gui::hello::image_format_gif;
+                            } else {
+                                if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_BMP_OPTARG_C))
+                                    || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_BMP_OPTARG_S))) {
+                                    VEDERE_LOG_MESSAGE_DEBUG("image_format_option_ = gui::hello::image_format_bmp");
+                                    image_format_option_ = gui::hello::image_format_bmp;
+                                } else {
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return to;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    virtual const char_t* set_image_transform_option(const char_t* to) {
+        if ((to) && (to[0])) {
+            VEDERE_LOG_MESSAGE_DEBUG("image_transform_option = \"" << to << "\"...");
+            if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_FAST_OPTARG_C))
+                || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_FAST_OPTARG_S))) {
+                VEDERE_LOG_MESSAGE_DEBUG("image_transform_option_ = gui::hello::image_transform_fast");
+                image_transform_option_ = gui::hello::image_transform_fast;
+            } else {
+                if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_SMOOTH_OPTARG_C))
+                    || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_SMOOTH_OPTARG_S))) {
+                    VEDERE_LOG_MESSAGE_DEBUG("image_transform_option_ = gui::hello::image_transform_smooth");
+                    image_transform_option_ = gui::hello::image_transform_smooth;
+                } else {
+                }
+            }
+        }
+        return to;
+    }
     ///////////////////////////////////////////////////////////////////////
     virtual const char_t* set_image_width_option(const char_t* to) {
         if ((to) && (to[0])) {
@@ -129,6 +200,8 @@ public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
 protected:
+    gui::hello::image_format_t image_format_option_;
+    gui::hello::image_transform_t image_transform_option_;
     size_t image_width_option_, image_height_option_, image_depth_option_;
     string image_file_option_;
     hello::image_renderer image_renderer_;
