@@ -16,40 +16,26 @@
 ///   File: main.hpp
 ///
 /// Author: $author$
-///   Date: 3/27/2016
+///   Date: 7/17/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _VEDERE_APP_GUI_VIEW_MAIN_HPP
-#define _VEDERE_APP_GUI_VIEW_MAIN_HPP
+#ifndef _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_MAIN_HPP
+#define _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_MAIN_HPP
 
-#include "vedere/gui/application/window_main.hpp"
-#include "vedere/app/gui/view/main_opt.hpp"
+#include "vedere/graphic/image/format/raw/libpgm/image_reader.hpp"
+#include "vedere/graphic/image/format/viewer/main_opt.hpp"
+#include "vedere/graphic/image/format/viewer/image_loader.hpp"
+#include "vedere/gui/main.hpp"
+#include "vedere/base/base.hpp"
 
-#define VEDERE_APP_GUI_VIEW_MAIN_WINDOW_WIDTH 500
-#define VEDERE_APP_GUI_VIEW_MAIN_WINDOW_HEIGHT 300
+#define VEDERE_APP_GUI_HELLO_MAIN_WINDOW_WIDTH 500
+#define VEDERE_APP_GUI_HELLO_MAIN_WINDOW_HEIGHT 250
 
 namespace vedere {
-namespace app {
-namespace gui {
-namespace view {
+namespace graphic {
+namespace image {
+namespace format {
+namespace viewer {
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-enum image_format_t {
-    image_format_raw,
-    image_format_bmp,
-    image_format_gif,
-    image_format_png,
-    image_format_jpeg,
-    image_format_tiff,
-
-    next_image_format,
-    first_image_format = image_format_raw,
-    last_image_format = (next_image_format - 1),
-    image_formats = (last_image_format - first_image_format + 1)
-};
-
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
 enum image_transform_t {
     image_transform_fast,
     image_transform_smooth,
@@ -60,15 +46,17 @@ enum image_transform_t {
     image_transforms = (last_image_transform - first_image_transform + 1)
 };
 
-typedef vedere::gui::application::window_main_implements main_implements;
-typedef vedere::gui::application::window_main main_extends;
+typedef vedere::gui::main_implements main_implements;
+typedef vedere::gui::main main_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: maint
 ///////////////////////////////////////////////////////////////////////
 template
 <class TImplements = main_implements, class TExtends = main_extends>
 
-class _EXPORT_CLASS maint: virtual public TImplements, public TExtends {
+class _EXPORT_CLASS maint
+: virtual public image_loader,
+  virtual public TImplements, public TExtends {
 public:
     typedef TImplements Implements;
     typedef TExtends Extends;
@@ -76,71 +64,47 @@ public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     maint()
-    : main_window_width_(VEDERE_APP_GUI_VIEW_MAIN_WINDOW_WIDTH),
-      main_window_height_(VEDERE_APP_GUI_VIEW_MAIN_WINDOW_HEIGHT),
+    : main_window_width_(VEDERE_APP_GUI_HELLO_MAIN_WINDOW_WIDTH),
+      main_window_height_(VEDERE_APP_GUI_HELLO_MAIN_WINDOW_HEIGHT),
       image_width_(0), image_height_(0), image_depth_(0),
       image_format_(first_image_format),
+      raw_image_format_(first_raw_image_format),
       image_transform_(first_image_transform) {
     }
     virtual ~maint() {
     }
 
-protected:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual const char_t* set_image_format(const char_t* to) {
-        if ((to) && (to[0])) {
-            VEDERE_LOG_MESSAGE_DEBUG("set image_format = \"" << to << "\"...");
-            if ((!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_FORMAT_RAW_OPTARG_C))
-                || (!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_FORMAT_RAW_OPTARG_S))) {
-                VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_raw");
-                image_format_ = image_format_raw;
-            } else {
-                if ((!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_FORMAT_BMP_OPTARG_C))
-                    || (!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_FORMAT_BMP_OPTARG_S))) {
-                    VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_bmp");
-                    image_format_ = image_format_bmp;
-                } else {
-                    if ((!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_FORMAT_GIF_OPTARG_C))
-                        || (!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_FORMAT_GIF_OPTARG_S))) {
-                        VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_gif");
-                        image_format_ = image_format_gif;
-                    } else {
-                        if ((!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_FORMAT_PNG_OPTARG_C))
-                            || (!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_FORMAT_PNG_OPTARG_S))) {
-                            VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_png");
-                            image_format_ = image_format_png;
-                        } else {
-                            if ((!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_FORMAT_JPEG_OPTARG_C))
-                                || (!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_FORMAT_JPEG_OPTARG_S))) {
-                                VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_jpeg");
-                                image_format_ = image_format_jpeg;
-                            } else {
-                                if ((!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_FORMAT_TIFF_OPTARG_C))
-                                    || (!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_FORMAT_TIFF_OPTARG_S))) {
-                                    VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_tiff");
-                                    image_format_ = image_format_tiff;
-                                } else {
-                                }
-                            }
-                        }
-                    }
-                    }
+    using image_loader::load_image;
+    virtual bool load_image
+    (const char_t* image_file, image_format_t image_format) {
+        VEDERE_LOG_MESSAGE_DEBUG("load_image(" <<  chars_to_string(image_file) << ", " << image_format << ")...");
+        if ((image_file)) {
+            //graphic::image::format::raw::libraw::to_bgra_image_reader reader;
+            graphic::image::format::raw::libpgm::to_bgra_image_reader reader;
+            if ((reader.read(image_file))) {
+                if ((load_image(reader))) {
+                    return true;
+                }
             }
         }
-        return to;
+        VEDERE_LOG_MESSAGE_DEBUG("...load_image(" <<  chars_to_string(image_file) << ", " << image_format << ")");
+        return false;
     }
+
+    ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual const char_t* set_image_transform(const char_t* to) {
         if ((to) && (to[0])) {
             VEDERE_LOG_MESSAGE_DEBUG("set image_transform = \"" << to << "\"...");
-            if ((!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_TRANSFORM_FAST_OPTARG_C))
-                || (!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_TRANSFORM_FAST_OPTARG_S))) {
+            if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_FAST_OPTARG_C))
+                || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_FAST_OPTARG_S))) {
                 VEDERE_LOG_MESSAGE_DEBUG("image_transform = image_transform_fast");
                 image_transform_ = image_transform_fast;
             } else {
-                if ((!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_TRANSFORM_SMOOTH_OPTARG_C))
-                    || (!chars_t::compare(to, VEDERE_APP_GUI_VIEW_MAIN_IMAGE_TRANSFORM_SMOOTH_OPTARG_S))) {
+                if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_SMOOTH_OPTARG_C))
+                    || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_SMOOTH_OPTARG_S))) {
                     VEDERE_LOG_MESSAGE_DEBUG("image_transform = image_transform_smooth");
                     image_transform_ = image_transform_smooth;
                 } else {
@@ -184,10 +148,9 @@ protected:
         return to;
     }
 
-protected:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-#include "vedere/app/gui/view/main_opt.cpp"
+#include "vedere/graphic/image/format/viewer/main_opt.cpp"
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
@@ -195,14 +158,15 @@ protected:
     size_t main_window_width_, main_window_height_,
            image_width_, image_height_, image_depth_;
     image_format_t image_format_;
+    raw_image_format_t raw_image_format_;
     image_transform_t image_transform_;
     string image_file_;
 };
-typedef maint<> main;
 
-} // namespace view 
-} // namespace gui 
-} // namespace app 
+} // namespace viewer
+} // namespace format 
+} // namespace image 
+} // namespace graphic 
 } // namespace vedere 
 
-#endif // _VEDERE_APP_GUI_VIEW_MAIN_HPP 
+#endif // _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_MAIN_HPP 

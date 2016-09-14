@@ -16,24 +16,23 @@
 ///   File: main.hpp
 ///
 /// Author: $author$
-///   Date: 3/27/2016
+///   Date: 7/18/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _VEDERE_APP_GUI_QT_VIEW_MAIN_HPP
-#define _VEDERE_APP_GUI_QT_VIEW_MAIN_HPP
+#ifndef _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_MAIN_HPP
+#define _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_MAIN_HPP
 
-#include "vedere/app/gui/view/main.hpp"
+#include "vedere/graphic/image/format/viewer/qt/main_window.hpp"
 #include "vedere/gui/qt/application/window_main.hpp"
-#include "vedere/graphic/image/format/png/libpng/image_reader.hpp"
-#include "lamna/graphic/image/format/png/libpng/reader.hpp"
 
 namespace vedere {
-namespace app {
-namespace gui {
+namespace graphic {
+namespace image {
+namespace format {
+namespace viewer {
 namespace qt {
-namespace view {
 
 typedef vedere::gui::qt::application::window_main_implements main_implements;
-typedef vedere::app::gui::view::maint
+typedef viewer::maint
 <main_implements, vedere::gui::qt::application::window_main> main_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: main
@@ -45,7 +44,7 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    main() {
+    main(): main_window_(0) {
     }
     virtual ~main() {
     }
@@ -53,23 +52,58 @@ public:
 protected:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    int run(int argc, char** argv, char** env) {
-        int err = 0;
-        const char* chars = 0;
-        if ((chars = this->image_file_.has_chars())) {
-            vedere::graphic::image::format::png::libpng::image_reader r;
-            r.read(chars);
+    virtual QMainWindow* create_main_window
+    (QApplication& qApplication, int argc, char_t** argv, char_t** env) {
+        if ((main_window_ = new main_window(this))) {
+            main_window_->resize(main_window_width_, main_window_height_);
+            if ((main_window_->init
+                 (image_width_, image_height_, image_depth_, image_file_.has_chars(),
+                  image_format_, raw_image_format_, image_transform_))) {
+                return main_window_;
+            } else {
+                VEDERE_LOG_ERROR("failed on main_window_->init()");
+                delete main_window_;
+                main_window_ = 0;
+            }
         }
-        return err;
+        return 0;
     }
+    virtual bool destroy_main_window
+    (QMainWindow* qMainWindow, QApplication& qApplication,
+     int argc, char_t** argv, char_t** env) {
+        if ((qMainWindow) && (qMainWindow == ((QMainWindow*)main_window_))) {
+            bool success = false;
+            if (!(success = main_window_->finish())) {
+                VEDERE_LOG_ERROR("failed on main_window_->finish()");
+            }
+            delete main_window_;
+            main_window_ = 0;
+            return success;
+        }
+        return false;
+    }
+
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+    virtual void* set_image
+    (byte_t* bytes, size_t size, size_t width, size_t height) {
+        if ((main_window_)) {
+            main_window_->set_image(bytes, size, width, height);
+        }
+        return 0;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+protected:
+    main_window* main_window_;
 };
 
-} // namespace view 
-} // namespace qt 
-} // namespace gui 
-} // namespace app 
+} // namespace qt
+} // namespace viewer 
+} // namespace format 
+} // namespace image 
+} // namespace graphic 
 } // namespace vedere 
 
-#endif // _VEDERE_APP_GUI_QT_VIEW_MAIN_HPP 
+#endif // _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_MAIN_HPP 

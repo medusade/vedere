@@ -50,6 +50,7 @@ typedef xos::io::writer writer;
 typedef xos::io::byte_reader byte_reader;
 typedef xos::io::byte_writer byte_writer;
 
+typedef lamna::chars_to_string chars_to_string;
 typedef lamna::pointer_to_string pointer_to_string;
 
 } // namespace vedere

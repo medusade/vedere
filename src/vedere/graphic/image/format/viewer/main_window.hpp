@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2015 $organization$
+/// Copyright (c) 1988-2016 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -16,22 +16,20 @@
 ///   File: main_window.hpp
 ///
 /// Author: $author$
-///   Date: 12/23/2015
+///   Date: 7/17/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _VEDERE_APP_GUI_HELLO_MAIN_WINDOW_HPP
-#define _VEDERE_APP_GUI_HELLO_MAIN_WINDOW_HPP
+#ifndef _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_MAIN_WINDOW_HPP
+#define _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_MAIN_WINDOW_HPP
 
-#include "vedere/graphic/image/format/jpeg/libjpeg/image_reader.hpp"
-#include "vedere/graphic/image/format/tiff/libtiff/image_reader.hpp"
-#include "vedere/graphic/image/format/png/libpng/image_reader.hpp"
-#include "vedere/graphic/image/format/bmp/implement/image_reader.hpp"
-#include "vedere/graphic/image/format/raw/libraw/image_reader.hpp"
-#include "vedere/app/gui/hello/main_window_extend.hpp"
+#include "vedere/graphic/image/format/viewer/image_loader.hpp"
+#include "vedere/graphic/image/format/viewer/main.hpp"
+#include "vedere/graphic/image/to_bytes_reader.hpp"
 
 namespace vedere {
-namespace app {
-namespace gui {
-namespace hello {
+namespace graphic {
+namespace image {
+namespace format {
+namespace viewer {
 
 ///////////////////////////////////////////////////////////////////////
 ///  Class: main_windowt
@@ -43,118 +41,61 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    main_windowt() {
+    main_windowt(image_loader* _image_loader = 0)
+    : image_loader_(_image_loader) {
     }
     virtual ~main_windowt() {
     }
 
-    /*///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual bool load_image
     (size_t image_width, size_t image_height,
      size_t image_depth, const char_t* image_file,
-     gui::hello::image_format_t image_format = gui::hello::image_format_raw) {
+     image_format_t image_format = image_format_raw,
+     raw_image_format_t raw_image_format = first_raw_image_format) {
         bool success = false;
         switch (image_format) {
-        case gui::hello::image_format_jpeg:
-            success = load_jpeg_image(image_file);
-            break;
-        case gui::hello::image_format_tiff:
-            success = load_tiff_image(image_file);
-            break;
-        case gui::hello::image_format_png:
-            success = load_png_image(image_file);
-            break;
-        case gui::hello::image_format_bmp:
-            success = load_bmp_image(image_file);
-            break;
-        case gui::hello::image_format_raw:
+        case image_format_raw:
             if ((image_width) && (image_height) && (image_depth)) {
                 success = load_raw_image
-                (image_width, image_height, image_depth, image_file);
+                (image_width, image_height,
+                 image_depth, image_file, raw_image_format);
             } else {
-                success = load_raw_image(image_file);
+                success = load_image(image_file, image_format);
             }
             break;
         default:
-            VEDERE_LOG_ERROR("unexpected image_format = " << image_format << "");
+            success = load_image(image_file, image_format);
             break;
         }
         return success;
-    }*/
+    }
+    virtual bool load_image
+    (const char_t* image_file, image_format_t image_format) {
+        if ((image_loader_)) {
+            return image_loader_->load_image(image_file, image_format);
+        }
+        return false;
+    }
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual bool load_jpeg_image(const char_t* image_file) {
-        if ((image_file)) {
-            graphic::image::format::jpeg::libjpeg::to_bgra_image_reader reader;
-            if ((reader.read(image_file))) {
-                if ((this->load_image(reader))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    ///////////////////////////////////////////////////////////////////////
-    virtual bool load_tiff_image(const char_t* image_file) {
-        if ((image_file)) {
-            graphic::image::format::tiff::libtiff::to_bgra_image_reader reader;
-            if ((reader.read(image_file))) {
-                if ((this->load_image(reader))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    ///////////////////////////////////////////////////////////////////////
-    virtual bool load_png_image(const char_t* image_file) {
-        if ((image_file)) {
-            graphic::image::format::png::libpng::to_bgra_image_reader reader;
-            if ((reader.read(image_file))) {
-                if ((this->load_image(reader))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    ///////////////////////////////////////////////////////////////////////
-    virtual bool load_bmp_image(const char_t* image_file) {
-        if ((image_file)) {
-            graphic::image::format::bmp::implement::to_bgra_image_reader reader;
-            if ((reader.read(image_file))) {
-                if ((this->load_image(reader))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    ///////////////////////////////////////////////////////////////////////
-    virtual bool load_raw_image(const char_t* image_file) {
-        if ((image_file)) {
-            graphic::image::format::raw::libraw::to_bgra_image_reader reader;
-            if ((reader.read(image_file))) {
-                if ((this->load_image(reader))) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    /*///////////////////////////////////////////////////////////////////////
     virtual bool load_raw_image
     (size_t image_width, size_t image_height,
-     size_t image_depth, const char_t* image_file) {
+     size_t image_depth, const char_t* image_file,
+     raw_image_format_t raw_image_format = first_raw_image_format) {
         if ((image_file) && (image_width) && (image_height) && (image_depth)) {
             size_t image_pixel_size = ((image_depth+7)/8),
                    image_size = (image_width*image_height*image_pixel_size);
             FILE* file = 0;
+
+            VEDERE_LOG_MESSAGE_DEBUG("fopen(" << image_file << ", \"rb\")...");
             if ((file = fopen(image_file, "rb"))) {
                 xos::io::read::byte_file f(file);
                 bool success = false;
+
+                VEDERE_LOG_MESSAGE_DEBUG("...fopen(" << image_file << ", \"rb\")");
                 if ((load_image(f, image_size, image_width, image_height))) {
                     success = true;
                 }
@@ -194,15 +135,18 @@ public:
     virtual void* set_image
     (byte_t* bytes, size_t size, size_t width, size_t height) {
         return false;
-    }*/
+    }
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+protected:
+    image_loader* image_loader_;
 };
 
-} // namespace hello 
-} // namespace gui 
-} // namespace app 
+} // namespace viewer
+} // namespace format 
+} // namespace image 
+} // namespace graphic 
 } // namespace vedere 
 
-#endif // _VEDERE_APP_GUI_HELLO_MAIN_WINDOW_HPP 
+#endif // _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_MAIN_WINDOW_HPP 

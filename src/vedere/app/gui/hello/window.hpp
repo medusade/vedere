@@ -21,6 +21,7 @@
 #ifndef _VEDERE_APP_GUI_HELLO_WINDOW_HPP
 #define _VEDERE_APP_GUI_HELLO_WINDOW_HPP
 
+#include "vedere/app/gui/hello/window_extend.hpp"
 #include "vedere/io/logger.hpp"
 #include "vedere/base/base.hpp"
 
@@ -38,6 +39,11 @@ class _EXPORT_CLASS windowt: public TExtends {
 public:
     typedef TExtends Extends;
 
+    typedef typename Extends::message_type_t message_type_t;
+    typedef typename Extends::message_data_t message_data_t;
+    typedef typename Extends::message_t message_t;
+    typedef xos::mt::queuet<message_t> message_queue_t;
+
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     windowt() {
@@ -47,57 +53,18 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual void switch_render() {
-    }
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    enum message_type_t {
-        message_type_none,
-        message_type_switch_render
-    };
-    typedef void* message_data_t;
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    class _EXPORT_CLASS message_t {
-    public:
-        message_t(message_type_t type, message_data_t data)
-        : type_(type), data_(data) {}
-        message_t(const message_t& copy)
-        : type_(copy.type_), data_(copy.data_) {}
-        message_t()
-        : type_(message_type_none), data_(0) {}
-        virtual ~message_t() {}
-    public:
-        message_type_t type_;
-        message_data_t data_;
-    };
-    typedef xos::mt::queuet<message_t> message_queue_t;
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
     virtual bool post_message(message_type_t type, message_data_t data) {
+        message_t message(type, data);
         VEDERE_LOG_MESSAGE_DEBUG("post_message(message_type_t type = " << type << ",...)...");
+        message_queue_.enqueue(message);
+        VEDERE_LOG_MESSAGE_DEBUG("...post_message(message_type_t type = " << type << ",...)");
         return false;
     }
 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 protected:
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    virtual void on_message(message_type_t type, message_data_t data) {
-        switch (type) {
-        case message_type_switch_render:
-            VEDERE_LOG_MESSAGE_DEBUG("...on_message(message_type_t type = message_type_switch_render,...)");
-            switch_render();
-            break;
-        default:
-            VEDERE_LOG_MESSAGE_DEBUG("...on_message(message_type_t type = " << type << ",...)");
-            break;
-        }
-    }
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
+    message_queue_t message_queue_;
 };
 
 } // namespace hello 

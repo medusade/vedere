@@ -16,12 +16,12 @@
 ///   File: image_reader.hpp
 ///
 /// Author: $author$
-///   Date: 2/24/2016
+///   Date: 7/18/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _VEDERE_GRAPHIC_IMAGE_FORMAT_RAW_LIBRAW_IMAGE_READER_HPP
-#define _VEDERE_GRAPHIC_IMAGE_FORMAT_RAW_LIBRAW_IMAGE_READER_HPP
+#ifndef _VEDERE_GRAPHIC_IMAGE_FORMAT_RAW_LIBPGM_IMAGE_READER_HPP
+#define _VEDERE_GRAPHIC_IMAGE_FORMAT_RAW_LIBPGM_IMAGE_READER_HPP
 
-#include "vedere/graphic/image/format/raw/libraw/reader.hpp"
+#include "vedere/graphic/image/format/raw/libpgm/reader.hpp"
 #include "lamna/graphic/image/format/raw/gamma/libraw/curve.hpp"
 #include "vedere/graphic/image/to_bytes_reader.hpp"
 #include "vedere/graphic/image/reader.hpp"
@@ -31,12 +31,12 @@ namespace graphic {
 namespace image {
 namespace format {
 namespace raw {
-namespace libraw {
+namespace libpgm {
 
 typedef image::reader image_reader_implement;
-typedef reader_events reader_implement;
+typedef libpgm::reader_events reader_implement;
 ///////////////////////////////////////////////////////////////////////
-///  Class: image_readerimplements
+///  Class: image_reader_implements
 ///////////////////////////////////////////////////////////////////////
 class _EXPORT_CLASS image_reader_implements
 : virtual public reader_implement,
@@ -55,9 +55,10 @@ class _EXPORT_CLASS image_readert: virtual public TImplements, public TExtends {
 public:
     typedef TImplements Implements;
     typedef TExtends Extends;
-    typedef filter filter_t;
-    typedef filter::pattern_t pattern_t;
+
     typedef lamna::graphic::image::format::raw::gamma::libraw::curve curve_t;
+    typedef lamna::graphic::image::format::raw::bayer::rgb::pattern pattern_t;
+    typedef lamna::graphic::image::format::raw::bayer::rgb::pattern_which_t pattern_which_t;
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
@@ -65,24 +66,15 @@ public:
     }
     virtual ~image_readert() {
     }
+
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    using Implements::Implements::read;
-    virtual bool read(const char* file) {
-        if ((file)) {
-            if ((reader_.read(file))) {
-                return true;
-            }
-        }
-        return false;
-    }
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    virtual bool on_libraw_unpack_image
-    (size_t height, size_t width, size_t stride,
-     ushort* image, pattern_t& pattern, imgdata_t& imgdata) {
+    virtual bool on_raw_libpgm_read_image
+    (size_t cols, size_t rows, max_t max,
+     gray_t** image, const pattern_t& pattern) {
         bool success = false;
-        size_t image_width = width/2, image_height = height/2;
+        size_t col_size = (max > 255)?(2):(1);
+        size_t image_width = cols/(2*col_size), image_height = rows/(2);
         size_t image_planes = 1, values_per_pixel = 3, bits_per_value = 8;
         pixel_value_interpretation_t pixel_value_interpretation = pixel_value_interpretation_rgb;
 
@@ -90,9 +82,10 @@ public:
              (image_width, image_height, image_planes,
               values_per_pixel, bits_per_value, pixel_value_interpretation))) {
 
-            success = this->on_libraw_unpack_image_rows
-            (height, width, stride, image, pattern, imgdata,
-             image_planes, values_per_pixel, bits_per_value, pixel_value_interpretation);
+            success = this->on_raw_libpgm_read_image_rows
+            (rows, cols, col_size, image, pattern,
+             image_width, image_height, image_planes,
+             values_per_pixel, bits_per_value, pixel_value_interpretation);
 
             if (!(this->on_end_image
                 (image_width, image_height, image_planes,
@@ -102,87 +95,68 @@ public:
         }
         return success;
     }
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    virtual bool on_libraw_unpack_image_rows
-    (size_t height, size_t width, size_t stride,
-     ushort* image, pattern_t& pattern, imgdata_t& imgdata,
-     size_t image_planes, size_t values_per_pixel, size_t bits_per_value,
+    virtual bool on_raw_libpgm_read_image_rows
+    (size_t height, size_t width, size_t col_size,
+     gray_t** image, const pattern_t& pattern,
+     size_t image_width, size_t image_height, size_t image_planes,
+     size_t values_per_pixel, size_t bits_per_value,
      pixel_value_interpretation_t pixel_value_interpretation) {
         bool success = false;
 
-        if ((width) && (height) && (stride) && (image)) {
-            colordata_t& color = imgdata.color;
-            output_params_t& params = imgdata.params;
-            size_t image_width = width/2, image_height = height/2;
-            byte_t* sample = ((byte_t*)image);
-            size_t sample_size = sizeof(ushort);
-            size_t sample_maximum = color.maximum, sample_diff = sample_maximum;
-            size_t sample_min = sample_maximum, sample_max = 0;
+        if ((width) && (height) && (image)) {
             size_t red = 0, green = 0, blue = 0, maximum = 255;
             rgba::pixel_t pixel(red, green, blue, maximum, maximum);
-            size_t map[4];
+            size_t sample_maximum = (1 << (col_size*8)) - 1, sample_diff = sample_maximum;
+            size_t sample_min = sample_maximum, sample_max = 0;
+            size_t white = 4095, black = 128;
+            gray_t* map[4] = {0, 0, 0, 0};
+            double gamm[2] = {0.52, 4.5};
+            gray_t* samples[2] = {0, 0};
+            size_t row = 0, col = 0, byte = 0;
 
-            success = true;
+            curve_.generate(gamm[0], gamm[1], white);
 
-            size_t black = color.black;
-
-            //color_cmatrix_t& color_cmatrix = color.cmatrix;
-            color_cmatrix_t color_cmatrix = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
-
-            to_rgb_row_t to_rgb;
-            to_rgb_matrix_t to_rgb_matrix;
-            to_rgb_vector_t raw_vector, rgb_vector, to_rgb_vector[3];
-
-            for (int row = 0; row < 3; ++row) {
-                for (int col = 0; col < 3; ++col) {
-                    to_rgb[col] = color_cmatrix[row][col];
-                }
-                to_rgb_vector[row].assign(to_rgb, 3);
-            }
-            to_rgb_matrix.assign(to_rgb_vector, 3);
-
-            //raw::libraw::curve_t& curve = color.curve;
-            curve_t& curve = curve_;
-            gamm_t& gamm = params.gamm;
-            curve.generate(gamm[0], gamm[1], sample_maximum);
-
-            for (unsigned pass = 0; pass < 2; ++pass) {
-
+            for (int pass = 0; pass < 2; ++pass) {
                 if (pass) {
                     if (!(sample_diff = (sample_max - sample_min))) {
                         sample_diff = sample_maximum;
                     }
                 }
-                for (size_t row = 0; row < image_height; ++row) {
+                for (samples[0] = image[row = 0], samples[1] = image[row+1];
+                     row < image_height;
+                     samples[0] = image[(++row)*2], samples[1] = image[row*2+1]) {
 
-                    for (size_t col = 0; col < image_width; ++col) {
+                    for (col = 0; col < image_width; ++col) {
+                        map[0] = samples[0]+(col*col_size*2); map[1] = map[0]+1;
+                        map[2] = samples[1]+(col*col_size*2); map[3] = map[2]+1;
 
-                        map[0] = col*2; map[1] = map[0]+1;
-                        map[2] = map[0]+width; map[3] = map[2]+1;
+                        red = map[pattern[0]][0];
+                        green = map[pattern[1]][0];
+                        blue = map[pattern[2]][0];
 
-                        red = image[row*width*2+map[pattern[0]]];
-                        green = image[row*width*2+map[pattern[1]]];
-                        blue = image[row*width*2+map[pattern[2]]];
+                        for (byte = 1; byte < col_size; ++byte) {
+                            red = (red << 8) | (map[pattern[0]][byte]);
+                            green = (green << 8) | (map[pattern[1]][byte]);
+                            blue = (blue << 8) | (map[pattern[2]][byte]);
+                        }
 
-                        red -= black; green -= black; blue -= black;
+                        red -= black;
+                        green -= black;
+                        blue -= black;
 
-                        red = curve[red]; green = curve[green]; blue = curve[blue];
+                        red = curve_[red];
+                        green = curve_[green];
+                        blue = curve_[blue];
 
-                        if (pass) {
+                        if ((pass)) {
                             red = ((red - sample_min) * maximum) / (sample_diff);
                             green = ((green - sample_min) * maximum) / (sample_diff);
                             blue = ((blue - sample_min) * maximum) / (sample_diff);
 
-                            to_rgb[0] = red; to_rgb[1] = green; to_rgb[2] = blue;
-                            raw_vector.assign(to_rgb, 3);
-                            to_rgb_matrix.mul(rgb_vector, raw_vector);
-                            red = rgb_vector[0]; green = rgb_vector[1]; blue = rgb_vector[2];
-
                             pixel(red, green, blue);
 
                             if (!(success = this->on_image_pixel
-                                (pixel, (byte_t*)sample, sample_size,
+                                (pixel, 0, 0,
                                  col, row, 0, image_width, image_height,
                                  image_planes, values_per_pixel, bits_per_value,
                                  pixel_value_interpretation))) {
@@ -204,6 +178,19 @@ public:
         }
         return success;
     }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    using Implements::Implements::read;
+    virtual bool read(const char* file) {
+        if ((file)) {
+            if ((reader_.read(file))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
 protected:
@@ -215,11 +202,11 @@ typedef image_readert<> image_reader;
 typedef to_bgra_bytes_readert
 <image_reader_implements, image_reader> to_bgra_image_reader;
 
-} // namespace libraw 
+} // namespace libpgm
 } // namespace raw 
 } // namespace format 
 } // namespace image 
 } // namespace graphic 
 } // namespace vedere 
 
-#endif // _VEDERE_GRAPHIC_IMAGE_FORMAT_RAW_LIBRAW_IMAGE_READER_HPP 
+#endif // _VEDERE_GRAPHIC_IMAGE_FORMAT_RAW_LIBPGM_IMAGE_READER_HPP 

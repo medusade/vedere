@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2015 $organization$
+/// Copyright (c) 1988-2016 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -16,22 +16,23 @@
 ///   File: renderer.hpp
 ///
 /// Author: $author$
-///   Date: 11/10/2015
+///   Date: 7/17/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _VEDERE_APP_GUI_QT_HELLO_RENDERER_HPP
-#define _VEDERE_APP_GUI_QT_HELLO_RENDERER_HPP
+#ifndef _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_RENDERER_HPP
+#define _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_RENDERER_HPP
 
-#include "vedere/app/gui/qt/hello/image_renderer.hpp"
-#include "vedere/app/gui/hello/renderer_extend.hpp"
+#include "vedere/graphic/image/format/viewer/qt/image_renderer.hpp"
+#include "vedere/graphic/image/format/viewer/renderer.hpp"
 
 namespace vedere {
-namespace app {
-namespace gui {
+namespace graphic {
+namespace image {
+namespace format {
+namespace viewer {
 namespace qt {
-namespace hello {
 
 typedef implement_base renderer_implements;
-typedef gui::hello::renderer_extendt
+typedef viewer::renderert
 <image_renderer::image_format_t,
  image_renderer::image_format_none, image_renderer> renderer_extends;
 ///////////////////////////////////////////////////////////////////////
@@ -78,12 +79,11 @@ protected:
     image_renderer_t image_renderer_;
 };
 
-} // namespace hello
-} // namespace qt 
-} // namespace gui 
-} // namespace app 
+} // namespace qt
+} // namespace viewer 
+} // namespace format 
+} // namespace image 
+} // namespace graphic 
 } // namespace vedere 
 
-#endif // _VEDERE_APP_GUI_QT_HELLO_RENDERER_HPP 
-        
-
+#endif // _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_RENDERER_HPP 

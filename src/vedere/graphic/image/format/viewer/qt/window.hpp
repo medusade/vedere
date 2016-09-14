@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2015 $organization$
+/// Copyright (c) 1988-2016 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -13,31 +13,26 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: main.hpp
+///   File: window.hpp
 ///
 /// Author: $author$
-///   Date: 5/29/2015
+///   Date: 7/17/2016
 ///////////////////////////////////////////////////////////////////////
-#ifndef _VEDERE_APP_GUI_QT_HELLO_MAIN_HPP
-#define _VEDERE_APP_GUI_QT_HELLO_MAIN_HPP
+#ifndef _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_WINDOW_HPP
+#define _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_WINDOW_HPP
 
-#include "vedere/app/gui/hello/main_window.hpp"
-#include "vedere/app/gui/hello/window.hpp"
-#include "vedere/app/gui/hello/renderer.hpp"
-#include "vedere/app/gui/hello/main.hpp"
-#include "vedere/app/gui/qt/hello/renderer.hpp"
-#include "vedere/app/gui/qt/hello/image_renderer.hpp"
-#include "vedere/gui/qt/application/window_main.hpp"
-#include "vedere/gui/qt/application/main_window.hpp"
+#include "vedere/graphic/image/format/viewer/qt/renderer.hpp"
+#include "vedere/graphic/image/format/viewer/window.hpp"
+#include "vedere/graphic/image/format/viewer/main.hpp"
 
 namespace vedere {
-namespace app {
-namespace gui {
+namespace graphic {
+namespace image {
+namespace format {
+namespace viewer {
 namespace qt {
-namespace hello {
 
-typedef gui::hello::windowt
-<gui::hello::window_extendt<QWidget> > main_widget_extends;
+typedef viewer::windowt<QWidget> main_widget_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: main_widget
 ///////////////////////////////////////////////////////////////////////
@@ -53,10 +48,10 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual bool init(gui::hello::image_transform_t image_transform) {
+    virtual bool init(viewer::image_transform_t image_transform) {
         renderer_.init(this);
         renderer_.transform_smooth
-        (!(gui::hello::image_transform_smooth != image_transform));
+        (!(viewer::image_transform_smooth != image_transform));
         return true;
     }
     virtual bool finish() {
@@ -160,130 +155,11 @@ protected:
     renderer renderer_;
 };
 
-typedef gui::hello::main_windowt<gui::hello::main_window_extendt
-<vedere::gui::qt::application::main_window> > main_window_extends;
-///////////////////////////////////////////////////////////////////////
-///  Class: main_window
-///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS main_window: public main_window_extends {
-public:
-    typedef main_window_extends Extends;
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    main_window(): main_widget_(0) {
-    }
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    virtual bool init
-    (size_t image_width, size_t image_height, size_t image_depth,
-     const char_t* image_file, gui::hello::image_format_t image_format,
-     gui::hello::image_transform_t image_transform) {
-        if ((main_widget_ = new main_widget(this))) {
-            if ((main_widget_->init(image_transform))) {
-                this->setCentralWidget(main_widget_);
-                load_image
-                (image_width, image_height,
-                 image_depth, image_file, image_format);
-                return true;
-            }
-            delete main_widget_;
-            main_widget_ = 0;
-        }
-        return true;
-    }
-    virtual bool finish() {
-        return true;
-    }
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    using Extends::load_image;
-    virtual void* load_image
-    (byte_reader& reader, size_t size, size_t width, size_t height) {
-        if ((main_widget_)) {
-            return main_widget_->load_image(reader, size, width, height);
-        }
-        return false;
-    }
-    virtual void* set_image
-    (byte_t* bytes, size_t size, size_t width, size_t height) {
-        if ((main_widget_)) {
-            return main_widget_->set_image(bytes, size, width, height);
-        }
-        return false;
-    }
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-protected:
-    main_widget* main_widget_;
-};
-
-typedef vedere::gui::qt::application::window_main_implements main_implements;
-typedef vedere::app::gui::hello::maint
-<main_implements, vedere::gui::qt::application::window_main> main_extends;
-///////////////////////////////////////////////////////////////////////
-///  Class: main
-///////////////////////////////////////////////////////////////////////
-class _EXPORT_CLASS main: virtual public main_implements, public main_extends {
-public:
-    typedef main_implements Implements;
-    typedef main_extends Extends;
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    main()
-    : main_window_(0) {
-    }
-    virtual ~main() {
-    }
-
-protected:
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-    virtual QMainWindow* create_main_window
-    (QApplication& qApplication, int argc, char_t** argv, char_t** env) {
-        main_window* mw = 0;
-        if ((mw = new main_window())) {
-            mw->resize(main_window_width_, main_window_height_);
-            if ((mw->init
-                 (image_width_, image_height_, image_depth_,
-                  image_file_.has_chars(), image_format_, image_transform_))) {
-                main_window_ = mw;
-                return main_window_;
-            } else {
-                VEDERE_LOG_ERROR("failed on main_window_->init()");
-            }
-        }
-        return 0;
-    }
-    virtual bool destroy_main_window
-    (QMainWindow* qMainWindow, QApplication& qApplication,
-     int argc, char_t** argv, char_t** env) {
-        if ((qMainWindow) && (qMainWindow == ((QMainWindow*)main_window_))) {
-            bool success = false;
-            if (!(success = main_window_->finish())) {
-                VEDERE_LOG_ERROR("failed on main_window_->finish()");
-            }
-            delete main_window_;
-            main_window_ = 0;
-            return success;
-        }
-        return false;
-    }
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-protected:
-    main_window* main_window_;
-};
-
-} // namespace hello 
-} // namespace qt 
-} // namespace gui 
-} // namespace app 
+} // namespace qt
+} // namespace viewer 
+} // namespace format 
+} // namespace image 
+} // namespace graphic 
 } // namespace vedere 
 
-#endif // _VEDERE_APP_GUI_QT_HELLO_MAIN_HPP 
+#endif // _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_WINDOW_HPP 
