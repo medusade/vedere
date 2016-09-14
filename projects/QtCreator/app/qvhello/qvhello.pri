@@ -116,6 +116,15 @@ $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/jpeg.cpp \
 # libraw
 
 qvhello_HEADERS += \
+$${LAMNA_SRC}/lamna/graphic/image/format/raw/gamma/libraw/curve.hpp \
+
+qvhello_SOURCES += \
+$${LAMNA_SRC}/lamna/graphic/image/format/raw/gamma/libraw/curve.cpp \
+
+########################################################################
+# libraw
+
+qvhello_HEADERS += \
 $${VEDERE_SRC}/vedere/graphic/image/format/raw/libraw/image_reader.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/raw/libraw/reader.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/raw/libraw/reader_events.hpp \

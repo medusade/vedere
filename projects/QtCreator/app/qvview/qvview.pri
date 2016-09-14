@@ -20,6 +20,7 @@
 ########################################################################
 
 ########################################################################
+# lamna
 qvview_HEADERS += \
 $${LAMNA_SRC}/lamna/graphic/image/pixel.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/color_channels.hpp \
@@ -30,7 +31,7 @@ $${LAMNA_SRC}/lamna/graphic/image/pixel.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/color_channels.cpp \
 
 ########################################################################
-# libpng
+# lamna libpng
 qvview_HEADERS += \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/reader.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/reader_events.hpp \
@@ -56,9 +57,7 @@ $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/struct_created.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/palette.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/color.cpp \
 
-_qvview_SOURCES += \
-$${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/png.cpp \
-
+########################################################################
 qvview_HEADERS += \
 $${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/image_reader.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/png.hpp \
@@ -66,43 +65,6 @@ $${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/png.hpp \
 qvview_SOURCES += \
 $${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/image_reader.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/png.cpp \
-
-########################################################################
-# libtiff
-qvview_HEADERS += \
-$${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/reader.hpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/reader_events.hpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/opened.hpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/libtiff.hpp \
-
-qvview_SOURCES += \
-$${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/opened.cpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/libtiff.cpp \
-
-_qvview_SOURCES += \
-$${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/reader.cpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/tiff/libtiff/reader_events.cpp \
-
-########################################################################
-# libraw
-qvview_HEADERS += \
-$${LAMNA_SRC}/lamna/graphic/image/format/raw/bayer/rgb/map.hpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/raw/bayer/rgb/filter.hpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/raw/bayer/rgb/pattern.hpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/raw/libraw/reader.hpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/raw/libraw/reader_events.hpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/raw/libraw/filter.hpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/raw/libraw/libraw.hpp \
-
-qvview_SOURCES += \
-$${LAMNA_SRC}/lamna/graphic/image/format/raw/bayer/rgb/map.cpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/raw/bayer/rgb/pattern.cpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/raw/libraw/filter.cpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/raw/libraw/libraw.cpp \
-
-_qvview_SOURCES += \
-$${LAMNA_SRC}/lamna/graphic/image/format/raw/libraw/reader.cpp \
-$${LAMNA_SRC}/lamna/graphic/image/format/raw/libraw/reader_events.cpp \
 
 ########################################################################
 qvview_HEADERS += \
@@ -127,21 +89,15 @@ $${VEDERE_SRC}/vedere/console/main_main.cpp \
 qvview_INCLUDEPATH += \
 $${vedere_INCLUDEPATH} \
 $${qt_INCLUDEPATH} \
-$${libraw_INCLUDEPATH} \
-$${libtiff_INCLUDEPATH} \
 $${libpng_INCLUDEPATH} \
 
 qvview_DEFINES += \
 $${vedere_DEFINES} \
 $${qt_DEFINES} \
-$${libraw_DEFINES} \
-$${libtiff_DEFINES} \
 $${libpng_DEFINES} \
 
 qvview_LIBS += \
 $${vedere_LIBS} \
 $${qt_LIBS} \
-$${libraw_LIBS} \
-$${libtiff_LIBS} \
 $${libpng_LIBS} \
 

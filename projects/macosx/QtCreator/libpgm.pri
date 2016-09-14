@@ -13,33 +13,20 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qvview.pro
+#   File: libpgm.pri
 #
 # Author: $author$
-#   Date: 3/27/2016
+#   Date: 7/15/2016
 ########################################################################
-include(../../../../../build/QtCreator/libpng.pri)
-include(../../libpng.pri)
-include(../../qt.pri)
-include(../../../../QtCreator/vedere.pri)
-include(../../vedere.pri)
-include(../../../../QtCreator/app/qvview/qvview.pri)
-
-TARGET = qvview
-
-INCLUDEPATH += \
-$${qvview_INCLUDEPATH} \
-
-DEFINES += \
-$${qvview_DEFINES} \
 
 ########################################################################
-HEADERS += \
-$${qvview_HEADERS} \
+# libpgm
+libpgm_INCLUDEPATH += \
+$${build_libpgm_INCLUDEPATH} \
 
-SOURCES += \
-$${qvview_SOURCES} \
+libpgm_DEFINES += \
+$${build_libpgm_DEFINES} \
 
-########################################################################
-LIBS += \
-$${qvview_LIBS} \
+libpgm_LIBS += \
+$${build_libpgm_LIBS} \
+
