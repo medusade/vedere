@@ -77,6 +77,13 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+    virtual const void* image
+    (size_t& image_size, size_t& image_width, size_t& image_height) const {
+        return renderer_.image(image_size, image_width, image_height);
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual void switch_render() {
         renderer_.switch_render();
         update(0,0, width(),height());
@@ -217,6 +224,16 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+    virtual const void* image
+    (size_t& image_size, size_t& image_width, size_t& image_height) const {
+        if ((main_widget_)) {
+            return main_widget_->image(image_size, image_width, image_height);
+        }
+        return 0;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 protected:
     main_widget* main_widget_;
 };
@@ -258,6 +275,34 @@ protected:
             }
         }
         return 0;
+    }
+    virtual bool after_create_main_window
+    (QMainWindow* qMainWindow, QApplication& qApplication,
+     int argc, char_t** argv, char_t** env) {
+        if ((optind+1 < (argc)) && (main_window_)) {
+            char_t* arg = 0;
+            if ((arg = argv[optind+1]) && (arg[0])) {
+                const void* image = 0;
+                size_t image_size = 0, image_width = 0, image_height = 0;
+                if ((image = main_window_->image(image_size, image_width, image_height))) {
+                    size_t pixel_size = image_size/image_height/image_width;
+                    if ((4 == (pixel_size))) {
+                        FILE* f = 0;
+                        VEDERE_LOG_MESSAGE_DEBUG("fopen(arg = \"" << arg << "\",\"rb\")...")
+                        if ((f = fopen(arg,"rb"))) {
+                            fclose(f);
+                        } else {
+                            VEDERE_LOG_MESSAGE_DEBUG("fopen(arg = \"" << arg << "\",\"wb\")...")
+                            if ((f = fopen(arg,"wb"))) {
+                                fwrite(image, 1, image_size, f);
+                                fclose(f);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
     virtual bool destroy_main_window
     (QMainWindow* qMainWindow, QApplication& qApplication,

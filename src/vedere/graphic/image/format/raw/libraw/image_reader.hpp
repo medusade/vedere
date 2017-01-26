@@ -145,7 +145,8 @@ public:
             //raw::libraw::curve_t& curve = color.curve;
             curve_t& curve = curve_;
             gamm_t& gamm = params.gamm;
-            curve.generate(gamm[0], gamm[1], sample_maximum);
+            curve.generate(gamm[0], gamm[1], 0x2000);
+            //curve.generate(gamm[0], gamm[1], sample_maximum);
 
             for (unsigned pass = 0; pass < 2; ++pass) {
 
