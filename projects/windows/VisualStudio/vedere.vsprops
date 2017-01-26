@@ -24,27 +24,15 @@
     Version="8.00"
     Name="vedere">
 
-    <!--===============================================-->
-
-    <UserMacro
-        Name="SOURCE_ROOT_DIR"
-        Value="../../../../../.."
-    />
-
-    <UserMacro
-        Name="SOURCE_BUILD_DIR"
-        Value="$(SOURCE_ROOT_DIR)"
-    />
-
   <!--===============================================-->
 
   <UserMacro
       Name="LIBRAW_GROUP"
-      Value="thirdparty/libc/libraw"
+      Value="libc/libraw/"
     />
   <UserMacro
       Name="LIBRAW_NAME"
-      Value="/LibRaw"
+      Value="LibRaw"
     />
   <UserMacro
       Name="LIBRAW_VERSION"
@@ -169,7 +157,7 @@
     />
     <UserMacro
         Name="NADIR_LIBS"
-        Value="libnadir.lib Ws2_32.lib"
+        Value="libxosnadir.lib Ws2_32.lib"
     />
 
   <!--===============================================-->
