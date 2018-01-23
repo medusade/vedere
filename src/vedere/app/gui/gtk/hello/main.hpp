@@ -42,7 +42,8 @@ namespace gtk {
 namespace hello {
 
 typedef gui::hello::windowt
-<vedere::gui::gtk::drawing_area> drawing_area_extends;
+<gui::hello::window_extendt
+ <vedere::gui::gtk::drawing_area> > drawing_area_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: drawing_area
 ///////////////////////////////////////////////////////////////////////
@@ -178,7 +179,8 @@ protected:
 };
 
 typedef app::gui::hello::main_windowt
-<vedere::gui::gtk::application::window> window_extends;
+<gui::hello::main_window_extendt
+ <vedere::gui::gtk::application::window> > window_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: window
 ///////////////////////////////////////////////////////////////////////
