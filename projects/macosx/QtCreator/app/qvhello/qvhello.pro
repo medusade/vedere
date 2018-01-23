@@ -45,12 +45,14 @@ DEFINES += \
 $${qvhello_DEFINES} \
 $${qt_DEFINES} \
 
+########################################################################
 HEADERS += \
 $${qvhello_HEADERS} \
 
 SOURCES += \
 $${qvhello_SOURCES} \
 
+########################################################################
 LIBS += \
 $${qvhello_LIBS} \
 $${qt_LIBS} \

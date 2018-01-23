@@ -13,33 +13,44 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: vedere.pri
+#   File: gtk.pri
 #
 # Author: $author$
-#   Date: 5/26/2015
+#   Date: 6/22/2015
 ########################################################################
 
-VEDERE_OS = macosx
-
 ########################################################################
-# nadir
-NADIR_BLD = ../$${NADIR_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-NADIR_LIB = $${NADIR_BLD}/lib
+# gtk
+#
+# pkg-config --cflags --libs gtk+-3.0
+#
+build_gtk_INCLUDEPATH += \
+/usr/include/gtk-3.0 \
+/usr/include/atk-1.0 \
+/usr/include/at-spi2-atk/2.0 \
+/usr/include/pango-1.0 \
+/usr/include/gio-unix-2.0/ \
+/usr/include/cairo \
+/usr/include/gdk-pixbuf-2.0 \
+/usr/include/glib-2.0 \
+/usr/lib/x86_64-linux-gnu/glib-2.0/include \
+/usr/include/harfbuzz \
+/usr/include/freetype2 \
+/usr/include/pixman-1 \
+/usr/include/libpng12  \
 
-########################################################################
-# lamna
-LAMNA_BLD = ../$${LAMNA_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-LAMNA_LIB = $${LAMNA_BLD}/lib
+build_gtk_DEFINES += \
 
-########################################################################
-# vedere
-vedere_LIBS += \
--L$${VEDERE_LIB}/libvedere \
--lvedere \
--L$${LAMNA_LIB}/liblamna \
--llamna \
--L$${NADIR_LIB}/libxosnadir \
--lxosnadir \
--lpthread \
--ldl \
+build_gtk_LIBS += \
+-lgtk-3 \
+-lgdk-3 \
+-latk-1.0 \
+-lgio-2.0 \
+-lpangocairo-1.0 \
+-lgdk_pixbuf-2.0 \
+-lcairo-gobject \
+-lpango-1.0 \
+-lcairo \
+-lgobject-2.0 \
+-lglib-2.0
 

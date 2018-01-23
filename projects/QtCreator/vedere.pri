@@ -28,20 +28,24 @@ VEDERE_SRC = $${VEDERE_PKG}/src
 
 CONFIG(debug, debug|release) {
 VEDERE_CONFIG = Debug
+BUILD_CONFIG = Debug
+vedere_DEFINES += DEBUG_BUILD
 } else {
 VEDERE_CONFIG = Release
+BUILD_CONFIG = Release
+vedere_DEFINES += RELEASE_BUILD
 }
 
 ########################################################################
-# xos
-XOS_PKG = $${VEDERE_PKG}/../nadir
-XOS_PRJ = $${XOS_PKG}
-XOS_SRC = $${XOS_PKG}/src
+# nadir
+NADIR_PKG = $${VEDERE_PKG}/../nadir
+NADIR_PRJ = $${NADIR_PKG}
+NADIR_SRC = $${NADIR_PKG}/src
 
-xos_INCLUDEPATH += \
-$${XOS_SRC} \
+nadir_INCLUDEPATH += \
+$${NADIR_SRC} \
 
-xos_DEFINES += \
+nadir_DEFINES += \
 
 ########################################################################
 # lamna
@@ -59,9 +63,9 @@ lamna_DEFINES += \
 vedere_INCLUDEPATH += \
 $${VEDERE_SRC} \
 $${lamna_INCLUDEPATH} \
-$${xos_INCLUDEPATH} \
+$${nadir_INCLUDEPATH} \
 
 vedere_DEFINES += \
-$${xos_DEFINES} \
+$${nadir_DEFINES} \
 $${lamna_DEFINES} \
 

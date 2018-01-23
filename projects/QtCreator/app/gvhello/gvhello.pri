@@ -27,10 +27,10 @@ $${vedere_DEFINES} \
 
 ########################################################################
 gvhello_HEADERS += \
-$${XOS_SRC}/xos/mt/queue.hpp \
+$${NADIR_SRC}/xos/mt/queue.hpp \
 
 gvhello_SOURCES += \
-$${XOS_SRC}/xos/mt/queue.cpp \
+$${NADIR_SRC}/xos/mt/queue.cpp \
 
 ########################################################################
 gvhello_HEADERS += \

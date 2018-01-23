@@ -45,12 +45,14 @@ DEFINES += \
 $${qvhello_DEFINES} \
 $${qt_DEFINES} \
 
+########################################################################
 HEADERS += \
 $${qvhello_HEADERS} \
 
 SOURCES += \
 $${qvhello_SOURCES} \
 
+########################################################################
 LIBS += \
 $${qvhello_LIBS} \
 $${qt_LIBS} \
@@ -58,6 +60,4 @@ $${libtiff_LIBS} \
 $${libjpeg_LIBS} \
 $${libpng_LIBS} \
 $${libraw_LIBS} \
--llcms2 \
--lgomp \
 -lz \

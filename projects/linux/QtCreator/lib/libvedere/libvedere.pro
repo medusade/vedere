@@ -19,8 +19,8 @@
 #   Date: 5/26/2015
 ########################################################################
 include(../../../../QtCreator/vedere.pri)
-include(../../../../QtCreator/lib/libvedere/libvedere.pri)
 include(../../vedere.pri)
+include(../../../../QtCreator/lib/libvedere/libvedere.pri)
 
 TARGET = vedere
 
@@ -33,9 +33,11 @@ $${libvedere_INCLUDEPATH} \
 DEFINES += \
 $${libvedere_DEFINES} \
 
+########################################################################
 HEADERS += \
 $${libvedere_HEADERS} \
 
 SOURCES += \
 $${libvedere_SOURCES} \
 
+########################################################################

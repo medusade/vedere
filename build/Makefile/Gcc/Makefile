@@ -13,33 +13,77 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: vedere.pri
+#   File: Makefile
 #
 # Author: $author$
-#   Date: 5/26/2015
+#   Date: 12/23/2015
+#
+# build Gcc Makefile for lamna
 ########################################################################
 
-VEDERE_OS = macosx
+########################################################################
+# fl
+#
+build_fl_USRINCLUDES += \
+
+build_fl_USRDEFINES += \
+
+build_fl_USRLIBDIRS += \
+
+build_fl_LIBS += \
+-lfltk \
 
 ########################################################################
-# nadir
-NADIR_BLD = ../$${NADIR_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-NADIR_LIB = $${NADIR_BLD}/lib
+# wx
+#
+build_wx_USRINCLUDES += \
+-I/$(HOME)/build/wxWidgets/include/wx-3.0 \
+-I/$(HOME)/jboyd/build/wxWidgets/lib/wx/include/gtk2-unicode-3.0 \
+
+build_wx_USRDEFINES += \
+__WXGTK__ \
+
+build_wx_USRLIBDIRS += \
+-L/$(HOME)/build/wxWidgets/lib \
+
+build_wx_LIBS += \
+-lwx_gtk2u_core-3.0 \
+-lwx_baseu-3.0 \
 
 ########################################################################
-# lamna
-LAMNA_BLD = ../$${LAMNA_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-LAMNA_LIB = $${LAMNA_BLD}/lib
+# gtk
+#
+# pkg-config --cflags --libs gtk+-3.0
+#
+build_gtk_USRINCLUDES += \
+-I/usr/include/gtk-3.0 \
+-I/usr/include/atk-1.0 \
+-I/usr/include/at-spi2-atk/2.0 \
+-I/usr/include/pango-1.0 \
+-I/usr/include/gio-unix-2.0/ \
+-I/usr/include/cairo \
+-I/usr/include/gdk-pixbuf-2.0 \
+-I/usr/include/glib-2.0 \
+-I/usr/lib/i386-linux-gnu/glib-2.0/include \
+-I/usr/include/harfbuzz \
+-I/usr/include/freetype2 \
+-I/usr/include/pixman-1 \
+-I/usr/include/libpng12 \
 
-########################################################################
-# vedere
-vedere_LIBS += \
--L$${VEDERE_LIB}/libvedere \
--lvedere \
--L$${LAMNA_LIB}/liblamna \
--llamna \
--L$${NADIR_LIB}/libxosnadir \
--lxosnadir \
--lpthread \
--ldl \
+build_gtk_USRDEFINES += \
+
+build_gtk_USRLIBDIRS += \
+
+build_gtk_LIBS += \
+-lgtk-3 \
+-lgdk-3 \
+-latk-1.0 \
+-lgio-2.0 \
+-lpangocairo-1.0 \
+-lgdk_pixbuf-2.0 \
+-lcairo-gobject \
+-lpango-1.0 \
+-lcairo \
+-lgobject-2.0 \
+-lglib-2.0 \
 

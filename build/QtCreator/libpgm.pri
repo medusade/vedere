@@ -1,5 +1,5 @@
 ########################################################################
-# Copyright (c) 1988-2015 $organization$
+# Copyright (c) 1988-2016 $organization$
 #
 # This software is provided by the author and contributors ``as is''
 # and any express or implied warranties, including, but not limited to,
@@ -13,33 +13,19 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: vedere.pri
+#   File: libpgm.pri
 #
 # Author: $author$
-#   Date: 5/26/2015
+#   Date: 7/17/2016
 ########################################################################
 
-VEDERE_OS = macosx
-
 ########################################################################
-# nadir
-NADIR_BLD = ../$${NADIR_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-NADIR_LIB = $${NADIR_BLD}/lib
+# libpgm
+build_libpgm_INCLUDEPATH += \
+${HOME}/build/apertus/include \
 
-########################################################################
-# lamna
-LAMNA_BLD = ../$${LAMNA_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-LAMNA_LIB = $${LAMNA_BLD}/lib
+build_libpgm_DEFINES += \
 
-########################################################################
-# vedere
-vedere_LIBS += \
--L$${VEDERE_LIB}/libvedere \
--lvedere \
--L$${LAMNA_LIB}/liblamna \
--llamna \
--L$${NADIR_LIB}/libxosnadir \
--lxosnadir \
--lpthread \
--ldl \
-
+build_libpgm_LIBS += \
+-L${HOME}/build/apertus/lib \
+-lpgm \

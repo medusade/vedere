@@ -13,33 +13,19 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: vedere.pri
+#   File: libjpeg.pri
 #
 # Author: $author$
-#   Date: 5/26/2015
+#   Date: 11/27/2015
 ########################################################################
 
-VEDERE_OS = macosx
-
 ########################################################################
-# nadir
-NADIR_BLD = ../$${NADIR_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-NADIR_LIB = $${NADIR_BLD}/lib
+# libjpeg
+build_libjpeg_INCLUDEPATH += \
+${HOME}/build/jpeg/include \
 
-########################################################################
-# lamna
-LAMNA_BLD = ../$${LAMNA_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-LAMNA_LIB = $${LAMNA_BLD}/lib
+build_libjpeg_DEFINES += \
 
-########################################################################
-# vedere
-vedere_LIBS += \
--L$${VEDERE_LIB}/libvedere \
--lvedere \
--L$${LAMNA_LIB}/liblamna \
--llamna \
--L$${NADIR_LIB}/libxosnadir \
--lxosnadir \
--lpthread \
--ldl \
-
+build_libjpeg_LIBS += \
+-L${HOME}/build/jpeg/lib \
+-ljpeg \

@@ -25,12 +25,14 @@ $${vedere_INCLUDEPATH} \
 libvedere_DEFINES += \
 $${vedere_DEFINES} \
 
+########################################################################
 libvedere_HEADERS += \
 $${VEDERE_SRC}/vedere/base/base.hpp \
 
 libvedere_SOURCES += \
 $${VEDERE_SRC}/vedere/base/base.cpp \
 
+########################################################################
 libvedere_LIBS += \
 $${vedere_LIBS} \
 

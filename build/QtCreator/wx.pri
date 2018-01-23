@@ -13,33 +13,23 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: vedere.pri
+#   File: wx.pri
 #
 # Author: $author$
-#   Date: 5/26/2015
+#   Date: 9/23/2015
 ########################################################################
 
-VEDERE_OS = macosx
-
 ########################################################################
-# nadir
-NADIR_BLD = ../$${NADIR_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-NADIR_LIB = $${NADIR_BLD}/lib
+# wx
+build_wx_INCLUDEPATH += \
+${HOME}/build/wxwidgets/include/wx-3.0 \
+${HOME}/build/wxwidgets/lib/wx/include/osx_cocoa-unicode-3.0 \
 
-########################################################################
-# lamna
-LAMNA_BLD = ../$${LAMNA_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-LAMNA_LIB = $${LAMNA_BLD}/lib
+build_wx_DEFINES += \
+__WXOSX_COCOA__ \
 
-########################################################################
-# vedere
-vedere_LIBS += \
--L$${VEDERE_LIB}/libvedere \
--lvedere \
--L$${LAMNA_LIB}/liblamna \
--llamna \
--L$${NADIR_LIB}/libxosnadir \
--lxosnadir \
--lpthread \
--ldl \
-
+build_wx_LIBS += \
+-L${HOME}/build/wxwidgets/lib \
+-lwx_osx_cocoau_core-3.0 \
+-lwx_baseu-3.0 \
+-framework CoreFoundation \

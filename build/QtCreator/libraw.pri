@@ -1,5 +1,5 @@
 ########################################################################
-# Copyright (c) 1988-2015 $organization$
+# Copyright (c) 1988-2016 $organization$
 #
 # This software is provided by the author and contributors ``as is''
 # and any express or implied warranties, including, but not limited to,
@@ -13,33 +13,18 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: vedere.pri
+#   File: libraw.pri
 #
 # Author: $author$
-#   Date: 5/26/2015
+#   Date: 3/27/2016
 ########################################################################
 
-VEDERE_OS = macosx
+build_libraw_INCLUDEPATH += \
+${HOME}/build/LibRaw/include \
 
-########################################################################
-# nadir
-NADIR_BLD = ../$${NADIR_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-NADIR_LIB = $${NADIR_BLD}/lib
+build_libraw_DEFINES += \
 
-########################################################################
-# lamna
-LAMNA_BLD = ../$${LAMNA_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-LAMNA_LIB = $${LAMNA_BLD}/lib
-
-########################################################################
-# vedere
-vedere_LIBS += \
--L$${VEDERE_LIB}/libvedere \
--lvedere \
--L$${LAMNA_LIB}/liblamna \
--llamna \
--L$${NADIR_LIB}/libxosnadir \
--lxosnadir \
--lpthread \
--ldl \
+build_libraw_LIBS += \
+-L${HOME}/build/LibRaw/lib \
+-lraw_r \
 

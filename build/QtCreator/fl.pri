@@ -13,33 +13,25 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: vedere.pri
+#   File: fl.pri
 #
 # Author: $author$
-#   Date: 5/26/2015
+#   Date: 10/2/2015
 ########################################################################
 
-VEDERE_OS = macosx
-
 ########################################################################
-# nadir
-NADIR_BLD = ../$${NADIR_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-NADIR_LIB = $${NADIR_BLD}/lib
+# fl
+build_fl_INCLUDEPATH += \
+${HOME}/build/fltk/include \
 
-########################################################################
-# lamna
-LAMNA_BLD = ../$${LAMNA_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-LAMNA_LIB = $${LAMNA_BLD}/lib
+build_fl_DEFINES += \
 
-########################################################################
-# vedere
-vedere_LIBS += \
--L$${VEDERE_LIB}/libvedere \
--lvedere \
--L$${LAMNA_LIB}/liblamna \
--llamna \
--L$${NADIR_LIB}/libxosnadir \
--lxosnadir \
--lpthread \
--ldl \
-
+build_fl_LIBS += \
+-L${HOME}/build/fltk/lib \
+-lfltk_forms \
+-lfltk_gl \
+-lfltk_images \
+-lfltk_jpeg \
+-lfltk_png \
+-lfltk \
+-framework Cocoa \

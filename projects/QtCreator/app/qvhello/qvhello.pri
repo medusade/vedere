@@ -26,34 +26,33 @@ qvhello_DEFINES += \
 $${vedere_DEFINES} \
 
 ########################################################################
-# xos
+# nadir
 qvhello_HEADERS += \
-$${XOS_SRC}/xos/base/matrix.hpp \
-$${XOS_SRC}/xos/base/vector.hpp \
-$${XOS_SRC}/xos/io/read/file_or_buffer.hpp \
-$${XOS_SRC}/xos/io/read/file.hpp \
-$${XOS_SRC}/xos/io/file/reader.hpp \
-$${XOS_SRC}/xos/io/read/buffer.hpp \
-$${XOS_SRC}/xos/io/buffer.hpp \
-$${XOS_SRC}/xos/io/seeker.hpp \
-$${XOS_SRC}/xos/io/teller.hpp \
-$${XOS_SRC}/xos/io/whencer.hpp \
-$${XOS_SRC}/xos/io/whence.hpp \
+$${NADIR_SRC}/xos/base/matrix.hpp \
+$${NADIR_SRC}/xos/base/vector.hpp \
+$${NADIR_SRC}/xos/io/read/file_or_buffer.hpp \
+$${NADIR_SRC}/xos/io/read/file.hpp \
+$${NADIR_SRC}/xos/io/file/reader.hpp \
+$${NADIR_SRC}/xos/io/read/buffer.hpp \
+$${NADIR_SRC}/xos/io/buffer.hpp \
+$${NADIR_SRC}/xos/io/seeker.hpp \
+$${NADIR_SRC}/xos/io/teller.hpp \
+$${NADIR_SRC}/xos/io/whencer.hpp \
+$${NADIR_SRC}/xos/io/whence.hpp \
 
 qvhello_SOURCES += \
-$${XOS_SRC}/xos/base/matrix.cpp \
-$${XOS_SRC}/xos/base/vector.cpp \
-$${XOS_SRC}/xos/io/read/file_or_buffer.cpp \
-$${XOS_SRC}/xos/io/read/file.cpp \
-$${XOS_SRC}/xos/io/read/buffer.cpp \
-$${XOS_SRC}/xos/io/seeker.cpp \
-$${XOS_SRC}/xos/io/teller.cpp \
-$${XOS_SRC}/xos/io/whencer.cpp \
-$${XOS_SRC}/xos/io/whence.cpp \
+$${NADIR_SRC}/xos/base/matrix.cpp \
+$${NADIR_SRC}/xos/base/vector.cpp \
+$${NADIR_SRC}/xos/io/read/file_or_buffer.cpp \
+$${NADIR_SRC}/xos/io/read/file.cpp \
+$${NADIR_SRC}/xos/io/read/buffer.cpp \
+$${NADIR_SRC}/xos/io/seeker.cpp \
+$${NADIR_SRC}/xos/io/teller.cpp \
+$${NADIR_SRC}/xos/io/whencer.cpp \
+$${NADIR_SRC}/xos/io/whence.cpp \
 
 ########################################################################
 # libpng
-
 qvhello_HEADERS += \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/reader.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/info_reader.hpp \
@@ -78,9 +77,6 @@ $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/palette.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/color.cpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/png.cpp \
 
-########################################################################
-# libpng
-
 _qvhello_HEADERS += \
 $${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/png.hpp \
 
@@ -89,7 +85,6 @@ $${VEDERE_SRC}/vedere/graphic/image/format/png/libpng/png.cpp \
 
 ########################################################################
 # libtiff
-
 qvhello_HEADERS += \
 $${VEDERE_SRC}/vedere/graphic/image/format/tiff/libtiff/image_reader.hpp \
 
@@ -100,7 +95,6 @@ $${VEDERE_SRC}/vedere/graphic/image/format/tiff/libtiff/image_reader.cpp \
 
 ########################################################################
 # libjpeg
-
 qvhello_HEADERS += \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/image_reader.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/reader.hpp \
@@ -114,15 +108,11 @@ $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/jpeg.cpp \
 
 ########################################################################
 # libraw
-
 qvhello_HEADERS += \
 $${LAMNA_SRC}/lamna/graphic/image/format/raw/gamma/libraw/curve.hpp \
 
 qvhello_SOURCES += \
 $${LAMNA_SRC}/lamna/graphic/image/format/raw/gamma/libraw/curve.cpp \
-
-########################################################################
-# libraw
 
 qvhello_HEADERS += \
 $${VEDERE_SRC}/vedere/graphic/image/format/raw/libraw/image_reader.hpp \
@@ -157,7 +147,7 @@ $${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/reader.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/reader_events.cpp \
 
 ########################################################################
-
+# graphic
 qvhello_HEADERS += \
 $${VEDERE_SRC}/vedere/graphic/image/to_bytes_reader.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/reader.hpp \
@@ -174,7 +164,7 @@ _qvhello_SOURCES += \
 $${VEDERE_SRC}/vedere/graphic/image/color.cpp \
 
 ########################################################################
-
+# gui
 qvhello_HEADERS += \
 $${VEDERE_SRC}/vedere/gui/qt/application/main.hpp \
 $${VEDERE_SRC}/vedere/gui/qt/main.hpp \
@@ -183,7 +173,6 @@ $${VEDERE_SRC}/vedere/gui/main.hpp \
 qvhello_SOURCES += \
 
 ########################################################################
-
 qvhello_HEADERS += \
 $${VEDERE_SRC}/vedere/app/gui/qt/hello/main.hpp \
 $${VEDERE_SRC}/vedere/app/gui/qt/hello/renderer.hpp \
@@ -206,7 +195,6 @@ $${VEDERE_SRC}/vedere/console/main_opt.cpp \
 $${VEDERE_SRC}/vedere/console/main_main.cpp \
 
 ########################################################################
-
 qvhello_LIBS += \
 $${vedere_LIBS} \
 

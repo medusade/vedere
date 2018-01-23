@@ -22,9 +22,9 @@
 VEDERE_OS = linux
 
 ########################################################################
-# xos
-XOS_BLD = ../$${XOS_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
-XOS_LIB = $${XOS_BLD}/lib
+# nadir
+NADIR_BLD = ../$${NADIR_PKG}/build/$${VEDERE_OS}/QtCreator/$${VEDERE_CONFIG}
+NADIR_LIB = $${NADIR_BLD}/lib
 
 ########################################################################
 # lamna
@@ -40,9 +40,8 @@ vedere_LIBS += \
 -lvedere \
 -L$${LAMNA_LIB}/liblamna \
 -llamna \
--L$${XOS_LIB}/libxosnadir \
+-L$${NADIR_LIB}/libxosnadir \
 -lxosnadir \
 -lpthread \
 -ldl \
 -lrt \
-
