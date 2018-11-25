@@ -23,7 +23,12 @@
 
 #include "vedere/app/gui/cocoa/hello/image_renderer.hh"
 #include "vedere/app/gui/hello/renderer_extend.hpp"
+#include "vedere/app/gui/hello/main_renderer_derive.hpp"
 #include "vedere/app/gui/hello/main.hpp"
+#include "vedere/graphic/image/format/png/libpng/image_reader.hpp"
+#include "vedere/graphic/image/format/jpeg/libjpeg/image_reader.hpp"
+#include "vedere/graphic/image/format/tiff/libtiff/image_reader.hpp"
+#include "vedere/graphic/image/format/raw/libraw/image_reader.hpp"
 #include "vedere/io/logger.hpp"
 
 namespace vedere {
@@ -32,12 +37,12 @@ namespace gui {
 namespace cocoa {
 namespace hello {
 
-/*typedef gui::hello::renderer_implements renderer_implements;
-typedef gui::hello::renderer renderer_extends;*/
 typedef implement_base renderer_implements;
-typedef gui::hello::renderer_extendt
-<image_renderer::image_format_t,
- image_renderer::image_format_none, image_renderer> renderer_extends;
+typedef gui::hello::main_renderer_derivet
+<gui::hello::renderer_extendt
+  <image_renderer::image_format_t,
+   image_renderer::image_format_none, 
+   image_renderer> > renderer_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: renderer
 ///////////////////////////////////////////////////////////////////////
@@ -85,20 +90,62 @@ public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual void* load_image_file() {
-        size_t image_pixel_size = ((image_depth_option_+7)/8),
-               image_size = (image_width_option_*image_height_option_*image_pixel_size);
-        void* image = 0;
-        FILE* file = 0;
-        if ((file = fopen(image_file_option_.chars(), "rb"))) {
-            xos::io::read::byte_file f(file);
-            if ((image = load_image
-                (f, image_size, image_width_option_, image_height_option_))) {
-            }
-            fclose(file);
-        } else {
-            VEDERE_LOG_MESSAGE_ERROR("...failed on fopen(" << image_file_option_ << ", \"rb\")");
+        if ((load_image
+            (image_width_option_, image_height_option_, image_depth_option_,
+             image_file_option_.chars(), image_format_option_))) {
+            return image_;
         }
-        return image;
+        return 0;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual bool load_png_image(const char_t* image_file) {
+        if ((image_file)) {
+            graphic::image::format::png::libpng::to_rgba_image_reader reader;
+            if ((reader.read(image_file))) {
+                if ((this->load_image(reader))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    virtual bool load_jpeg_image(const char_t* image_file) {
+        if ((image_file)) {
+            graphic::image::format::jpeg::libjpeg::to_rgba_image_reader reader;
+            if ((reader.read(image_file))) {
+                if ((this->load_image(reader))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    virtual bool load_tiff_image(const char_t* image_file) {
+        if ((image_file)) {
+            graphic::image::format::tiff::libtiff::to_rgba_image_reader reader;
+            if ((reader.read(image_file))) {
+                if ((this->load_image(reader))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    virtual bool load_raw_image(const char_t* image_file) {
+        if ((image_file)) {
+            graphic::image::format::raw::libraw::to_rgba_image_reader reader;
+            if ((reader.read(image_file))) {
+                if ((this->load_image(reader))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     ///////////////////////////////////////////////////////////////////////

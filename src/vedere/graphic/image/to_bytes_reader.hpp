@@ -268,6 +268,7 @@ public:
                 byte[1] = *pixel_byte;
                 byte[2] = *pixel_byte;
                 byte[3] = 255;
+                on_bgra_image_pixel_byte(byte);
             }
         } else {
             success = false;
@@ -288,6 +289,7 @@ public:
             byte[1] = pixel.color_axis(color::space::rgba::axis_green);
             byte[2] = pixel.color_axis(color::space::rgba::axis_red);
             byte[3] = 255;
+            on_bgra_image_pixel_byte(byte);
             //VEDERE_LOG_MESSAGE_DEBUG("col = " << image_col << " row = " << image_row << " byte[" << pixel_offset << "] = (" << byte[0] << ", "  << byte[1] << ", "  << byte[2] << ", "  << byte[3] << ")");
         }
         return success;
@@ -306,6 +308,7 @@ public:
             byte[1] = pixel.color_axis(color::space::rgba::axis_green);
             byte[2] = pixel.color_axis(color::space::rgba::axis_red);
             byte[3] = pixel.color_axis(color::space::rgba::axis_alpha);
+            on_bgra_image_pixel_byte(byte);
             //VEDERE_LOG_MESSAGE_DEBUG("col = " << image_col << " row = " << image_row << " byte[" << pixel_offset << "] = (" << byte[0] << ", "  << byte[1] << ", "  << byte[2] << ", "  << byte[3] << ")");
         }
         return success;
@@ -313,8 +316,45 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+    virtual void on_bgra_image_pixel_byte(byte_t* byte) {
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 protected:
     on_image_pixel_t on_image_pixel_;
+};
+
+///////////////////////////////////////////////////////////////////////
+///  Class: to_rgba_bytes_readert
+///////////////////////////////////////////////////////////////////////
+template
+<class TImplements, class TReaderExtends,
+ class TExtends = to_bgra_bytes_readert
+ <TImplements, TReaderExtends> >
+
+class _EXPORT_CLASS to_rgba_bytes_readert
+: virtual public TImplements, public TExtends {
+public:
+    typedef TImplements Implements;
+    typedef TExtends Extends;
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    to_rgba_bytes_readert() {
+    }
+    virtual ~to_rgba_bytes_readert() {
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual void on_bgra_image_pixel_byte(byte_t* byte) {
+        if ((byte)) {
+            byte_t blue = byte[0];
+            byte[0] = byte[2];
+            byte[2] = blue;
+        }
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 };
 
 } // namespace image

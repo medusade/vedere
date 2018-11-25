@@ -258,6 +258,9 @@ typedef image_readert<> image_reader;
 typedef to_bgra_bytes_readert
 <image_reader_implements, image_reader> to_bgra_image_reader;
 
+typedef to_rgba_bytes_readert
+<image_reader_implements, image_reader> to_rgba_image_reader;
+
 } // namespace libjpeg
 } // namespace jpeg 
 } // namespace format 
