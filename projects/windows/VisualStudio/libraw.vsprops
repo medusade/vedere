@@ -14,7 +14,7 @@
 <!-- or otherwise) arising in any way out of the use of this software,      -->
 <!-- even if advised of the possibility of such damage.                     -->
 <!--                                                                        -->
-<!--   File: vedere.vsprops                                                 -->
+<!--   File: libraw.vsprops                                                 -->
 <!--                                                                        -->
 <!-- Author: $author$                                                       -->
 <!--   Date: 11/29/2018                                                     -->
@@ -22,85 +22,85 @@
 <VisualStudioPropertySheet
     ProjectType="Visual C++"
     Version="8.00"
-    Name="vedere">
+    Name="LibRaw">
 
     <!--===============================================-->
 
     <UserMacro
-        Name="VEDERE_GROUP"
-        Value=""
+        Name="LIBRAW_GROUP"
+        Value="thirdparty/libc/libraw/"
     />
     <UserMacro
-        Name="VEDERE_NAME"
-        Value="vedere"
+        Name="LIBRAW_NAME"
+        Value="LibRaw"
     />
     <UserMacro
-        Name="VEDERE_VERSION"
-        Value=""
-    />
-
-    <!--===============================================-->
-
-    <UserMacro
-        Name="VEDERE_DIR"
-        Value="$(VEDERE_GROUP)$(VEDERE_NAME)$(VEDERE_VERSION)"
-    />
-    <UserMacro
-        Name="VEDERE_SOURCE_DIR"
-        Value="$(SOURCE_ROOT_DIR)/$(VEDERE_DIR)/src"
-    />
-    <UserMacro
-        Name="VEDERE_BUILD_DIR"
-        Value="$(SOURCE_BUILD_DIR)/$(VEDERE_DIR)/build"
+        Name="LIBRAW_VERSION"
+        Value="-0.17.1"
     />
 
     <!--===============================================-->
 
     <UserMacro
-        Name="VEDERE_BUILD"
-        Value="$(VEDERE_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+        Name="LIBRAW_DIR"
+        Value="$(LIBRAW_GROUP)$(LIBRAW_NAME)$(LIBRAW_VERSION)"
     />
     <UserMacro
-        Name="VEDERE_OBJ"
-        Value="$(VEDERE_BUILD)/obj/$(ProjectName)"
+        Name="LIBRAW_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(LIBRAW_DIR)"
     />
     <UserMacro
-        Name="VEDERE_LIB"
-        Value="$(VEDERE_BUILD)/lib"
-    />
-    <UserMacro
-        Name="VEDERE_BIN"
-        Value="$(VEDERE_BUILD)/bin"
+        Name="LIBRAW_BUILD_DIR"
+        Value="$(SOURCE_BUILD_DIR)/$(LIBRAW_DIR)/build"
     />
 
     <!--===============================================-->
 
     <UserMacro
-        Name="VEDERE_DEFINES"
-        Value=""
+        Name="LIBRAW_BUILD"
+        Value="$(LIBRAW_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
     />
     <UserMacro
-        Name="VEDERE_DEBUG_DEFINES"
-        Value="$(VEDERE_DEFINES);$(LAMNA_DEBUG_DEFINES);$(LIBRAW_DEBUG_DEFINES)"
+        Name="LIBRAW_OBJ"
+        Value="$(LIBRAW_BUILD)/obj/$(ProjectName)"
     />
     <UserMacro
-        Name="VEDERE_RELEASE_DEFINES"
-        Value="$(VEDERE_DEFINES);$(LAMNA_RELEASE_DEFINES);$(LIBRAW_RELEASE_DEFINES)"
+        Name="LIBRAW_LIB"
+        Value="$(LIBRAW_BUILD)/lib"
+    />
+    <UserMacro
+        Name="LIBRAW_BIN"
+        Value="$(LIBRAW_BUILD)/bin"
+    />
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="LIBRAW_DEFINES"
+        Value="LIBRAW_NODLL"
+    />
+    <UserMacro
+        Name="LIBRAW_DEBUG_DEFINES"
+        Value="$(LIBRAW_DEFINES);$(DEPENDS_DEBUG_DEFINES)"
+    />
+    <UserMacro
+        Name="LIBRAW_RELEASE_DEFINES"
+        Value="$(LIBRAW_DEFINES);$(DEPENDS_RELEASE_DEFINES)"
     />
 
     <!--===============================================-->
   
     <UserMacro
-        Name="VEDERE_INCLUDE_DIRS"
-        Value="$(VEDERE_SOURCE_DIR);$(LAMNA_INCLUDE_DIRS);$(LIBRAW_INCLUDE_DIRS)"
+        Name="LIBRAW_INCLUDE_DIRS"
+        Value="$(LIBRAW_SOURCE_DIR)"
     />
     <UserMacro
-        Name="VEDERE_LIB_DIRS"
-        Value="$(VEDERE_LIB);$(LAMNA_LIB_DIRS);$(LIBRAW_LIB_DIRS)"
+        Name="LIBRAW_LIB_DIRS"
+        Value="$(LIBRAW_LIB)"
     />
     <UserMacro
-        Name="VEDERE_LIBS"
-        Value="libvedere.lib $(LAMNA_LIBS) $(LIBRAW_LIBS)"
+        Name="LIBRAW_LIBS"
+        Value="libraw.lib"
     />
 
     <!--===============================================-->

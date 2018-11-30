@@ -14,93 +14,109 @@
 <!-- or otherwise) arising in any way out of the use of this software,      -->
 <!-- even if advised of the possibility of such damage.                     -->
 <!--                                                                        -->
-<!--   File: vedere.vsprops                                                 -->
+<!--   File: nadir.vsprops                                                  -->
 <!--                                                                        -->
 <!-- Author: $author$                                                       -->
-<!--   Date: 11/29/2018                                                     -->
+<!--   Date: 11/25/2018                                                     -->
 <!--========================================================================-->
 <VisualStudioPropertySheet
     ProjectType="Visual C++"
     Version="8.00"
-    Name="vedere">
+    Name="nadir">
 
     <!--===============================================-->
 
     <UserMacro
-        Name="VEDERE_GROUP"
+        Name="NADIR_GROUP"
         Value=""
     />
     <UserMacro
-        Name="VEDERE_NAME"
-        Value="vedere"
+        Name="NADIR_NAME"
+        Value="nadir"
     />
     <UserMacro
-        Name="VEDERE_VERSION"
+        Name="NADIR_VERSION"
         Value=""
     />
 
     <!--===============================================-->
 
     <UserMacro
-        Name="VEDERE_DIR"
-        Value="$(VEDERE_GROUP)$(VEDERE_NAME)$(VEDERE_VERSION)"
+        Name="NADIR_DIR"
+        Value="$(NADIR_GROUP)$(NADIR_NAME)$(NADIR_VERSION)"
     />
     <UserMacro
-        Name="VEDERE_SOURCE_DIR"
-        Value="$(SOURCE_ROOT_DIR)/$(VEDERE_DIR)/src"
+        Name="NADIR_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(NADIR_DIR)/src"
     />
     <UserMacro
-        Name="VEDERE_BUILD_DIR"
-        Value="$(SOURCE_BUILD_DIR)/$(VEDERE_DIR)/build"
-    />
-
-    <!--===============================================-->
-
-    <UserMacro
-        Name="VEDERE_BUILD"
-        Value="$(VEDERE_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
-    />
-    <UserMacro
-        Name="VEDERE_OBJ"
-        Value="$(VEDERE_BUILD)/obj/$(ProjectName)"
-    />
-    <UserMacro
-        Name="VEDERE_LIB"
-        Value="$(VEDERE_BUILD)/lib"
-    />
-    <UserMacro
-        Name="VEDERE_BIN"
-        Value="$(VEDERE_BUILD)/bin"
+        Name="NADIR_BUILD_DIR"
+        Value="$(SOURCE_BUILD_DIR)/$(NADIR_DIR)/build"
     />
 
     <!--===============================================-->
 
     <UserMacro
-        Name="VEDERE_DEFINES"
-        Value=""
+        Name="NADIR_BUILD"
+        Value="$(NADIR_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
     />
     <UserMacro
-        Name="VEDERE_DEBUG_DEFINES"
-        Value="$(VEDERE_DEFINES);$(LAMNA_DEBUG_DEFINES);$(LIBRAW_DEBUG_DEFINES)"
+        Name="NADIR_OBJ"
+        Value="$(NADIR_BUILD)/obj/$(ProjectName)"
     />
     <UserMacro
-        Name="VEDERE_RELEASE_DEFINES"
-        Value="$(VEDERE_DEFINES);$(LAMNA_RELEASE_DEFINES);$(LIBRAW_RELEASE_DEFINES)"
+        Name="NADIR_LIB"
+        Value="$(NADIR_BUILD)/lib"
+    />
+    <UserMacro
+        Name="NADIR_BIN"
+        Value="$(NADIR_BUILD)/bin"
+    />
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="NADIR_DEFINES"
+        Value="WINSOCK_2"
+    />
+    <UserMacro
+        Name="NADIR_DEBUG_DEFINES"
+        Value="$(NADIR_DEFINES);DEBUG_BUILD"
+    />
+    <UserMacro
+        Name="NADIR_RELEASE_DEFINES"
+        Value="$(NADIR_DEFINES);RELEASE_BUILD"
+    />
+    <UserMacro
+        Name="XOS_NADIR_DEFINES"
+        Value="$(NADIR_DEFINES);NO_USE_NADIR_BASE;NO_USE_XOS_LOGGER_INTERFACE"
+    />
+    <UserMacro
+        Name="XOS_NADIR_DEBUG_DEFINES"
+        Value="$(XOS_NADIR_DEFINES);DEBUG_BUILD"
+    />
+    <UserMacro
+        Name="XOS_NADIR_RELEASE_DEFINES"
+        Value="$(XOS_NADIR_DEFINES);RELEASE_BUILD"
     />
 
     <!--===============================================-->
   
     <UserMacro
-        Name="VEDERE_INCLUDE_DIRS"
-        Value="$(VEDERE_SOURCE_DIR);$(LAMNA_INCLUDE_DIRS);$(LIBRAW_INCLUDE_DIRS)"
+        Name="NADIR_INCLUDE_DIRS"
+        Value="$(NADIR_SOURCE_DIR);$(NADIR_SOURCE_DIR)/platform/windows/unix;$(NADIR_SOURCE_DIR)/thirdparty/gnu/getopt"
     />
     <UserMacro
-        Name="VEDERE_LIB_DIRS"
-        Value="$(VEDERE_LIB);$(LAMNA_LIB_DIRS);$(LIBRAW_LIB_DIRS)"
+        Name="NADIR_LIB_DIRS"
+        Value="$(NADIR_LIB)"
     />
     <UserMacro
-        Name="VEDERE_LIBS"
-        Value="libvedere.lib $(LAMNA_LIBS) $(LIBRAW_LIBS)"
+        Name="NADIR_LIBS"
+        Value="libnadir.lib Ws2_32.lib"
+    />
+    <UserMacro
+        Name="XOS_NADIR_LIBS"
+        Value="libxosnadir.lib Ws2_32.lib"
     />
 
     <!--===============================================-->

@@ -14,7 +14,7 @@
 <!-- or otherwise) arising in any way out of the use of this software,      -->
 <!-- even if advised of the possibility of such damage.                     -->
 <!--                                                                        -->
-<!--   File: vedere.vsprops                                                 -->
+<!--   File: lamna.vsprops                                                  -->
 <!--                                                                        -->
 <!-- Author: $author$                                                       -->
 <!--   Date: 11/29/2018                                                     -->
@@ -22,85 +22,85 @@
 <VisualStudioPropertySheet
     ProjectType="Visual C++"
     Version="8.00"
-    Name="vedere">
+    Name="lamna">
 
     <!--===============================================-->
 
     <UserMacro
-        Name="VEDERE_GROUP"
+        Name="LAMNA_GROUP"
         Value=""
     />
     <UserMacro
-        Name="VEDERE_NAME"
-        Value="vedere"
+        Name="LAMNA_NAME"
+        Value="lamna"
     />
     <UserMacro
-        Name="VEDERE_VERSION"
+        Name="LAMNA_VERSION"
         Value=""
     />
 
     <!--===============================================-->
 
     <UserMacro
-        Name="VEDERE_DIR"
-        Value="$(VEDERE_GROUP)$(VEDERE_NAME)$(VEDERE_VERSION)"
+        Name="LAMNA_DIR"
+        Value="$(LAMNA_GROUP)$(LAMNA_NAME)$(LAMNA_VERSION)"
     />
     <UserMacro
-        Name="VEDERE_SOURCE_DIR"
-        Value="$(SOURCE_ROOT_DIR)/$(VEDERE_DIR)/src"
+        Name="LAMNA_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(LAMNA_DIR)/src"
     />
     <UserMacro
-        Name="VEDERE_BUILD_DIR"
-        Value="$(SOURCE_BUILD_DIR)/$(VEDERE_DIR)/build"
-    />
-
-    <!--===============================================-->
-
-    <UserMacro
-        Name="VEDERE_BUILD"
-        Value="$(VEDERE_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
-    />
-    <UserMacro
-        Name="VEDERE_OBJ"
-        Value="$(VEDERE_BUILD)/obj/$(ProjectName)"
-    />
-    <UserMacro
-        Name="VEDERE_LIB"
-        Value="$(VEDERE_BUILD)/lib"
-    />
-    <UserMacro
-        Name="VEDERE_BIN"
-        Value="$(VEDERE_BUILD)/bin"
+        Name="LAMNA_BUILD_DIR"
+        Value="$(SOURCE_BUILD_DIR)/$(LAMNA_DIR)/build"
     />
 
     <!--===============================================-->
 
     <UserMacro
-        Name="VEDERE_DEFINES"
+        Name="LAMNA_BUILD"
+        Value="$(LAMNA_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+    />
+    <UserMacro
+        Name="LAMNA_OBJ"
+        Value="$(LAMNA_BUILD)/obj/$(ProjectName)"
+    />
+    <UserMacro
+        Name="LAMNA_LIB"
+        Value="$(LAMNA_BUILD)/lib"
+    />
+    <UserMacro
+        Name="LAMNA_BIN"
+        Value="$(LAMNA_BUILD)/bin"
+    />
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="LAMNA_DEFINES"
         Value=""
     />
     <UserMacro
-        Name="VEDERE_DEBUG_DEFINES"
-        Value="$(VEDERE_DEFINES);$(LAMNA_DEBUG_DEFINES);$(LIBRAW_DEBUG_DEFINES)"
+        Name="LAMNA_DEBUG_DEFINES"
+        Value="$(LAMNA_DEFINES);$(XOS_NADIR_DEBUG_DEFINES)"
     />
     <UserMacro
-        Name="VEDERE_RELEASE_DEFINES"
-        Value="$(VEDERE_DEFINES);$(LAMNA_RELEASE_DEFINES);$(LIBRAW_RELEASE_DEFINES)"
+        Name="LAMNA_RELEASE_DEFINES"
+        Value="$(LAMNA_DEFINES);$(XOS_NADIR_RELEASE_DEFINES)"
     />
 
     <!--===============================================-->
   
     <UserMacro
-        Name="VEDERE_INCLUDE_DIRS"
-        Value="$(VEDERE_SOURCE_DIR);$(LAMNA_INCLUDE_DIRS);$(LIBRAW_INCLUDE_DIRS)"
+        Name="LAMNA_INCLUDE_DIRS"
+        Value="$(LAMNA_SOURCE_DIR);$(NADIR_INCLUDE_DIRS)"
     />
     <UserMacro
-        Name="VEDERE_LIB_DIRS"
-        Value="$(VEDERE_LIB);$(LAMNA_LIB_DIRS);$(LIBRAW_LIB_DIRS)"
+        Name="LAMNA_LIB_DIRS"
+        Value="$(LAMNA_LIB);$(NADIR_LIB_DIRS)"
     />
     <UserMacro
-        Name="VEDERE_LIBS"
-        Value="libvedere.lib $(LAMNA_LIBS) $(LIBRAW_LIBS)"
+        Name="LAMNA_LIBS"
+        Value="liblamna.lib $(XOS_NADIR_LIBS)"
     />
 
     <!--===============================================-->

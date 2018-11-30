@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="winvhello"
+	Name="WinVHello"
 	ProjectGUID="{5CD666BB-6149-4EA1-A1A1-953ADB7D7334}"
-	RootNamespace="winvhello"
+	RootNamespace="WinVHello"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -24,7 +24,7 @@
 			OutputDirectory="$(VEDERE_BIN)"
 			IntermediateDirectory="$(VEDERE_OBJ)"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\vedere-vcversion.vsprops;..\..\vedere.vsprops"
+			InheritedPropertySheets="..\vcversion.vsprops;..\..\vcproj.vsprops;..\..\zlib.vsprops;..\..\libraw.vsprops;..\..\lamna.vsprops;..\..\vedere.vsprops;..\..\nadir.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -45,8 +45,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(VEDERE_INCLUDE_DIRS);$(LIBRAW_INCLUDE_DIRS)"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;$(VEDERE_DEFINES);$(LIBRAW_DEFINES)"
+				AdditionalIncludeDirectories="$(VEDERE_INCLUDE_DIRS)"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;$(VEDERE_DEBUG_DEFINES)"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -65,9 +65,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="$(VEDERE_LIBS) $(LIBRAW_LIBS)"
+				AdditionalDependencies="$(VEDERE_LIBS)"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(VEDERE_LIB_DIRS);$(LIBRAW_LIB_DIRS)"
+				AdditionalLibraryDirectories="$(VEDERE_LIB_DIRS)"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -99,7 +99,7 @@
 			OutputDirectory="$(VEDERE_BIN)"
 			IntermediateDirectory="$(VEDERE_OBJ)"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\vedere-vcversion.vsprops;..\..\vedere.vsprops"
+			InheritedPropertySheets="..\vcversion.vsprops;..\..\vcproj.vsprops;..\..\zlib.vsprops;..\..\libraw.vsprops;..\..\lamna.vsprops;..\..\vedere.vsprops;..\..\nadir.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -121,8 +121,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(VEDERE_INCLUDE_DIRS);$(LIBRAW_INCLUDE_DIRS)"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;$(VEDERE_DEFINES);$(LIBRAW_DEFINES)"
+				AdditionalIncludeDirectories="$(VEDERE_INCLUDE_DIRS)"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;$(VEDERE_DEBUG_DEFINES)"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -141,9 +141,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="$(VEDERE_LIBS) $(LIBRAW_LIBS)"
+				AdditionalDependencies="$(VEDERE_LIBS)"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(VEDERE_LIB_DIRS);$(LIBRAW_LIB_DIRS)"
+				AdditionalLibraryDirectories="$(VEDERE_LIB_DIRS)"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="17"
@@ -175,7 +175,7 @@
 			OutputDirectory="$(VEDERE_BIN)"
 			IntermediateDirectory="$(VEDERE_OBJ)"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\vedere-vcversion.vsprops;..\..\vedere.vsprops"
+			InheritedPropertySheets="..\vcversion.vsprops;..\..\vcproj.vsprops;..\..\zlib.vsprops;..\..\libraw.vsprops;..\..\lamna.vsprops;..\..\vedere.vsprops;..\..\nadir.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -198,8 +198,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="$(VEDERE_INCLUDE_DIRS);$(LIBRAW_INCLUDE_DIRS)"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;$(VEDERE_DEFINES);$(LIBRAW_DEFINES)"
+				AdditionalIncludeDirectories="$(VEDERE_INCLUDE_DIRS)"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;$(VEDERE_RELEASE_DEFINES)"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -217,9 +217,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="$(VEDERE_LIBS) $(LIBRAW_LIBS)"
+				AdditionalDependencies="$(VEDERE_LIBS)"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(VEDERE_LIB_DIRS);$(LIBRAW_LIB_DIRS)"
+				AdditionalLibraryDirectories="$(VEDERE_LIB_DIRS)"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -253,7 +253,7 @@
 			OutputDirectory="$(VEDERE_BIN)"
 			IntermediateDirectory="$(VEDERE_OBJ)"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\vedere-vcversion.vsprops;..\..\vedere.vsprops"
+			InheritedPropertySheets="..\vcversion.vsprops;..\..\vcproj.vsprops;..\..\zlib.vsprops;..\..\libraw.vsprops;..\..\lamna.vsprops;..\..\vedere.vsprops;..\..\nadir.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -277,8 +277,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="$(VEDERE_INCLUDE_DIRS);$(LIBRAW_INCLUDE_DIRS)"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;$(VEDERE_DEFINES);$(LIBRAW_DEFINES)"
+				AdditionalIncludeDirectories="$(VEDERE_INCLUDE_DIRS)"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;$(VEDERE_RELEASE_DEFINES)"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -296,9 +296,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="$(VEDERE_LIBS) $(LIBRAW_LIBS)"
+				AdditionalDependencies="$(VEDERE_LIBS)"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(VEDERE_LIB_DIRS);$(LIBRAW_LIB_DIRS)"
+				AdditionalLibraryDirectories="$(VEDERE_LIB_DIRS)"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
