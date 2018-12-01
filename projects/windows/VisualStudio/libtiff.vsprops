@@ -14,93 +14,93 @@
 <!-- or otherwise) arising in any way out of the use of this software,      -->
 <!-- even if advised of the possibility of such damage.                     -->
 <!--                                                                        -->
-<!--   File: vedere.vsprops                                                 -->
+<!--   File: libtiff.vsprops                                                -->
 <!--                                                                        -->
 <!-- Author: $author$                                                       -->
-<!--   Date: 11/29/2018                                                     -->
+<!--   Date: 12/1/2018                                                      -->
 <!--========================================================================-->
 <VisualStudioPropertySheet
     ProjectType="Visual C++"
     Version="8.00"
-    Name="vedere">
+    Name="libtiff">
 
     <!--===============================================-->
 
     <UserMacro
-        Name="VEDERE_GROUP"
+        Name="LIBTIFF_GROUP"
+        Value="thirdparty/libc/libtiff/"
+    />
+    <UserMacro
+        Name="LIBTIFF_NAME"
+        Value="tiff"
+    />
+    <UserMacro
+        Name="LIBTIFF_VERSION"
+        Value="-3.8.2"
+    />
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="LIBTIFF_DIR"
+        Value="$(LIBTIFF_GROUP)$(LIBTIFF_NAME)$(LIBTIFF_VERSION)"
+    />
+    <UserMacro
+        Name="LIBTIFF_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(LIBTIFF_DIR)/libtiff"
+    />
+    <UserMacro
+        Name="LIBTIFF_BUILD_DIR"
+        Value="$(SOURCE_BUILD_DIR)/$(LIBTIFF_DIR)/build"
+    />
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="LIBTIFF_BUILD"
+        Value="$(LIBTIFF_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+    />
+    <UserMacro
+        Name="LIBTIFF_OBJ"
+        Value="$(LIBTIFF_BUILD)/obj/$(ProjectName)"
+    />
+    <UserMacro
+        Name="LIBTIFF_LIB"
+        Value="$(LIBTIFF_BUILD)/lib"
+    />
+    <UserMacro
+        Name="LIBTIFF_BIN"
+        Value="$(LIBTIFF_BUILD)/bin"
+    />
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="LIBTIFF_DEFINES"
         Value=""
     />
     <UserMacro
-        Name="VEDERE_NAME"
-        Value="vedere"
+        Name="LIBTIFF_DEBUG_DEFINES"
+        Value="$(LIBTIFF_DEFINES);$(ZLIB_DEBUG_DEFINES)"
     />
     <UserMacro
-        Name="VEDERE_VERSION"
-        Value=""
-    />
-
-    <!--===============================================-->
-
-    <UserMacro
-        Name="VEDERE_DIR"
-        Value="$(VEDERE_GROUP)$(VEDERE_NAME)$(VEDERE_VERSION)"
-    />
-    <UserMacro
-        Name="VEDERE_SOURCE_DIR"
-        Value="$(SOURCE_ROOT_DIR)/$(VEDERE_DIR)/src"
-    />
-    <UserMacro
-        Name="VEDERE_BUILD_DIR"
-        Value="$(SOURCE_BUILD_DIR)/$(VEDERE_DIR)/build"
-    />
-
-    <!--===============================================-->
-
-    <UserMacro
-        Name="VEDERE_BUILD"
-        Value="$(VEDERE_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
-    />
-    <UserMacro
-        Name="VEDERE_OBJ"
-        Value="$(VEDERE_BUILD)/obj/$(ProjectName)"
-    />
-    <UserMacro
-        Name="VEDERE_LIB"
-        Value="$(VEDERE_BUILD)/lib"
-    />
-    <UserMacro
-        Name="VEDERE_BIN"
-        Value="$(VEDERE_BUILD)/bin"
-    />
-
-    <!--===============================================-->
-
-    <UserMacro
-        Name="VEDERE_DEFINES"
-        Value=""
-    />
-    <UserMacro
-        Name="VEDERE_DEBUG_DEFINES"
-        Value="$(VEDERE_DEFINES);$(LAMNA_DEBUG_DEFINES);$(LIBPNG_DEBUG_DEFINES);$(LIBJPEG_DEBUG_DEFINES);$(LIBTIFF_DEBUG_DEFINES);$(LIBRAW_DEBUG_DEFINES)"
-    />
-    <UserMacro
-        Name="VEDERE_RELEASE_DEFINES"
-        Value="$(VEDERE_DEFINES);$(LAMNA_RELEASE_DEFINES);$(LIBONG_RELEASE_DEFINES);$(LIBJPEG_RELEASE_DEFINES);$(LIBTIFF_RELEASE_DEFINES);$(LIBRAW_RELEASE_DEFINES)"
+        Name="LIBTIFF_RELEASE_DEFINES"
+        Value="$(LIBTIFF_DEFINES);$(ZLIB_RELEASE_DEFINES)"
     />
 
     <!--===============================================-->
   
     <UserMacro
-        Name="VEDERE_INCLUDE_DIRS"
-        Value="$(VEDERE_SOURCE_DIR);$(LAMNA_INCLUDE_DIRS);$(LIBPNG_INCLUDE_DIRS);$(LIBJPEG_INCLUDE_DIRS);$(LIBTIFF_INCLUDE_DIRS);$(LIBRAW_INCLUDE_DIRS)"
+        Name="LIBTIFF_INCLUDE_DIRS"
+        Value="$(LIBTIFF_SOURCE_DIR);$(ZLIB_INCLUDE_DIRS)"
     />
     <UserMacro
-        Name="VEDERE_LIB_DIRS"
-        Value="$(VEDERE_LIB);$(LAMNA_LIB_DIRS);$(LIBPNG_LIB_DIRS);$(LIBJPEG_LIB_DIRS);$(LIBTIFF_LIB_DIRS);$(LIBRAW_LIB_DIRS)"
+        Name="LIBTIFF_LIB_DIRS"
+        Value="$(LIBTIFF_LIB);$(ZLIB_LIB_DIRS)"
     />
     <UserMacro
-        Name="VEDERE_LIBS"
-        Value="libvedere.lib $(LAMNA_LIBS) $(LIBPNG_LIBS) $(LIBJPEG_LIBS) $(LIBTIFF_LIBS) $(LIBRAW_LIBS)"
+        Name="LIBTIFF_LIBS"
+        Value="libtiff.lib $(ZLIB_LIBS)"
     />
 
     <!--===============================================-->

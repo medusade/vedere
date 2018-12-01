@@ -24,7 +24,7 @@
 			OutputDirectory="$(VEDERE_LIB)"
 			IntermediateDirectory="$(VEDERE_OBJ)"
 			ConfigurationType="4"
-			InheritedPropertySheets="..\vcversion.vsprops;..\..\vcproj.vsprops;..\..\zlib.vsprops;..\..\libraw.vsprops;..\..\nadir.vsprops;..\..\lamna.vsprops;..\..\vedere.vsprops"
+			InheritedPropertySheets="..\vcversion.vsprops;..\..\vcproj.vsprops;..\..\zlib.vsprops;..\..\libraw.vsprops;..\..\nadir.vsprops;..\..\lamna.vsprops;..\..\vedere.vsprops;..\..\libjpeg.vsprops;..\..\libpng.vsprops;..\..\libtiff.vsprops"
 			CharacterSet="1"
 			>
 			<Tool

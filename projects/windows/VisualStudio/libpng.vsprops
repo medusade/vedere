@@ -14,93 +14,93 @@
 <!-- or otherwise) arising in any way out of the use of this software,      -->
 <!-- even if advised of the possibility of such damage.                     -->
 <!--                                                                        -->
-<!--   File: vedere.vsprops                                                 -->
+<!--   File: libpng.vsprops                                                 -->
 <!--                                                                        -->
 <!-- Author: $author$                                                       -->
-<!--   Date: 11/29/2018                                                     -->
+<!--   Date: 11/28/2018                                                     -->
 <!--========================================================================-->
 <VisualStudioPropertySheet
     ProjectType="Visual C++"
     Version="8.00"
-    Name="vedere">
+    Name="libpng">
 
     <!--===============================================-->
 
     <UserMacro
-        Name="VEDERE_GROUP"
-        Value=""
+        Name="LIBPNG_GROUP"
+        Value="thirdparty/libc/libpng/"
     />
     <UserMacro
-        Name="VEDERE_NAME"
-        Value="vedere"
+        Name="LIBPNG_NAME"
+        Value="libpng"
     />
     <UserMacro
-        Name="VEDERE_VERSION"
-        Value=""
-    />
-
-    <!--===============================================-->
-
-    <UserMacro
-        Name="VEDERE_DIR"
-        Value="$(VEDERE_GROUP)$(VEDERE_NAME)$(VEDERE_VERSION)"
-    />
-    <UserMacro
-        Name="VEDERE_SOURCE_DIR"
-        Value="$(SOURCE_ROOT_DIR)/$(VEDERE_DIR)/src"
-    />
-    <UserMacro
-        Name="VEDERE_BUILD_DIR"
-        Value="$(SOURCE_BUILD_DIR)/$(VEDERE_DIR)/build"
+        Name="LIBPNG_VERSION"
+        Value="-1.2.36"
     />
 
     <!--===============================================-->
 
     <UserMacro
-        Name="VEDERE_BUILD"
-        Value="$(VEDERE_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
+        Name="LIBPNG_DIR"
+        Value="$(LIBPNG_GROUP)$(LIBPNG_NAME)$(LIBPNG_VERSION)"
     />
     <UserMacro
-        Name="VEDERE_OBJ"
-        Value="$(VEDERE_BUILD)/obj/$(ProjectName)"
+        Name="LIBPNG_SOURCE_DIR"
+        Value="$(SOURCE_ROOT_DIR)/$(LIBPNG_DIR)"
     />
     <UserMacro
-        Name="VEDERE_LIB"
-        Value="$(VEDERE_BUILD)/lib"
-    />
-    <UserMacro
-        Name="VEDERE_BIN"
-        Value="$(VEDERE_BUILD)/bin"
+        Name="LIBPNG_BUILD_DIR"
+        Value="$(SOURCE_BUILD_DIR)/$(LIBPNG_DIR)/build"
     />
 
     <!--===============================================-->
 
     <UserMacro
-        Name="VEDERE_DEFINES"
-        Value=""
+        Name="LIBPNG_BUILD"
+        Value="$(LIBPNG_BUILD_DIR)/$(PlatformName)/$(VCVersion)/$(ConfigurationName)"
     />
     <UserMacro
-        Name="VEDERE_DEBUG_DEFINES"
-        Value="$(VEDERE_DEFINES);$(LAMNA_DEBUG_DEFINES);$(LIBPNG_DEBUG_DEFINES);$(LIBJPEG_DEBUG_DEFINES);$(LIBTIFF_DEBUG_DEFINES);$(LIBRAW_DEBUG_DEFINES)"
+        Name="LIBPNG_OBJ"
+        Value="$(LIBPNG_BUILD)/obj/$(ProjectName)"
     />
     <UserMacro
-        Name="VEDERE_RELEASE_DEFINES"
-        Value="$(VEDERE_DEFINES);$(LAMNA_RELEASE_DEFINES);$(LIBONG_RELEASE_DEFINES);$(LIBJPEG_RELEASE_DEFINES);$(LIBTIFF_RELEASE_DEFINES);$(LIBRAW_RELEASE_DEFINES)"
+        Name="LIBPNG_LIB"
+        Value="$(LIBPNG_BUILD)/lib"
+    />
+    <UserMacro
+        Name="LIBPNG_BIN"
+        Value="$(LIBPNG_BUILD)/bin"
+    />
+
+    <!--===============================================-->
+
+    <UserMacro
+        Name="LIBPNG_DEFINES"
+        Value="PNG_SETJMP_NOT_SUPPORTED;PNG_NO_STDIO;PNG_NO_MMX_CODE"
+    />
+    <UserMacro
+        Name="LIBPNG_DEBUG_DEFINES"
+        Value="$(LIBPNG_DEFINES);PNG_DEBUG=1;$(ZLIB_DEBUG_DEFINES)"
+    />
+    <UserMacro
+        Name="LIBPNG_RELEASE_DEFINES"
+        Value="$(LIBPNG_DEFINES);$(ZLIB_RELEASE_DEFINES)"
     />
 
     <!--===============================================-->
   
     <UserMacro
-        Name="VEDERE_INCLUDE_DIRS"
-        Value="$(VEDERE_SOURCE_DIR);$(LAMNA_INCLUDE_DIRS);$(LIBPNG_INCLUDE_DIRS);$(LIBJPEG_INCLUDE_DIRS);$(LIBTIFF_INCLUDE_DIRS);$(LIBRAW_INCLUDE_DIRS)"
+        Name="LIBPNG_INCLUDE_DIRS"
+        Value="$(LIBPNG_SOURCE_DIR);$(ZLIB_INCLUDE_DIRS)"
     />
     <UserMacro
-        Name="VEDERE_LIB_DIRS"
-        Value="$(VEDERE_LIB);$(LAMNA_LIB_DIRS);$(LIBPNG_LIB_DIRS);$(LIBJPEG_LIB_DIRS);$(LIBTIFF_LIB_DIRS);$(LIBRAW_LIB_DIRS)"
+        Name="LIBPNG_LIB_DIRS"
+        Value="$(LIBPNG_LIB);$(ZLIB_LIB_DIRS)"
     />
     <UserMacro
-        Name="VEDERE_LIBS"
-        Value="libvedere.lib $(LAMNA_LIBS) $(LIBPNG_LIBS) $(LIBJPEG_LIBS) $(LIBTIFF_LIBS) $(LIBRAW_LIBS)"
+        Name="LIBPNG_LIBS"
+        Value="libpng.lib $(ZLIB_LIBS)"
     />
 
     <!--===============================================-->

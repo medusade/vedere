@@ -47,7 +47,7 @@
     />
     <UserMacro
         Name="ZLIB_SOURCE_DIR"
-        Value="$(SOURCE_ROOT_DIR)/$(ZLIB_DIR)/src"
+        Value="$(SOURCE_ROOT_DIR)/$(ZLIB_DIR)"
     />
     <UserMacro
         Name="ZLIB_BUILD_DIR"
@@ -100,7 +100,7 @@
     />
     <UserMacro
         Name="ZLIB_LIBS"
-        Value="libzlib.lib $(DEPENDS_LIBS)"
+        Value="zlib.lib $(DEPENDS_LIBS)"
     />
 
     <!--===============================================-->

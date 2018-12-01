@@ -24,7 +24,7 @@
 			OutputDirectory="$(VEDERE_BIN)"
 			IntermediateDirectory="$(VEDERE_OBJ)"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\vcversion.vsprops;..\..\vcproj.vsprops;..\..\zlib.vsprops;..\..\libraw.vsprops;..\..\lamna.vsprops;..\..\vedere.vsprops;..\..\nadir.vsprops"
+			InheritedPropertySheets="..\vcversion.vsprops;..\..\vcproj.vsprops;..\..\zlib.vsprops;..\..\libraw.vsprops;..\..\lamna.vsprops;..\..\vedere.vsprops;..\..\nadir.vsprops;..\..\libjpeg.vsprops;..\..\libpng.vsprops;..\..\libtiff.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -99,7 +99,7 @@
 			OutputDirectory="$(VEDERE_BIN)"
 			IntermediateDirectory="$(VEDERE_OBJ)"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\vcversion.vsprops;..\..\vcproj.vsprops;..\..\zlib.vsprops;..\..\libraw.vsprops;..\..\lamna.vsprops;..\..\vedere.vsprops;..\..\nadir.vsprops"
+			InheritedPropertySheets="..\vcversion.vsprops;..\..\vcproj.vsprops;..\..\zlib.vsprops;..\..\libraw.vsprops;..\..\lamna.vsprops;..\..\vedere.vsprops;..\..\nadir.vsprops;..\..\libjpeg.vsprops;..\..\libpng.vsprops;..\..\libtiff.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -175,7 +175,7 @@
 			OutputDirectory="$(VEDERE_BIN)"
 			IntermediateDirectory="$(VEDERE_OBJ)"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\vcversion.vsprops;..\..\vcproj.vsprops;..\..\zlib.vsprops;..\..\libraw.vsprops;..\..\lamna.vsprops;..\..\vedere.vsprops;..\..\nadir.vsprops"
+			InheritedPropertySheets="..\vcversion.vsprops;..\..\vcproj.vsprops;..\..\zlib.vsprops;..\..\libraw.vsprops;..\..\lamna.vsprops;..\..\vedere.vsprops;..\..\nadir.vsprops;..\..\libjpeg.vsprops;..\..\libpng.vsprops;..\..\libtiff.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -253,7 +253,7 @@
 			OutputDirectory="$(VEDERE_BIN)"
 			IntermediateDirectory="$(VEDERE_OBJ)"
 			ConfigurationType="1"
-			InheritedPropertySheets="..\vcversion.vsprops;..\..\vcproj.vsprops;..\..\zlib.vsprops;..\..\libraw.vsprops;..\..\lamna.vsprops;..\..\vedere.vsprops;..\..\nadir.vsprops"
+			InheritedPropertySheets="..\vcversion.vsprops;..\..\vcproj.vsprops;..\..\zlib.vsprops;..\..\libraw.vsprops;..\..\lamna.vsprops;..\..\vedere.vsprops;..\..\nadir.vsprops;..\..\libjpeg.vsprops;..\..\libpng.vsprops;..\..\libtiff.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>

@@ -8,7 +8,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "properties", "properties", "{6B14A73A-7B51-465B-A8C4-A29DE8773BA7}"
 	ProjectSection(SolutionItems) = preProject
 		..\lamna.vsprops = ..\lamna.vsprops
+		..\libjpeg.vsprops = ..\libjpeg.vsprops
+		..\libpng.vsprops = ..\libpng.vsprops
 		..\libraw.vsprops = ..\libraw.vsprops
+		..\libtiff.vsprops = ..\libtiff.vsprops
 		..\nadir.vsprops = ..\nadir.vsprops
 		..\vcproj.vsprops = ..\vcproj.vsprops
 		vcversion.vsprops = vcversion.vsprops
