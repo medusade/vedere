@@ -30,7 +30,9 @@
 #undef INT32
 #define INT32 JPEG_INT32
 
+extern "C" {
 #include "jpeglib.h"
+} // extern "C"
 
 namespace vedere {
 namespace graphic {

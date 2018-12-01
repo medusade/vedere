@@ -23,6 +23,7 @@
 
 #include "vedere/base/base.hpp"
 
+#if !defined(WINDOWS)
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 typedef struct tagRGBQUAD {
@@ -87,6 +88,8 @@ typedef struct tagBITMAPINFOHEADER {
   DWORD biClrUsed;
   DWORD biClrImportant;
 } BITMAPINFOHEADER, *PBITMAPINFOHEADER;
+#else // !defined(WINDOWS)
+#endif // !defined(WINDOWS)
 
 namespace vedere {
 namespace graphic {
@@ -205,23 +208,23 @@ public:
         DWORD dword = 0;
         WORD word = 0;
 
-        if (sizeof(WORD) == (amount = reader.read_lsb(word))) {
+        if (sizeof(WORD) == (amount = reader.WORD_read_lsb(word))) {
             bfh.bfType = word;
             count += amount;
 
-            if (sizeof(DWORD) == (amount = reader.read_lsb(dword))) {
+            if (sizeof(DWORD) == (amount = reader.DWORD_read_lsb(dword))) {
                 bfh.bfSize = dword;
                 count += amount;
 
-                if (sizeof(WORD) == (amount = reader.read_lsb(word))) {
+                if (sizeof(WORD) == (amount = reader.WORD_read_lsb(word))) {
                     bfh.bfReserved1 = word;
                     count += amount;
 
-                    if (sizeof(WORD) == (amount = reader.read_lsb(word))) {
+                    if (sizeof(WORD) == (amount = reader.WORD_read_lsb(word))) {
                         bfh.bfReserved2 = word;
                         count += amount;
 
-                        if (sizeof(DWORD) == (amount = reader.read_lsb(dword))) {
+                        if (sizeof(DWORD) == (amount = reader.DWORD_read_lsb(dword))) {
                             bfh.bfOffBits = dword;
                             count += amount;
                             return count;
@@ -258,47 +261,47 @@ public:
         WORD word = 0;
         LONG llong = 0;
 
-        if (sizeof(DWORD) == (amount = reader.read_lsb(dword))) {
+        if (sizeof(DWORD) == (amount = reader.DWORD_read_lsb(dword))) {
             bih.biSize= dword;
             count += amount;
 
-            if (sizeof(LONG) == (amount = reader.read_lsb(llong))) {
+            if (sizeof(LONG) == (amount = reader.LONG_read_lsb(llong))) {
                 bih.biWidth = llong;
                 count += amount;
 
-                if (sizeof(LONG) == (amount = reader.read_lsb(llong))) {
+                if (sizeof(LONG) == (amount = reader.LONG_read_lsb(llong))) {
                     bih.biHeight = llong;
                     count += amount;
 
-                    if (sizeof(WORD) == (amount = reader.read_lsb(word))) {
+                    if (sizeof(WORD) == (amount = reader.WORD_read_lsb(word))) {
                         bih.biPlanes = word;
                         count += amount;
 
-                        if (sizeof(WORD) == (amount = reader.read_lsb(word))) {
+                        if (sizeof(WORD) == (amount = reader.WORD_read_lsb(word))) {
                             bih.biBitCount = word;
                             count += amount;
 
-                            if (sizeof(DWORD) == (amount = reader.read_lsb(dword))) {
+                            if (sizeof(DWORD) == (amount = reader.DWORD_read_lsb(dword))) {
                                 bih.biCompression = dword;
                                 count += amount;
 
-                                if (sizeof(DWORD) == (amount = reader.read_lsb(dword))) {
+                                if (sizeof(DWORD) == (amount = reader.DWORD_read_lsb(dword))) {
                                     bih.biSizeImage = dword;
                                     count += amount;
 
-                                    if (sizeof(LONG) == (amount = reader.read_lsb(llong))) {
+                                    if (sizeof(LONG) == (amount = reader.LONG_read_lsb(llong))) {
                                         bih.biXPelsPerMeter = llong;
                                         count += amount;
 
-                                        if (sizeof(LONG) == (amount = reader.read_lsb(llong))) {
+                                        if (sizeof(LONG) == (amount = reader.LONG_read_lsb(llong))) {
                                             bih.biYPelsPerMeter = llong;
                                             count += amount;
 
-                                            if (sizeof(DWORD) == (amount = reader.read_lsb(dword))) {
+                                            if (sizeof(DWORD) == (amount = reader.DWORD_read_lsb(dword))) {
                                                 bih.biClrUsed = dword;
                                                 count += amount;
 
-                                                if (sizeof(DWORD) == (amount = reader.read_lsb(dword))) {
+                                                if (sizeof(DWORD) == (amount = reader.DWORD_read_lsb(dword))) {
                                                     bih.biClrImportant = dword;
                                                     count += amount;
                                                     return count;

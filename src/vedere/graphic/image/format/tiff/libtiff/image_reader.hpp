@@ -105,6 +105,21 @@ public:
          samplesPerPixel, bitsPerSample, pixel_value_interpretation_);
         return success;
     }
+    virtual bool on_8_bit_PLANARCONFIG_CONTIG_PHOTOMETRIC_RGBA_TIFFPixel
+    (lamna::graphic::image::pixel& pixel,
+     byte_t* pixelByte, size_t pixelBytes, size_t imageRow, size_t imageCol,
+     size_t imageLength, size_t imageWidth, size_t rowsPerStrip,
+     size_t samplesPerPixel, size_t bitsPerSample,
+     uint16_t planarConfiguration, uint16_t photometricInterpretation) {
+        bool success = true;
+        size_t red = pixel.red(), green = pixel.green(), blue = pixel.blue(), alpha = pixel.alpha();
+        rgba::pixel_t pix(red, green, blue, alpha, 255);
+        success = this->on_image_pixel
+        (pix, pixelByte, pixelBytes,
+         imageCol, imageRow, 0, imageWidth, imageLength, 1,
+         samplesPerPixel, bitsPerSample, pixel_value_interpretation_);
+        return success;
+    }
     ///////////////////////////////////////////////////////////////////////
     virtual bool on_TIFFPixel
     (lamna::graphic::image::pixel& pixel,
@@ -130,20 +145,44 @@ public:
      size_t rowsPerStrip, size_t samplesPerPixel, size_t bitsPerSample,
      uint16_t planarConfiguration, uint16_t photometricInterpretation) {
         bool success = true;
-        switch (bitsPerSample) {
-        case 8:
-            on_TIFFPixel_ = &Derives::on_8_bit_PLANARCONFIG_CONTIG_PHOTOMETRIC_RGB_TIFFPixel;
+        switch (samplesPerPixel) {
+        case 3:
+            switch (bitsPerSample) {
+            case 8:
+                on_TIFFPixel_ = &Derives::on_8_bit_PLANARCONFIG_CONTIG_PHOTOMETRIC_RGB_TIFFPixel;
+                break;
+            default:
+                VEDERE_LOG_MESSAGE_ERROR("...unimplemented bitsPerSample = " << bitsPerSample << " on on_begin_PLANARCONFIG_CONTIG_PHOTOMETRIC_RGB_TIFFImage(" << imageLength << "," <<  imageWidth << "," <<  rowsPerStrip << "," <<  samplesPerPixel << "," <<  bitsPerSample << "," <<  planarConfiguration << "," <<  photometricInterpretation << ")");
+                success = false;
+                break;
+            } // switch (bitsPerSample)
+            if ((success)) {
+                success = this->on_begin_image
+                (imageWidth, imageLength, 1, samplesPerPixel, bitsPerSample,
+                 pixel_value_interpretation_ = pixel_value_interpretation_rgb);
+            }
+            break;
+        case 4:
+            switch (bitsPerSample) {
+            case 8:
+                on_TIFFPixel_ = &Derives::on_8_bit_PLANARCONFIG_CONTIG_PHOTOMETRIC_RGBA_TIFFPixel;
+                break;
+            default:
+                VEDERE_LOG_MESSAGE_ERROR("...unimplemented bitsPerSample = " << bitsPerSample << " on on_begin_PLANARCONFIG_CONTIG_PHOTOMETRIC_RGB_TIFFImage(" << imageLength << "," <<  imageWidth << "," <<  rowsPerStrip << "," <<  samplesPerPixel << "," <<  bitsPerSample << "," <<  planarConfiguration << "," <<  photometricInterpretation << ")");
+                success = false;
+                break;
+            } // switch (bitsPerSample)
+            if ((success)) {
+                success = this->on_begin_image
+                (imageWidth, imageLength, 1, samplesPerPixel, bitsPerSample,
+                 pixel_value_interpretation_ = pixel_value_interpretation_rgba);
+            }
             break;
         default:
-            VEDERE_LOG_MESSAGE_ERROR("...unimplemented bitsPerSample = " << bitsPerSample << " on on_begin_PLANARCONFIG_CONTIG_PHOTOMETRIC_RGB_TIFFImage(" << imageLength << "," <<  imageWidth << "," <<  rowsPerStrip << "," <<  samplesPerPixel << "," <<  bitsPerSample << "," <<  planarConfiguration << "," <<  photometricInterpretation << ")");
+            VEDERE_LOG_MESSAGE_ERROR("...unimplemented samplesPerPixel = " << samplesPerPixel << " on on_begin_PLANARCONFIG_CONTIG_PHOTOMETRIC_RGB_TIFFImage(" << imageLength << "," <<  imageWidth << "," <<  rowsPerStrip << "," <<  samplesPerPixel << "," <<  bitsPerSample << "," <<  planarConfiguration << "," <<  photometricInterpretation << ")");
             success = false;
             break;
-        }
-        if ((success)) {
-            success = this->on_begin_image
-            (imageWidth, imageLength, 1, samplesPerPixel, bitsPerSample,
-             pixel_value_interpretation_ = pixel_value_interpretation_rgb);
-        }
+        } // switch (samplesPerPixel)
         return success;
     }
     ///////////////////////////////////////////////////////////////////////

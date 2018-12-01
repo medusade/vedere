@@ -156,7 +156,7 @@ public:
     }
 
     typedef bool (Derives::*on_image_pixel_t)
-    (pixel_t& pixel, byte_t* pixel_byte, size_t pixel_bytes,
+    (vedere::graphic::image::pixel_t& pixel, byte_t* pixel_byte, size_t pixel_bytes,
      size_t image_col, size_t image_row, size_t image_plane,
      size_t image_width, size_t image_height, size_t image_planes,
      size_t values_per_pixel, size_t bits_per_value,
@@ -239,7 +239,7 @@ public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual bool on_image_pixel
-    (pixel_t& pixel, byte_t* pixel_byte, size_t pixel_bytes,
+    (vedere::graphic::image::pixel_t& pixel, byte_t* pixel_byte, size_t pixel_bytes,
      size_t image_col, size_t image_row, size_t image_plane,
      size_t image_width, size_t image_height, size_t image_planes,
      size_t values_per_pixel, size_t bits_per_value,
@@ -254,7 +254,7 @@ public:
         return success;
     }
     virtual bool on_greyscale_image_pixel
-    (pixel_t& pixel, byte_t* pixel_byte, size_t pixel_bytes,
+    (vedere::graphic::image::pixel_t& pixel, byte_t* pixel_byte, size_t pixel_bytes,
      size_t image_col, size_t image_row, size_t image_plane,
      size_t image_width, size_t image_height, size_t image_planes,
      size_t values_per_pixel, size_t bits_per_value,
@@ -276,7 +276,7 @@ public:
         return success;
     }
     virtual bool on_rgb_image_pixel
-    (pixel_t& pixel, byte_t* pixel_byte, size_t pixel_bytes,
+    (vedere::graphic::image::pixel_t& pixel, byte_t* pixel_byte, size_t pixel_bytes,
      size_t image_col, size_t image_row, size_t image_plane,
      size_t image_width, size_t image_height, size_t image_planes,
      size_t values_per_pixel, size_t bits_per_value,
@@ -295,7 +295,7 @@ public:
         return success;
     }
     virtual bool on_rgba_image_pixel
-    (pixel_t& pixel, byte_t* pixel_byte, size_t pixel_bytes,
+    (vedere::graphic::image::pixel_t& pixel, byte_t* pixel_byte, size_t pixel_bytes,
      size_t image_col, size_t image_row, size_t image_plane,
      size_t image_width, size_t image_height, size_t image_planes,
      size_t values_per_pixel, size_t bits_per_value,
@@ -323,6 +323,41 @@ public:
     ///////////////////////////////////////////////////////////////////////
 protected:
     on_image_pixel_t on_image_pixel_;
+};
+
+///////////////////////////////////////////////////////////////////////
+///  Class: to_argb_bytes_readert
+///////////////////////////////////////////////////////////////////////
+template
+<class TImplements, class TReaderExtends,
+ class TExtends = to_bgra_bytes_readert
+ <TImplements, TReaderExtends> >
+
+class _EXPORT_CLASS to_argb_bytes_readert
+: virtual public TImplements, public TExtends {
+public:
+    typedef TImplements Implements;
+    typedef TExtends Extends;
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    to_argb_bytes_readert() {
+    }
+    virtual ~to_argb_bytes_readert() {
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual void on_bgra_image_pixel_byte(byte_t* byte) {
+        if ((byte)) {
+            byte_t temp = byte[0];
+            byte[0] = byte[3];
+            byte[3] = temp;
+            temp = byte[1];
+            byte[1] = byte[2];
+            byte[2] = temp;
+        }
+    }
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 };
 
 ///////////////////////////////////////////////////////////////////////

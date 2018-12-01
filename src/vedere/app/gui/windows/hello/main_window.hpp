@@ -21,12 +21,16 @@
 #ifndef _VEDERE_APP_GUI_WINDOWS_HELLO_MAIN_WINDOW_HPP
 #define _VEDERE_APP_GUI_WINDOWS_HELLO_MAIN_WINDOW_HPP
 
+#include "vedere/graphic/image/format/png/libpng/image_reader.hpp"
+#include "vedere/graphic/image/format/jpeg/libjpeg/image_reader.hpp"
+#include "vedere/graphic/image/format/tiff/libtiff/image_reader.hpp"
+#include "vedere/graphic/image/format/raw/libraw/image_reader.hpp"
+#include "vedere/graphic/image/format/bmp/implement/image_reader.hpp"
 #include "vedere/app/gui/windows/hello/renderer.hpp"
 #include "vedere/app/gui/windows/hello/image_renderer.hpp"
 #include "vedere/app/gui/hello/main_window_extend.hpp"
 #include "vedere/app/gui/hello/window_extend.hpp"
 #include "vedere/gui/windows/main_window.hpp"
-#include "vedere/graphic/image/format/raw/libraw/image_reader.hpp"
 
 namespace vedere {
 namespace app {
@@ -57,6 +61,54 @@ public:
     }
 
     ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+    virtual bool load_bmp_image(const char_t* image_file) {
+        if ((image_file)) {
+            graphic::image::format::bmp::implement::to_bgra_image_reader reader;
+            if ((reader.read(image_file))) {
+                if ((this->load_image(reader))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    virtual bool load_jpeg_image(const char_t* image_file) {
+        if ((image_file)) {
+            graphic::image::format::jpeg::libjpeg::to_bgra_image_reader reader;
+            if ((reader.read(image_file))) {
+                if ((this->load_image(reader))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    virtual bool load_tiff_image(const char_t* image_file) {
+        if ((image_file)) {
+            graphic::image::format::tiff::libtiff::to_bgra_image_reader reader;
+            if ((reader.read(image_file))) {
+                if ((this->load_image(reader))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    virtual bool load_png_image(const char_t* image_file) {
+        if ((image_file)) {
+            graphic::image::format::png::libpng::to_bgra_image_reader reader;
+            if ((reader.read(image_file))) {
+                if ((this->load_image(reader))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     ///////////////////////////////////////////////////////////////////////
     virtual bool load_raw_image(const char_t* image_file) {
         if ((image_file)) {
