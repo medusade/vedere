@@ -21,7 +21,7 @@
 #include "vedere/lib/vedere/version.hpp"
 
 #if !defined(VEDERE_LIB_VEDERE_VERSION_NAME)
-#define VEDERE_LIB_VEDERE_VERSION_NAME "vedere"
+#define VEDERE_LIB_VEDERE_VERSION_NAME "libvedere"
 #endif // !defined(VEDERE_LIB_VEDERE_VERSION_NAME)
 
 #if !defined(VEDERE_LIB_VEDERE_VERSION_MAJOR)
