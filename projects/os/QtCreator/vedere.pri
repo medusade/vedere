@@ -22,10 +22,20 @@
 ########################################################################
 UNAME = $$system(uname)
 
+contains(UNAME,Windows) {
+VEDERE_OS = windows
+} else {
 contains(UNAME,Darwin) {
 VEDERE_OS = macosx
 } else {
 VEDERE_OS = linux
+}
+}
+
+contains(VEDERE_OS,linux) {
+VEDERE_BUILD = os
+} else {
+VEDERE_BUILD = $${VEDERE_OS}
 }
 
 #CONFIG += c++11
@@ -33,12 +43,12 @@ VEDERE_OS = linux
 
 ########################################################################
 # nadir
-NADIR_THIRDPARTY_PKG_MAKE_BLD = $${NADIR_THIRDPARTY_PKG}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
-NADIR_THIRDPARTY_PRJ_MAKE_BLD = $${NADIR_THIRDPARTY_PRJ}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
-NADIR_THIRDPARTY_PKG_BLD = $${NADIR_THIRDPARTY_PKG}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
-NADIR_THIRDPARTY_PRJ_BLD = $${NADIR_THIRDPARTY_PRJ}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
-NADIR_PKG_BLD = $${OTHER_BLD}/$${NADIR_PKG}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
-NADIR_PRJ_BLD = $${OTHER_BLD}/$${NADIR_PRJ}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+NADIR_THIRDPARTY_PKG_MAKE_BLD = $${NADIR_THIRDPARTY_PKG}/build/$${VEDERE_BUILD}/$${BUILD_CONFIG}
+NADIR_THIRDPARTY_PRJ_MAKE_BLD = $${NADIR_THIRDPARTY_PRJ}/build/$${VEDERE_BUILD}/$${BUILD_CONFIG}
+NADIR_THIRDPARTY_PKG_BLD = $${NADIR_THIRDPARTY_PKG}/build/$${VEDERE_BUILD}/QtCreator/$${BUILD_CONFIG}
+NADIR_THIRDPARTY_PRJ_BLD = $${NADIR_THIRDPARTY_PRJ}/build/$${VEDERE_BUILD}/QtCreator/$${BUILD_CONFIG}
+NADIR_PKG_BLD = $${OTHER_BLD}/$${NADIR_PKG}/build/$${VEDERE_BUILD}/QtCreator/$${BUILD_CONFIG}
+NADIR_PRJ_BLD = $${OTHER_BLD}/$${NADIR_PRJ}/build/$${VEDERE_BUILD}/QtCreator/$${BUILD_CONFIG}
 #NADIR_LIB = $${NADIR_THIRDPARTY_PKG_MAKE_BLD}/lib
 #NADIR_LIB = $${NADIR_THIRDPARTY_PRJ_MAKE_BLD}/lib
 #NADIR_LIB = $${NADIR_THIRDPARTY_PKG_BLD}/lib
@@ -61,12 +71,12 @@ xosnadir_LIBS += \
 
 ########################################################################
 # lamna
-LAMNA_THIRDPARTY_PKG_MAKE_BLD = $${LAMNA_THIRDPARTY_PKG}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
-LAMNA_THIRDPARTY_PRJ_MAKE_BLD = $${LAMNA_THIRDPARTY_PRJ}/build/$${VEDERE_OS}/$${BUILD_CONFIG}
-LAMNA_THIRDPARTY_PKG_BLD = $${LAMNA_THIRDPARTY_PKG}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
-LAMNA_THIRDPARTY_PRJ_BLD = $${LAMNA_THIRDPARTY_PRJ}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
-LAMNA_PKG_BLD = $${OTHER_BLD}/$${LAMNA_PKG}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
-LAMNA_PRJ_BLD = $${OTHER_BLD}/$${LAMNA_PRJ}/build/$${VEDERE_OS}/QtCreator/$${BUILD_CONFIG}
+LAMNA_THIRDPARTY_PKG_MAKE_BLD = $${LAMNA_THIRDPARTY_PKG}/build/$${VEDERE_BUILD}/$${BUILD_CONFIG}
+LAMNA_THIRDPARTY_PRJ_MAKE_BLD = $${LAMNA_THIRDPARTY_PRJ}/build/$${VEDERE_BUILD}/$${BUILD_CONFIG}
+LAMNA_THIRDPARTY_PKG_BLD = $${LAMNA_THIRDPARTY_PKG}/build/$${VEDERE_BUILD}/QtCreator/$${BUILD_CONFIG}
+LAMNA_THIRDPARTY_PRJ_BLD = $${LAMNA_THIRDPARTY_PRJ}/build/$${VEDERE_BUILD}/QtCreator/$${BUILD_CONFIG}
+LAMNA_PKG_BLD = $${OTHER_BLD}/$${LAMNA_PKG}/build/$${VEDERE_BUILD}/QtCreator/$${BUILD_CONFIG}
+LAMNA_PRJ_BLD = $${OTHER_BLD}/$${LAMNA_PRJ}/build/$${VEDERE_BUILD}/QtCreator/$${BUILD_CONFIG}
 #LAMNA_LIB = $${LAMNA_THIRDPARTY_PKG_MAKE_BLD}/lib
 #LAMNA_LIB = $${LAMNA_THIRDPARTY_PRJ_MAKE_BLD}/lib
 #LAMNA_LIB = $${LAMNA_THIRDPARTY_PKG_BLD}/lib
@@ -107,6 +117,9 @@ vedere_LIBS += \
 } else {
 }
 
+contains(VEDERE_OS,linux) {
+} else {
+} # contains(VEDERE_OS,linux)
 ########################################################################
 # vedere libpgm INCLUDEPATH
 #
@@ -127,6 +140,9 @@ vedere_libpgm_LIBS += \
 -L${HOME}/build/apertus/lib \
 -lpgm \
 
+contains(VEDERE_OS,linux) {
+} else {
+} # contains(VEDERE_OS,linux)
 ########################################################################
 # vedere libpng INCLUDEPATH
 #
@@ -147,6 +163,9 @@ vedere_libpng_LIBS += \
 -L${HOME}/build/libpng/lib \
 -lpng \
 
+contains(VEDERE_OS,linux) {
+} else {
+} # contains(VEDERE_OS,linux)
 ########################################################################
 # vedere libjpeg INCLUDEPATH
 #
@@ -167,6 +186,9 @@ vedere_libjpeg_LIBS += \
 -L${HOME}/build/jpeg/lib \
 -ljpeg \
 
+contains(VEDERE_OS,linux) {
+} else {
+} # contains(VEDERE_OS,linux)
 ########################################################################
 # vedere libtiff INCLUDEPATH
 #
@@ -187,6 +209,9 @@ vedere_libtiff_LIBS += \
 -L${HOME}/build/tiff/lib \
 -ltiff \
 
+contains(VEDERE_OS,linux) {
+} else {
+} # contains(VEDERE_OS,linux)
 ########################################################################
 # vedere libraw INCLUDEPATH
 #
@@ -206,6 +231,12 @@ vedere_libraw_FRAMEWORKS += \
 vedere_libraw_LIBS += \
 -L${HOME}/build/LibRaw/lib \
 -lraw_r \
+
+contains(VEDERE_OS,linux) {
+vedere_libraw_LIBS += \
+-lgomp
+} else {
+} # contains(VEDERE_OS,linux)
 
 contains(VEDERE_OS,linux) {
 } else {
@@ -229,6 +260,10 @@ vedere_cocoa_FRAMEWORKS += \
 #
 vedere_cocoa_LIBS += \
 
+} # contains(VEDERE_OS,linux)
+
+contains(VEDERE_OS,linux) {
+} else {
 ########################################################################
 # vedere qt INCLUDEPATH
 #
@@ -251,3 +286,28 @@ vedere_qt_FRAMEWORKS += -framework QtWidgets
 vedere_qt_LIBS += \
 
 } # contains(VEDERE_OS,linux)
+
+contains(VEDERE_OS,linux) {
+} else {
+} # contains(VEDERE_OS,linux)
+########################################################################
+# vedere gtk INCLUDEPATH
+#
+vedere_gtk_INCLUDEPATH += \
+$${build_gtk_INCLUDEPATH}
+
+# vedere gtk DEFINES
+#
+vedere_gtk_DEFINES += \
+$${build_gtk_DEFINES}
+
+# vedere gtk FRAMEWORKS
+#
+vedere_gtk_FRAMEWORKS += \
+$${build_gtk_FRAMEWORKS}
+
+# vedere gtk LIBS
+#
+vedere_gtk_LIBS += \
+$${build_gtk_LIBS}
+
