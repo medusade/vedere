@@ -32,10 +32,10 @@ VEDERE_OS = linux
 }
 }
 
-contains(VEDERE_OS,linux) {
-VEDERE_BUILD = os
-} else {
+contains(VEDERE_BUILD,VEDERE_OS) {
 VEDERE_BUILD = $${VEDERE_OS}
+} else {
+VEDERE_BUILD = os
 }
 
 #CONFIG += c++11
@@ -117,10 +117,12 @@ vedere_LIBS += \
 } else {
 }
 
+########################################################################
+# vedere libpgm
+#
 contains(VEDERE_OS,linux) {
 } else {
 } # contains(VEDERE_OS,linux)
-########################################################################
 # vedere libpgm INCLUDEPATH
 #
 vedere_libpgm_INCLUDEPATH += \
@@ -140,10 +142,12 @@ vedere_libpgm_LIBS += \
 -L${HOME}/build/apertus/lib \
 -lpgm \
 
+########################################################################
+# vedere libpng
+#
 contains(VEDERE_OS,linux) {
 } else {
 } # contains(VEDERE_OS,linux)
-########################################################################
 # vedere libpng INCLUDEPATH
 #
 vedere_libpng_INCLUDEPATH += \
@@ -163,10 +167,12 @@ vedere_libpng_LIBS += \
 -L${HOME}/build/libpng/lib \
 -lpng \
 
+########################################################################
+# vedere libjpeg
+#
 contains(VEDERE_OS,linux) {
 } else {
 } # contains(VEDERE_OS,linux)
-########################################################################
 # vedere libjpeg INCLUDEPATH
 #
 vedere_libjpeg_INCLUDEPATH += \
@@ -186,10 +192,12 @@ vedere_libjpeg_LIBS += \
 -L${HOME}/build/jpeg/lib \
 -ljpeg \
 
+########################################################################
+# vedere libtiff
+#
 contains(VEDERE_OS,linux) {
 } else {
 } # contains(VEDERE_OS,linux)
-########################################################################
 # vedere libtiff INCLUDEPATH
 #
 vedere_libtiff_INCLUDEPATH += \
@@ -209,10 +217,12 @@ vedere_libtiff_LIBS += \
 -L${HOME}/build/tiff/lib \
 -ltiff \
 
+########################################################################
+# vedere libraw
+#
 contains(VEDERE_OS,linux) {
 } else {
 } # contains(VEDERE_OS,linux)
-########################################################################
 # vedere libraw INCLUDEPATH
 #
 vedere_libraw_INCLUDEPATH += \
@@ -238,9 +248,11 @@ vedere_libraw_LIBS += \
 } else {
 } # contains(VEDERE_OS,linux)
 
+########################################################################
+# vedere cocoa
+#
 contains(VEDERE_OS,linux) {
 } else {
-########################################################################
 # vedere cocoa INCLUDEPATH
 #
 vedere_cocoa_INCLUDEPATH += \
@@ -262,9 +274,11 @@ vedere_cocoa_LIBS += \
 
 } # contains(VEDERE_OS,linux)
 
+########################################################################
+# vedere qt
+#
 contains(VEDERE_OS,linux) {
 } else {
-########################################################################
 # vedere qt INCLUDEPATH
 #
 vedere_qt_INCLUDEPATH += \
@@ -287,10 +301,12 @@ vedere_qt_LIBS += \
 
 } # contains(VEDERE_OS,linux)
 
+########################################################################
+# vedere gtk
+#
 contains(VEDERE_OS,linux) {
 } else {
 } # contains(VEDERE_OS,linux)
-########################################################################
 # vedere gtk INCLUDEPATH
 #
 vedere_gtk_INCLUDEPATH += \
@@ -311,3 +327,28 @@ $${build_gtk_FRAMEWORKS}
 vedere_gtk_LIBS += \
 $${build_gtk_LIBS}
 
+########################################################################
+# vedere zlib
+#
+contains(VEDERE_OS,linux) {
+} else {
+} # contains(VEDERE_OS,linux)
+# vedere zlib INCLUDEPATH
+#
+vedere_zlib_INCLUDEPATH += \
+$${build_zlib_INCLUDEPATH}
+
+# vedere zlib DEFINES
+#
+vedere_zlib_DEFINES += \
+$${build_zlib_DEFINES}
+
+# vedere zlib FRAMEWORKS
+#
+vedere_zlib_FRAMEWORKS += \
+$${build_zlib_FRAMEWORKS}
+
+# vedere zlib LIBS
+#
+vedere_zlib_LIBS += \
+$${build_zlib_LIBS}

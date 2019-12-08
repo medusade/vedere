@@ -180,10 +180,8 @@ $${vedere_qt_FRAMEWORKS} \
 #
 qVHello_LIBS += \
 $${vedere_LIBS} \
-$${vedere_libpgm_LIBS} \
-$${vedere_libpng_LIBS} \
-$${vedere_libjpeg_LIBS} \
-$${vedere_libtiff_LIBS} \
 $${vedere_libraw_LIBS} \
-
-
+$${vedere_libtiff_LIBS} \
+$${vedere_libjpeg_LIBS} \
+$${vedere_libpng_LIBS} \
+$${vedere_zlib_LIBS} \

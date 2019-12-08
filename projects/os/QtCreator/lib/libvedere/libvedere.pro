@@ -20,6 +20,7 @@
 #
 # QtCreator .pro file for vedere library libvedere
 ########################################################################
+include(../../../../../../build/QtCreator/vedere.pri)
 include(../../../../../build/QtCreator/vedere.pri)
 include(../../../../QtCreator/vedere.pri)
 include(../../vedere.pri)

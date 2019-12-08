@@ -20,12 +20,13 @@
 #
 # QtCreator .pro file for vedere executable gVHello
 ########################################################################
-include(../../../../../../build/QtCreator/libpgm.pri)
+include(../../../../../../build/QtCreator/zlib.pri)
 include(../../../../../../build/QtCreator/libpng.pri)
 include(../../../../../../build/QtCreator/libjpeg.pri)
 include(../../../../../../build/QtCreator/libtiff.pri)
 include(../../../../../../build/QtCreator/libraw.pri)
 include(../../../../../../build/QtCreator/gtk.pri)
+include(../../../../../../build/QtCreator/vedere.pri)
 include(../../../../../build/QtCreator/vedere.pri)
 include(../../../../QtCreator/vedere.pri)
 include(../../vedere.pri)

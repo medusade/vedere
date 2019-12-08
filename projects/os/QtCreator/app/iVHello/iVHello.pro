@@ -20,6 +20,7 @@
 #
 # QtCreator .pro file for vedere executable iVHello
 ########################################################################
+include(../../../../../../build/QtCreator/vedere.pri)
 include(../../../../../build/QtCreator/vedere.pri)
 include(../../../../QtCreator/vedere.pri)
 include(../../vedere.pri)
