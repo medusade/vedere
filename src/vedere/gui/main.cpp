@@ -20,12 +20,19 @@
 ///////////////////////////////////////////////////////////////////////
 #include "vedere/gui/main.hpp"
 
+#if !defined(VEDERE_GUI_MAIN_INSTANCE)
+//#define VEDERE_GUI_MAIN_INSTANCE
+#endif /// !defined(VEDERE_GUI_MAIN_INSTANCE)
+
 namespace vedere {
 namespace gui {
 
 ///////////////////////////////////////////////////////////////////////
 ///  Class: main
 ///////////////////////////////////////////////////////////////////////
+#if defined(VEDERE_GUI_MAIN_INSTANCE)
+static main the_main;
+#endif /// defined(VEDERE_GUI_MAIN_INSTANCE)
 
 } // namespace gui 
 } // namespace vedere 

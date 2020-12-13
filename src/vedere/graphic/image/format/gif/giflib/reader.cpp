@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2015 $organization$
+/// Copyright (c) 1988-2020 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -13,30 +13,28 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: main.cpp
+///   File: reader.cpp
 ///
 /// Author: $author$
-///   Date: 10/27/2015, 11/28/2020
+///   Date: 12/7/2020
 ///////////////////////////////////////////////////////////////////////
-#include "vedere/app/gui/hello/main.hpp"
-
-#if !defined(VEDERE_APP_GUI_HELLO_MAIN_INSTANCE)
-//#define VEDERE_APP_GUI_HELLO_MAIN_INSTANCE
-#endif /// !defined(VEDERE_APP_GUI_HELLO_MAIN_INSTANCE)
+#include "vedere/graphic/image/format/gif/giflib/reader.hpp"
 
 namespace vedere {
-namespace app {
-namespace gui {
-namespace hello {
+namespace graphic {
+namespace image {
+namespace format {
+namespace gif {
+namespace giflib {
 
 ///////////////////////////////////////////////////////////////////////
-///  Class: maint
+///  Class: readert
 ///////////////////////////////////////////////////////////////////////
-#if defined(VEDERE_APP_GUI_HELLO_MAIN_INSTANCE)
-static main the_main;
-#endif /// defined(VEDERE_APP_GUI_HELLO_MAIN_INSTANCE)
 
-} // namespace hello 
-} // namespace gui 
-} // namespace app 
-} // namespace vedere 
+} /// namespace giflib
+} /// namespace gif
+} /// namespace format
+} /// namespace image
+} /// namespace graphic
+} /// namespace vedere
+

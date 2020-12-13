@@ -61,6 +61,10 @@ public:
             success = load_tiff_image(image_file);
             break;
 
+        case gui::hello::image_format_gif:
+            success = load_gif_image(image_file);
+            break;
+
         case gui::hello::image_format_png:
             success = load_png_image(image_file);
             break;
@@ -91,6 +95,9 @@ public:
         return false;
     }
     virtual bool load_tiff_image(const char_t* image_file) {
+        return false;
+    }
+    virtual bool load_gif_image(const char_t* image_file) {
         return false;
     }
     virtual bool load_png_image(const char_t* image_file) {
@@ -149,11 +156,11 @@ public:
     ///////////////////////////////////////////////////////////////////////
     virtual void* load_image
     (byte_reader& reader, size_t size, size_t width, size_t height) {
-        return false;
+        return (void*)0;
     }
     virtual void* set_image
     (byte_t* bytes, size_t size, size_t width, size_t height) {
-        return false;
+        return (void*)0;
     }
 
     ///////////////////////////////////////////////////////////////////////

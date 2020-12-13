@@ -212,14 +212,14 @@ public:
         if ((main_widget_)) {
             return main_widget_->load_image(reader, size, width, height);
         }
-        return false;
+        return (void*)0;
     }
     virtual void* set_image
     (byte_t* bytes, size_t size, size_t width, size_t height) {
         if ((main_widget_)) {
             return main_widget_->set_image(bytes, size, width, height);
         }
-        return false;
+        return (void*)0;
     }
 
     ///////////////////////////////////////////////////////////////////////

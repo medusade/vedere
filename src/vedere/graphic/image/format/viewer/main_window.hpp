@@ -130,11 +130,11 @@ public:
     ///////////////////////////////////////////////////////////////////////
     virtual void* load_image
     (byte_reader& reader, size_t size, size_t width, size_t height) {
-        return false;
+        return 0;
     }
     virtual void* set_image
     (byte_t* bytes, size_t size, size_t width, size_t height) {
-        return false;
+        return 0;
     }
 
     ///////////////////////////////////////////////////////////////////////

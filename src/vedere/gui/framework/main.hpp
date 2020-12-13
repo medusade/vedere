@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2015 $organization$
+/// Copyright (c) 1988-2020 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -13,30 +13,50 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: main.cpp
+///   File: main.hpp
 ///
 /// Author: $author$
-///   Date: 10/27/2015, 11/28/2020
+///   Date: 12/1/2020
 ///////////////////////////////////////////////////////////////////////
-#include "vedere/app/gui/hello/main.hpp"
+#ifndef _VEDERE_GUI_FRAMEWORK_MAIN_HPP
+#define _VEDERE_GUI_FRAMEWORK_MAIN_HPP
 
-#if !defined(VEDERE_APP_GUI_HELLO_MAIN_INSTANCE)
-//#define VEDERE_APP_GUI_HELLO_MAIN_INSTANCE
-#endif /// !defined(VEDERE_APP_GUI_HELLO_MAIN_INSTANCE)
+#include "vedere/gui/framework/main_opt.hpp"
 
 namespace vedere {
-namespace app {
 namespace gui {
-namespace hello {
+namespace framework {
 
+typedef main_opt::Implements maint_implements;
+typedef main_opt maint_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: maint
 ///////////////////////////////////////////////////////////////////////
-#if defined(VEDERE_APP_GUI_HELLO_MAIN_INSTANCE)
-static main the_main;
-#endif /// defined(VEDERE_APP_GUI_HELLO_MAIN_INSTANCE)
+template <class TImplements = maint_implements, class TExtends = maint_extends>
+class _EXPORT_CLASS maint: virtual public TImplements, public TExtends {
+public:
+    typedef TImplements Implements;
+    typedef TExtends Extends;
+    typedef maint Derives;
+    
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+private:
+    maint(const maint &copy) {
+    }
+public:
+    maint() {
+    }
+    virtual ~maint() {
+    }
 
-} // namespace hello 
-} // namespace gui 
-} // namespace app 
-} // namespace vedere 
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
+}; /// class _EXPORT_CLASS maint
+typedef maint<> main;
+
+} /// namespace framework
+} /// namespace gui
+} /// namespace vedere
+
+#endif /// _VEDERE_GUI_FRAMEWORK_MAIN_HPP 

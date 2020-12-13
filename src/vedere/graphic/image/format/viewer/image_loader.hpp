@@ -80,12 +80,16 @@ public:
             size_t image_width = 0, image_height = 0,
                    image_depth = 0, image_size = 0;
             byte_t* bytes = 0;
+            void *image = 0;
 
             if ((bytes = reader.detach_image
                  (image_width, image_height, image_depth, image_size))) {
-                if ((set_image(bytes, image_size, image_width, image_height))) {
+                VEDERE_LOG_MESSAGE_DEBUG("load_image(): image = set_image(bytes = " << pointer_to_string(bytes) << " size = " << image_size << " width = " << image_width << " height = " << image_height << ") depth = " << image_depth << "...");
+                if ((image = set_image(bytes, image_size, image_width, image_height))) {
+                    VEDERE_LOG_MESSAGE_DEBUG("load_image(): ...image = " << pointer_to_string(image) << " = set_image(bytes = " << pointer_to_string(bytes) << " size = " << image_size << " width = " << image_width << " height = " << image_height << ") depth = " << image_depth << "");
                     success = true;
                 } else {
+                    VEDERE_LOG_MESSAGE_ERROR("load_image(): ...failed on image = " << pointer_to_string(image) << " = set_image(bytes = " << pointer_to_string(bytes) << " size = " << image_size << " width = " << image_width << " height = " << image_height << ") depth = " << image_depth << "...");
                     delete[] bytes;
                 }
             } else {

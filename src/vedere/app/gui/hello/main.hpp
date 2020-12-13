@@ -16,7 +16,7 @@
 ///   File: main.hpp
 ///
 /// Author: $author$
-///   Date: 10/27/2015
+///   Date: 10/27/2015, 11/28/2020
 ///////////////////////////////////////////////////////////////////////
 #ifndef _VEDERE_APP_GUI_HELLO_MAIN_HPP
 #define _VEDERE_APP_GUI_HELLO_MAIN_HPP
@@ -193,6 +193,8 @@ protected:
     image_transform_t image_transform_;
     string image_file_;
 };
+
+typedef maint<> main;
 
 } // namespace hello 
 } // namespace gui 

@@ -88,7 +88,7 @@ protected:
     virtual void* set_image
     (byte_t* bytes, size_t size, size_t width, size_t height) {
         if ((main_window_)) {
-            main_window_->set_image(bytes, size, width, height);
+            return main_window_->set_image(bytes, size, width, height);
         }
         return 0;
     }

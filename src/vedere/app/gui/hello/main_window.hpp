@@ -23,6 +23,7 @@
 
 #include "vedere/graphic/image/format/jpeg/libjpeg/image_reader.hpp"
 #include "vedere/graphic/image/format/tiff/libtiff/image_reader.hpp"
+#include "vedere/graphic/image/format/gif/giflib/image_reader.hpp"
 #include "vedere/graphic/image/format/png/libpng/image_reader.hpp"
 #include "vedere/graphic/image/format/bmp/implement/image_reader.hpp"
 #include "vedere/graphic/image/format/raw/libraw/image_reader.hpp"
@@ -100,6 +101,18 @@ public:
     virtual bool load_tiff_image(const char_t* image_file) {
         if ((image_file)) {
             graphic::image::format::tiff::libtiff::to_bgra_image_reader reader;
+            if ((reader.read(image_file))) {
+                if ((this->load_image(reader))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    ///////////////////////////////////////////////////////////////////////
+    virtual bool load_gif_image(const char_t* image_file) {
+        if ((image_file)) {
+            graphic::image::format::gif::giflib::to_bgra_image_reader reader;
             if ((reader.read(image_file))) {
                 if ((this->load_image(reader))) {
                     return true;

@@ -21,7 +21,23 @@
 #ifndef _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_MAIN_HPP
 #define _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_MAIN_HPP
 
+#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_JEPG_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+#include "vedere/graphic/image/format/jppg/libjpg/image_reader.hpp"
+#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+#include "vedere/graphic/image/format/png/libpng/image_reader.hpp"
+#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_GIF_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+#include "vedere/graphic/image/format/gif/giflib/image_reader.hpp"
+#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_TIFF_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+#include "vedere/graphic/image/format/tiff/libtiff/image_reader.hpp"
+#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PGM_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
 #include "vedere/graphic/image/format/raw/libpgm/image_reader.hpp"
+#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_RAW_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+#include "vedere/graphic/image/format/raw/libraw/image_reader.hpp"
+#else /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_JPEG_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+#if !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER)
+#define VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER
+#endif /// !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER)
+#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_JPEG_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
 #include "vedere/graphic/image/format/viewer/main_opt.hpp"
 #include "vedere/graphic/image/format/viewer/image_loader.hpp"
 #include "vedere/gui/main.hpp"
@@ -29,6 +45,10 @@
 
 #define VEDERE_APP_GUI_HELLO_MAIN_WINDOW_WIDTH 500
 #define VEDERE_APP_GUI_HELLO_MAIN_WINDOW_HEIGHT 250
+
+#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_VIEWER)
+#else /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_VIEWER)
+#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_VIEWER)
 
 namespace vedere {
 namespace graphic {
@@ -77,17 +97,30 @@ public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     using image_loader::load_image;
-    virtual bool load_image
-    (const char_t* image_file, image_format_t image_format) {
+    virtual bool load_image(const char_t* image_file, image_format_t image_format) {
         VEDERE_LOG_MESSAGE_DEBUG("load_image(" <<  chars_to_string(image_file) << ", " << image_format << ")...");
-        if ((image_file)) {
-            //graphic::image::format::raw::libraw::to_bgra_image_reader reader;
+        if ((image_file) && (image_file[0])) {
+#if !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER)
+#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_JPEG_VIEWER)
+            graphic::image::format::jpeg::libjpeg::to_bgra_image_reader reader;
+#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_VIEWER)
+            graphic::image::format::png::libpng::to_bgra_image_reader reader;
+#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_GIF_VIEWER)
+            graphic::image::format::gif::giflib::to_bgra_image_reader reader;
+#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_TIFF_VIEWER)
+            graphic::image::format::tiff::libtiff::to_bgra_image_reader reader;
+#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_RAW_VIEWER)
+            graphic::image::format::raw::libraw::to_bgra_image_reader reader;
+#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PGM_VIEWER)
             graphic::image::format::raw::libpgm::to_bgra_image_reader reader;
+#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_VIEWER)
             if ((reader.read(image_file))) {
                 if ((load_image(reader))) {
                     return true;
                 }
             }
+#else /// !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER)
+#endif /// !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER)
         }
         VEDERE_LOG_MESSAGE_DEBUG("...load_image(" <<  chars_to_string(image_file) << ", " << image_format << ")");
         return false;

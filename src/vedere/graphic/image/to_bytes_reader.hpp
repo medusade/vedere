@@ -94,6 +94,7 @@ public:
         image_depth = image_depth_;
         bytes_ = 0;
         image_width_ = (image_height_ = (image_depth_ = (image_size_ = 0)));
+        VEDERE_LOG_MESSAGE_DEBUG("detach_image(): bytes = " << pointer_to_string(bytes) << " size = " << image_size << " width = " << image_width << " height = " << image_height << " depth = " << image_depth << "");
         return bytes;
     }
 
@@ -102,9 +103,9 @@ public:
     virtual byte_t* alloc_image
     (size_t image_width, size_t image_height,
      size_t image_depth, size_t image_size) {
-        VEDERE_LOG_MESSAGE_DEBUG("bytes_ = new byte_t[image_size = " << image_size << "]...");
+        VEDERE_LOG_MESSAGE_DEBUG("alloc_image(): bytes_ = new byte_t[image_size = " << image_size << "]...");
         if ((bytes_ = new byte_t[image_size])) {
-            VEDERE_LOG_MESSAGE_DEBUG("...bytes_ = new byte_t[image_size = " << image_size << "]");
+            VEDERE_LOG_MESSAGE_DEBUG("alloc_image(): ...bytes_ = " << pointer_to_string(bytes_) << " = new byte_t[image_size = " << image_size << "]");
             image_width_ = image_width;
             image_height_ = image_height;
             image_depth_ = image_depth;
@@ -117,9 +118,9 @@ public:
     virtual void free_image() {
         image_width_ = (image_height_ = (image_depth_ = (image_size_ = 0)));
         if ((bytes_)) {
-            VEDERE_LOG_MESSAGE_DEBUG("delete[] bytes_...");
+            VEDERE_LOG_MESSAGE_DEBUG("free_image(): delete[] bytes_ = " << pointer_to_string(bytes_) << "...");
             delete[] bytes_;
-            VEDERE_LOG_MESSAGE_DEBUG("...delete[] bytes_");
+            VEDERE_LOG_MESSAGE_DEBUG("free_image(): ...delete[] bytes_ = " << pointer_to_string(bytes_) << "");
             bytes_ = 0;
         }
     }
@@ -148,11 +149,12 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    to_bgra_bytes_readert()
-    : on_image_pixel_(0) {
+    to_bgra_bytes_readert(): on_image_pixel_(0) {
     }
     virtual ~to_bgra_bytes_readert() {
+        VEDERE_LOG_MESSAGE_DEBUG("this->free_image()...");
         this->free_image();
+        VEDERE_LOG_MESSAGE_DEBUG("...this->free_image()");
     }
 
     typedef bool (Derives::*on_image_pixel_t)
