@@ -16,10 +16,11 @@
 #   File: iVHello.pro
 #
 # Author: $author$
-#   Date: 11/21/2018
+#   Date: 11/21/2018, 12/1/2020
 #
 # QtCreator .pro file for vedere executable iVHello
 ########################################################################
+include(../../../../../../build/QtCreator/cocoa.pri)
 include(../../../../../../build/QtCreator/vedere.pri)
 include(../../../../../build/QtCreator/vedere.pri)
 include(../../../../QtCreator/vedere.pri)
@@ -55,7 +56,7 @@ $${iVHello_OBJECTIVE_SOURCES} \
 #
 HEADERS += \
 $${iVHello_HEADERS} \
-$${OBJECTIVE_HEADERS} \
+$${iVHello_OBJECTIVE_HEADERS} \
 
 # SOURCES
 #
@@ -74,6 +75,8 @@ LIBS += \
 $${iVHello_LIBS} \
 $${FRAMEWORKS} \
 
+contains(UNAME,Darwin) {
 ########################################################################
 # NO Qt
 QT -= gui core
+} # contains(UNAME,Darwin)

@@ -32,6 +32,7 @@ qVHello_TARGET = qVHello
 #
 qVHello_INCLUDEPATH += \
 $${vedere_INCLUDEPATH} \
+$${vedere_giflib_INCLUDEPATH} \
 $${vedere_libpgm_INCLUDEPATH} \
 $${vedere_libpng_INCLUDEPATH} \
 $${vedere_libjpeg_INCLUDEPATH} \
@@ -80,6 +81,12 @@ $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/struct_created.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/palette.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/color.hpp \
 $${LAMNA_SRC}/lamna/graphic/image/format/png/libpng/png.hpp \
+\
+$${VEDERE_SRC}/vedere/graphic/image/format/gif/giflib/image_reader.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/gif/giflib/reader.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/gif/giflib/reader_events.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/gif/giflib/file.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/gif/giflib/jpeg.hpp \
 \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/image_reader.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/jpeg/libjpeg/reader.hpp \
@@ -184,4 +191,5 @@ $${vedere_libraw_LIBS} \
 $${vedere_libtiff_LIBS} \
 $${vedere_libjpeg_LIBS} \
 $${vedere_libpng_LIBS} \
+$${vedere_giflib_LIBS} \
 $${vedere_zlib_LIBS} \

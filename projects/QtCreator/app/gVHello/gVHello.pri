@@ -16,10 +16,15 @@
 #   File: gVHello.pri
 #
 # Author: $author$
-#   Date: 7/19/2019
+#   Date: 7/19/2019, 11/28/2020, 11/29/2020
 #
 # QtCreator .pri file for vedere executable gVHello
 ########################################################################
+
+contains(VEDERE_OS,linux) {
+vedere_libpng_INCLUDEPATH = /usr/include/libpng
+vedere_libpng_LIBS = -lpng
+} # contains(VEDERE_OS,linux)
 
 ########################################################################
 # gVHello
@@ -42,6 +47,15 @@ $${vedere_libraw_INCLUDEPATH} \
 #
 gVHello_DEFINES += \
 $${vedere_DEFINES} \
+XOS_DEFAULT_LOG_ERROR \
+XOS_NO_ERR_LOG_DEBUG \
+XOS_NO_ERR_LOG_TRACE \
+
+contains(VEDERE_OS,linux) {
+} else {
+gVHello_DEFINES += \
+VEDERE_APP_GUI_HELLO_MAIN_INSTANCE
+} # contains(VEDERE_OS,linux)
 
 ########################################################################
 # gVHello OBJECTIVE_HEADERS

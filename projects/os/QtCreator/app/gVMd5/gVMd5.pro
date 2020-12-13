@@ -1,5 +1,5 @@
 ########################################################################
-# Copyright (c) 1988-2018 $organization$
+# Copyright (c) 1988-2020 $organization$
 #
 # This software is provided by the author and contributors ``as is''
 # and any express or implied warranties, including, but not limited to,
@@ -13,72 +13,67 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qVHello.pro
+#   File: gVMd5.pro
 #
 # Author: $author$
-#   Date: 11/22/2018
+#   Date: 11/28/2020
 #
-# QtCreator .pro file for vedere executable qVHello
+# QtCreator .pro file for vedere executable gVMd5
 ########################################################################
-include(../../../../../../build/QtCreator/zlib.pri)
-include(../../../../../../build/QtCreator/giflib.pri)
-include(../../../../../../build/QtCreator/libpng.pri)
-include(../../../../../../build/QtCreator/libjpeg.pri)
-include(../../../../../../build/QtCreator/libtiff.pri)
-include(../../../../../../build/QtCreator/libraw.pri)
-include(../../../../../../build/QtCreator/qt.pri)
+include(../../../../../../build/QtCreator/gtk.pri)
 include(../../../../../../build/QtCreator/vedere.pri)
 include(../../../../../build/QtCreator/vedere.pri)
 include(../../../../QtCreator/vedere.pri)
 include(../../vedere.pri)
-include(../../../../QtCreator/app/qVHello/qVHello.pri)
+include(../../../../QtCreator/app/gVMd5/gVMd5.pri)
 
-TARGET = $${qVHello_TARGET}
+TARGET = $${gVMd5_TARGET}
 
 ########################################################################
 # INCLUDEPATH
 #
 INCLUDEPATH += \
-$${qVHello_INCLUDEPATH} \
+$${gVMd5_INCLUDEPATH} \
 
 # DEFINES
 # 
 DEFINES += \
-$${qVHello_DEFINES} \
+$${gVMd5_DEFINES} \
 
 ########################################################################
 # OBJECTIVE_HEADERS
 #
 OBJECTIVE_HEADERS += \
-$${qVHello_OBJECTIVE_HEADERS} \
+$${gVMd5_OBJECTIVE_HEADERS} \
 
 # OBJECTIVE_SOURCES
 #
 OBJECTIVE_SOURCES += \
-$${qVHello_OBJECTIVE_SOURCES} \
+$${gVMd5_OBJECTIVE_SOURCES} \
 
 ########################################################################
 # HEADERS
 #
 HEADERS += \
-$${qVHello_HEADERS} \
-$${OBJECTIVE_HEADERS} \
+$${gVMd5_HEADERS} \
 
 # SOURCES
 #
 SOURCES += \
-$${qVHello_SOURCES} \
+$${gVMd5_SOURCES} \
 
 ########################################################################
 # FRAMEWORKS
 #
 FRAMEWORKS += \
-$${qVHello_FRAMEWORKS} \
+$${gVMd5_FRAMEWORKS} \
 
 # LIBS
 #
 LIBS += \
-$${qVHello_LIBS} \
+$${gVMd5_LIBS} \
 $${FRAMEWORKS} \
 
-
+########################################################################
+# NO Qt
+QT -= gui core

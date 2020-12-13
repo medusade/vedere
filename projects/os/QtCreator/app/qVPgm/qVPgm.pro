@@ -1,5 +1,5 @@
 ########################################################################
-# Copyright (c) 1988-2018 $organization$
+# Copyright (c) 1988-2020 $organization$
 #
 # This software is provided by the author and contributors ``as is''
 # and any express or implied warranties, including, but not limited to,
@@ -13,15 +13,15 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: qVHello.pro
+#   File: qVPgm.pro
 #
 # Author: $author$
-#   Date: 11/22/2018
+#   Date: 11/28/2020
 #
-# QtCreator .pro file for vedere executable qVHello
+# QtCreator .pro file for vedere executable qVPgm
 ########################################################################
 include(../../../../../../build/QtCreator/zlib.pri)
-include(../../../../../../build/QtCreator/giflib.pri)
+include(../../../../../../build/QtCreator/libpgm.pri)
 include(../../../../../../build/QtCreator/libpng.pri)
 include(../../../../../../build/QtCreator/libjpeg.pri)
 include(../../../../../../build/QtCreator/libtiff.pri)
@@ -31,54 +31,54 @@ include(../../../../../../build/QtCreator/vedere.pri)
 include(../../../../../build/QtCreator/vedere.pri)
 include(../../../../QtCreator/vedere.pri)
 include(../../vedere.pri)
-include(../../../../QtCreator/app/qVHello/qVHello.pri)
+include(../../../../QtCreator/app/qVPgm/qVPgm.pri)
 
-TARGET = $${qVHello_TARGET}
+TARGET = $${qVPgm_TARGET}
 
 ########################################################################
 # INCLUDEPATH
 #
 INCLUDEPATH += \
-$${qVHello_INCLUDEPATH} \
+$${qVPgm_INCLUDEPATH} \
 
 # DEFINES
 # 
 DEFINES += \
-$${qVHello_DEFINES} \
+$${qVPgm_DEFINES} \
 
 ########################################################################
 # OBJECTIVE_HEADERS
 #
 OBJECTIVE_HEADERS += \
-$${qVHello_OBJECTIVE_HEADERS} \
+$${qVPgm_OBJECTIVE_HEADERS} \
 
 # OBJECTIVE_SOURCES
 #
 OBJECTIVE_SOURCES += \
-$${qVHello_OBJECTIVE_SOURCES} \
+$${qVPgm_OBJECTIVE_SOURCES} \
 
 ########################################################################
 # HEADERS
 #
 HEADERS += \
-$${qVHello_HEADERS} \
+$${qVPgm_HEADERS} \
 $${OBJECTIVE_HEADERS} \
 
 # SOURCES
 #
 SOURCES += \
-$${qVHello_SOURCES} \
+$${qVPgm_SOURCES} \
 
 ########################################################################
 # FRAMEWORKS
 #
 FRAMEWORKS += \
-$${qVHello_FRAMEWORKS} \
+$${qVPgm_FRAMEWORKS} \
 
 # LIBS
 #
 LIBS += \
-$${qVHello_LIBS} \
+$${qVPgm_LIBS} \
 $${FRAMEWORKS} \
 
 

@@ -16,7 +16,7 @@
 #   File: gVHello.pro
 #
 # Author: $author$
-#   Date: 7/19/2019
+#   Date: 7/19/2019, 11/28/2020
 #
 # QtCreator .pro file for vedere executable gVHello
 ########################################################################
@@ -53,7 +53,7 @@ $${gVHello_OBJECTIVE_HEADERS} \
 
 # OBJECTIVE_SOURCES
 #
-SOURCES += \
+OBJECTIVE_SOURCES += \
 $${gVHello_OBJECTIVE_SOURCES} \
 
 ########################################################################
@@ -66,7 +66,6 @@ $${gVHello_HEADERS} \
 #
 SOURCES += \
 $${gVHello_SOURCES} \
-$${OBJECTIVE_SOURCES} \
 
 ########################################################################
 # FRAMEWORKS
@@ -80,4 +79,6 @@ LIBS += \
 $${gVHello_LIBS} \
 $${FRAMEWORKS} \
 
-
+########################################################################
+# NO Qt
+QT -= gui core
