@@ -16,7 +16,7 @@
 #   File: libvedere.pri
 #
 # Author: $author$
-#   Date: 11/20/2018
+#   Date: 11/20/2018, 12/14/2020
 #
 # QtCreator .pri file for vedere library libvedere
 ########################################################################
@@ -39,6 +39,9 @@ $${vedere_INCLUDEPATH} \
 #
 libvedere_DEFINES += \
 $${vedere_DEFINES} \
+XOS_DEFAULT_LOG_ERROR \
+XOS_NO_ERR_LOG_DEBUG \
+XOS_NO_ERR_LOG_TRACE \
 
 ########################################################################
 # libvedere OBJECTIVE_HEADERS

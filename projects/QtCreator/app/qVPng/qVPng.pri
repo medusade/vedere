@@ -16,7 +16,7 @@
 #   File: qVPng.pri
 #
 # Author: $author$
-#   Date: 11/30/2020
+#   Date: 11/30/2020, 12/14/2020
 #
 # QtCreator .pri file for vedere executable qVPng
 ########################################################################
@@ -39,6 +39,9 @@ $${vedere_libpng_INCLUDEPATH} \
 #
 qVPng_DEFINES += \
 $${vedere_DEFINES} \
+XOS_DEFAULT_LOG_ERROR \
+XOS_NO_ERR_LOG_DEBUG \
+XOS_NO_ERR_LOG_TRACE \
 VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_VIEWER \
 
 ########################################################################
@@ -80,6 +83,7 @@ $${VEDERE_SRC}/vedere/graphic/image/format/viewer/window.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/viewer/qt/main.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/viewer/main.hpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/viewer/main_opt.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/to_bytes_reader.hpp \
 \
 $${VEDERE_SRC}/vedere/console/main.hpp \
 $${VEDERE_SRC}/vedere/console/main_opt.hpp \

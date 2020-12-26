@@ -16,7 +16,7 @@
 #   File: gVHello.pri
 #
 # Author: $author$
-#   Date: 7/19/2019, 11/28/2020, 11/29/2020
+#   Date: 7/19/2019, 11/28/2020, 11/29/2020, 12/14/2020
 #
 # QtCreator .pri file for vedere executable gVHello
 ########################################################################
@@ -38,6 +38,7 @@ gVHello_TARGET = gVHello
 gVHello_INCLUDEPATH += \
 $${vedere_INCLUDEPATH} \
 $${vedere_gtk_INCLUDEPATH} \
+$${vedere_giflib_INCLUDEPATH} \
 $${vedere_libtiff_INCLUDEPATH} \
 $${vedere_libjpeg_INCLUDEPATH} \
 $${vedere_libpng_INCLUDEPATH} \
@@ -111,6 +112,7 @@ gVHello_SOURCES += \
 $${VEDERE_SRC}/vedere/console/main_main.cpp \
 
 contains(VEDERE_OS,linux) {
+
 gVHello_SOURCES += \
 $${VEDERE_SRC}/vedere/gui/gtk/application/window_main.cpp \
 $${VEDERE_SRC}/vedere/gui/gtk/application/window.cpp \
@@ -140,6 +142,7 @@ $${vedere_FRAMEWORKS} \
 gVHello_LIBS += \
 $${vedere_LIBS} \
 $${vedere_gtk_LIBS} \
+$${vedere_giflib_LIBS} \
 $${vedere_libtiff_LIBS} \
 $${vedere_libjpeg_LIBS} \
 $${vedere_libpng_LIBS} \

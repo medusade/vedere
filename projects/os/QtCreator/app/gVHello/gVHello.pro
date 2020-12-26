@@ -16,11 +16,12 @@
 #   File: gVHello.pro
 #
 # Author: $author$
-#   Date: 7/19/2019, 11/28/2020
+#   Date: 7/19/2019, 11/28/2020, 12/14/2020
 #
 # QtCreator .pro file for vedere executable gVHello
 ########################################################################
 include(../../../../../../build/QtCreator/zlib.pri)
+include(../../../../../../build/QtCreator/giflib.pri)
 include(../../../../../../build/QtCreator/libpng.pri)
 include(../../../../../../build/QtCreator/libjpeg.pri)
 include(../../../../../../build/QtCreator/libtiff.pri)

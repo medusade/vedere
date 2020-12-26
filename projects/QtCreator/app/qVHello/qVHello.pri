@@ -16,7 +16,7 @@
 #   File: qVHello.pri
 #
 # Author: $author$
-#   Date: 11/22/2018
+#   Date: 11/22/2018, 12/14/2020
 #
 # QtCreator .pri file for vedere executable qVHello
 ########################################################################
@@ -43,6 +43,9 @@ $${vedere_libraw_INCLUDEPATH} \
 #
 qVHello_DEFINES += \
 $${vedere_DEFINES} \
+XOS_DEFAULT_LOG_ERROR \
+XOS_NO_ERR_LOG_DEBUG \
+XOS_NO_ERR_LOG_TRACE \
 
 ########################################################################
 # qVHello OBJECTIVE_HEADERS

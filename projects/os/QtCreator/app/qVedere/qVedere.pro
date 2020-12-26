@@ -1,5 +1,5 @@
 ########################################################################
-# Copyright (c) 1988-2018 $organization$
+# Copyright (c) 1988-2020 $organization$
 #
 # This software is provided by the author and contributors ``as is''
 # and any express or implied warranties, including, but not limited to,
@@ -13,76 +13,73 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: iVHello.pro
+#   File: qVedere.pro
 #
 # Author: $author$
-#   Date: 11/21/2018, 12/1/2020, 12/14/2020
+#   Date: 12/24/2020
 #
-# QtCreator .pro file for vedere executable iVHello
+# QtCreator .pro file for vedere executable qVedere
 ########################################################################
 include(../../../../../../build/QtCreator/zlib.pri)
 include(../../../../../../build/QtCreator/giflib.pri)
+include(../../../../../../build/QtCreator/libpgm.pri)
 include(../../../../../../build/QtCreator/libpng.pri)
 include(../../../../../../build/QtCreator/libjpeg.pri)
 include(../../../../../../build/QtCreator/libtiff.pri)
 include(../../../../../../build/QtCreator/libraw.pri)
-include(../../../../../../build/QtCreator/cocoa.pri)
+include(../../../../../../build/QtCreator/qt.pri)
 include(../../../../../../build/QtCreator/vedere.pri)
 include(../../../../../build/QtCreator/vedere.pri)
 include(../../../../QtCreator/vedere.pri)
 include(../../vedere.pri)
-include(../../../../QtCreator/app/iVHello/iVHello.pri)
+include(../../../../QtCreator/app/qVedere/qVedere.pri)
 
-TARGET = $${iVHello_TARGET}
+TARGET = $${qVedere_TARGET}
 
 ########################################################################
 # INCLUDEPATH
 #
 INCLUDEPATH += \
-$${iVHello_INCLUDEPATH} \
+$${qVedere_INCLUDEPATH} \
 
 # DEFINES
 # 
 DEFINES += \
-$${iVHello_DEFINES} \
+$${qVedere_DEFINES} \
 
 ########################################################################
 # OBJECTIVE_HEADERS
 #
 OBJECTIVE_HEADERS += \
-$${iVHello_OBJECTIVE_HEADERS} \
+$${qVedere_OBJECTIVE_HEADERS} \
 
 # OBJECTIVE_SOURCES
 #
 OBJECTIVE_SOURCES += \
-$${iVHello_OBJECTIVE_SOURCES} \
+$${qVedere_OBJECTIVE_SOURCES} \
 
 ########################################################################
 # HEADERS
 #
 HEADERS += \
-$${iVHello_HEADERS} \
-$${iVHello_OBJECTIVE_HEADERS} \
+$${qVedere_HEADERS} \
+$${qVedere_OBJECTIVE_HEADERS} \
 
 # SOURCES
 #
 SOURCES += \
-$${iVHello_SOURCES} \
+$${qVedere_SOURCES} \
 
 ########################################################################
 # FRAMEWORKS
 #
 FRAMEWORKS += \
-$${iVHello_FRAMEWORKS} \
+$${qVedere_FRAMEWORKS} \
 
 # LIBS
 #
 LIBS += \
-$${iVHello_LIBS} \
+$${qVedere_LIBS} \
 $${FRAMEWORKS} \
 
-contains(UNAME,Darwin) {
-########################################################################
-# NO Qt
-QT -= gui core
-} # contains(UNAME,Darwin)
+

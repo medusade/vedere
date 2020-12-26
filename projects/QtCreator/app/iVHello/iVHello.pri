@@ -16,7 +16,7 @@
 #   File: iVHello.pri
 #
 # Author: $author$
-#   Date: 11/21/2018, 12/1/2020
+#   Date: 11/21/2018, 12/1/2020, 12/14/2020
 #
 # QtCreator .pri file for vedere executable iVHello
 ########################################################################
@@ -46,12 +46,16 @@ $${vedere_INCLUDEPATH} \
 $${vedere_libpng_INCLUDEPATH} \
 $${vedere_libjpeg_INCLUDEPATH} \
 $${vedere_libtiff_INCLUDEPATH} \
+$${vedere_giflib_INCLUDEPATH} \
 $${vedere_libraw_INCLUDEPATH} \
 
 # iVHello DEFINES
 #
 iVHello_DEFINES += \
 $${vedere_DEFINES} \
+XOS_DEFAULT_LOG_ERROR \
+XOS_NO_ERR_LOG_DEBUG \
+XOS_NO_ERR_LOG_TRACE \
 
 contains(UNAME,Darwin) {
 } else {
@@ -192,6 +196,7 @@ $${VEDERE_SRC}/vedere/graphic/image/format/bmp/implement/bmp.hpp \
 $${VEDERE_SRC}/vedere/gui/main.hpp \
 $${VEDERE_SRC}/vedere/app/gui/hello/main_window.hpp \
 $${VEDERE_SRC}/vedere/app/gui/hello/window.hpp \
+$${VEDERE_SRC}/vedere/app/gui/hello/main_renderer_derive.hpp \
 $${VEDERE_SRC}/vedere/app/gui/hello/renderer.hpp \
 $${VEDERE_SRC}/vedere/app/gui/hello/main.hpp \
 $${VEDERE_SRC}/vedere/app/gui/hello/main_opt.hpp \
@@ -234,4 +239,5 @@ $${vedere_libpng_LIBS} \
 $${vedere_libjpeg_LIBS} \
 $${vedere_libtiff_LIBS} \
 $${vedere_libraw_LIBS} \
+$${vedere_giflib_LIBS} \
 $${vedere_zlib_LIBS} \

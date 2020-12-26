@@ -16,7 +16,7 @@
 #   File: qVView.pri
 #
 # Author: $author$
-#   Date: 11/28/2020
+#   Date: 11/28/2020, 12/14/2020
 #
 # QtCreator .pri file for vedere executable qVView
 ########################################################################
@@ -40,6 +40,10 @@ $${vedere_qt_INCLUDEPATH} \
 #
 qVView_DEFINES += \
 $${vedere_DEFINES} \
+XOS_DEFAULT_LOG_ERROR \
+XOS_NO_ERR_LOG_DEBUG \
+XOS_NO_ERR_LOG_TRACE \
+VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_VIEWER \
 
 ########################################################################
 # qVView OBJECTIVE_HEADERS
@@ -123,5 +127,3 @@ $${vedere_LIBS} \
 $${vedere_qt_LIBS} \
 $${vedere_libpng_LIBS} \
 $${vedere_zlib_LIBS} \
-
-

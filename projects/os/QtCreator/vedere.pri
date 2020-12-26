@@ -16,27 +16,27 @@
 #   File: vedere.pri
 #
 # Author: $author$
-#   Date: 11/20/2018, 11/28/2020, 11/29/2020, 11/30/2020, 12/5/2020
+#   Date: 11/20/2018, 12/26/2020
 #
-# Os QtCreator .pri file for vedere
+# Os specific QtCreator .pri file for vedere
 ########################################################################
 UNAME = $$system(uname)
 
-contains(UNAME,Windows) {
-VEDERE_OS = windows
-} else {
 contains(UNAME,Darwin) {
 VEDERE_OS = macosx
 } else {
+contains(UNAME,Linux) {
 VEDERE_OS = linux
+} else {
+VEDERE_OS = windows
+} # contains(UNAME,Linux)
 } # contains(UNAME,Darwin)
-} # contains(UNAME,Windows)
 
-contains(VEDERE_BUILD,VEDERE_OS) {
+contains(BUILD_OS,VEDERE_OS) {
 VEDERE_BUILD = $${VEDERE_OS}
 } else {
-VEDERE_BUILD = os
-} # contains(VEDERE_BUILD,VEDERE_OS)
+VEDERE_BUILD = $${BUILD_OS}
+} # contains(BUILD_OS,VEDERE_OS)
 
 contains(BUILD_CPP_VERSION,10) {
 CONFIG += c++0x
@@ -47,11 +47,21 @@ CONFIG += c++$${BUILD_CPP_VERSION}
 } # contains(BUILD_CPP_VERSION,98|03|11|14|17)
 } # contains(BUILD_CPP_VERSION,10)
 
+contains(VEDERE_OS,macosx) {
 QMAKE_CXXFLAGS += \
 -Wno-reserved-id-macro \
 -Wno-unused-parameter \
 -Wno-zero-as-null-pointer-constant \
--Wno-dangling-else \
+-Wno-dangling-else 
+} else {
+contains(VEDERE_OS,linux) {
+QMAKE_CXXFLAGS += -fpermissive
+} else {
+contains(VEDERE_OS,windows) {
+} else {
+} # contains(VEDERE_OS,windows)
+} # contains(VEDERE_OS,linux)
+} # contains(VEDERE_OS,macosx)
 
 ########################################################################
 # nadir

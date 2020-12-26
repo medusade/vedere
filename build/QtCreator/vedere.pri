@@ -16,10 +16,34 @@
 #   File: vedere.pri
 #
 # Author: $author$
-#   Date: 11/20/2018
+#   Date: 11/20/2018, 12/26/2020
 #
-# build QtCreator .pri file for vedere
+# Build specific QtCreator .pri file for vedere
 ########################################################################
+contains(BUILD_OS,Uname) {
+UNAME = $$system(uname)
+
+contains(UNAME,Darwin) {
+BUILD_OS = macosx
+} else {
+contains(UNAME,Linux) {
+BUILD_OS = linux
+} else {
+contains(UNAME,Windows) {
+BUILD_OS = windows
+} else {
+BUILD_OS = os
+} # contains(UNAME,Windows)
+} # contains(UNAME,Linux)
+} # contains(UNAME,Darwin)
+} else {
+contains(BUILD_OS,VEDERE_OS) {
+} else {
+BUILD_OS = os
+} # contains(BUILD_OS,VEDERE_OS)
+} # contains(BUILD_OS,Uname)
+
+#BUILD_CPP_VERSION = 11
 
 ########################################################################
 # nadir
