@@ -32,6 +32,13 @@ namespace viewer {
 
 enum image_format_t {
     image_format_raw,
+    image_format_png,
+    image_format_jpeg,
+    image_format_tiff,
+    image_format_gif,
+    image_format_bmp,
+    image_format_pgm,
+    image_format_dng,
 
     next_image_format,
     first_image_format = image_format_raw,

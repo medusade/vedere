@@ -21,25 +21,33 @@
 #ifndef _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_MAIN_HPP
 #define _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_MAIN_HPP
 
-#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_JEPG_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
-#include "vedere/graphic/image/format/jppg/libjpg/image_reader.hpp"
-#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
-#include "vedere/graphic/image/format/png/libpng/image_reader.hpp"
-#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_GIF_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
-#include "vedere/graphic/image/format/gif/giflib/image_reader.hpp"
-#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_TIFF_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
-#include "vedere/graphic/image/format/tiff/libtiff/image_reader.hpp"
-#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PGM_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
-#include "vedere/graphic/image/format/raw/libpgm/image_reader.hpp"
-#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_RAW_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
-#include "vedere/graphic/image/format/raw/libraw/image_reader.hpp"
-#else /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_JPEG_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
-#if !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER)
-#define VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER
-#endif /// !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER)
+#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_JPEG_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+#include "vedere/graphic/image/format/jpeg/libjpeg/image_reader.hpp"
 #endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_JPEG_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+
+#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+#include "vedere/graphic/image/format/png/libpng/image_reader.hpp"
+#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+
+#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_GIF_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+#include "vedere/graphic/image/format/gif/giflib/image_reader.hpp"
+#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_GIF_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+
+#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_TIFF_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+#include "vedere/graphic/image/format/tiff/libtiff/image_reader.hpp"
+#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_TIFF_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+
+#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PGM_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+#include "vedere/graphic/image/format/raw/libpgm/image_reader.hpp"
+#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PGM_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+
+#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_DNG_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+#include "vedere/graphic/image/format/raw/libraw/image_reader.hpp"
+#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_DNG_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+
 #include "vedere/graphic/image/format/viewer/main_opt.hpp"
 #include "vedere/graphic/image/format/viewer/image_loader.hpp"
+#include "vedere/graphic/image/format/viewer/image_reader.hpp"
 #include "vedere/gui/main.hpp"
 #include "vedere/base/base.hpp"
 
@@ -80,11 +88,15 @@ class _EXPORT_CLASS maint
 public:
     typedef TImplements Implements;
     typedef TExtends Extends;
+    typedef maint Derives;
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    maint()
-    : main_window_width_(VEDERE_APP_GUI_HELLO_MAIN_WINDOW_WIDTH),
+    maint(): 
+#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+      load_image_(0),
+#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+      main_window_width_(VEDERE_APP_GUI_HELLO_MAIN_WINDOW_WIDTH),
       main_window_height_(VEDERE_APP_GUI_HELLO_MAIN_WINDOW_HEIGHT),
       image_width_(0), image_height_(0), image_depth_(0),
       image_format_(first_image_format),
@@ -98,9 +110,10 @@ public:
     ///////////////////////////////////////////////////////////////////////
     using image_loader::load_image;
     virtual bool load_image(const char_t* image_file, image_format_t image_format) {
+#if !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+#if !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER)
         VEDERE_LOG_MESSAGE_DEBUG("load_image(" <<  chars_to_string(image_file) << ", " << image_format << ")...");
         if ((image_file) && (image_file[0])) {
-#if !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER)
 #if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_JPEG_VIEWER)
             graphic::image::format::jpeg::libjpeg::to_bgra_image_reader reader;
 #elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_VIEWER)
@@ -109,25 +122,177 @@ public:
             graphic::image::format::gif::giflib::to_bgra_image_reader reader;
 #elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_TIFF_VIEWER)
             graphic::image::format::tiff::libtiff::to_bgra_image_reader reader;
-#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_RAW_VIEWER)
+#elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_DNG_VIEWER)
             graphic::image::format::raw::libraw::to_bgra_image_reader reader;
 #elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PGM_VIEWER)
             graphic::image::format::raw::libpgm::to_bgra_image_reader reader;
-#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PNG_VIEWER)
+#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_JPEG_VIEWER)
             if ((reader.read(image_file))) {
                 if ((load_image(reader))) {
                     return true;
                 }
             }
-#else /// !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER)
-#endif /// !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER)
+        } else {
         }
         VEDERE_LOG_MESSAGE_DEBUG("...load_image(" <<  chars_to_string(image_file) << ", " << image_format << ")");
+#endif /// !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER)
+#else /// !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+        if ((default_load_image(image_file, image_format))) {
+            return true;
+        }
+#endif /// !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
         return false;
     }
+#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+    bool (Derives::*load_image_)(const char_t* image_file, image_format_t image_format);
+    virtual bool default_load_image(const char_t* image_file, image_format_t image_format) {
+        if ((this->load_image_)) {
+            if (((this->*load_image_)(image_file, image_format))) {
+                return true;
+            }
+        } else {
+            if ((jpeg_load_image(image_file, image_format))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    virtual bool png_load_image(const char_t* image_file, image_format_t image_format) {
+        image_readert<graphic::image::format::png::libpng::to_bgra_image_reader> image_reader;
+        if ((load_image(image_reader, image_file, image_format))) {
+            return true;
+        }
+        return false;
+    }
+    virtual bool jpeg_load_image(const char_t* image_file, image_format_t image_format) {
+        image_readert<graphic::image::format::jpeg::libjpeg::to_bgra_image_reader> image_reader;
+        if ((load_image(image_reader, image_file, image_format))) {
+            return true;
+        }
+        return false;
+    }
+    virtual bool tiff_load_image(const char_t* image_file, image_format_t image_format) {
+        image_readert<graphic::image::format::tiff::libtiff::to_bgra_image_reader> image_reader;
+        if ((load_image(image_reader, image_file, image_format))) {
+            return true;
+        }
+        return false;
+    }
+    virtual bool gif_load_image(const char_t* image_file, image_format_t image_format) {
+        image_readert<graphic::image::format::gif::giflib::to_bgra_image_reader> image_reader;
+        if ((load_image(image_reader, image_file, image_format))) {
+            return true;
+        }
+        return false;
+    }
+    virtual bool bmp_load_image(const char_t* image_file, image_format_t image_format) {
+        /*image_readert<graphic::image::format::bmp::implemented::to_bgra_image_reader> image_reader;
+        if ((load_image(image_reader, image_file, image_format))) {
+            return true;
+        }*/
+        return false;
+    }
+    virtual bool pgm_load_image(const char_t* image_file, image_format_t image_format) {
+        image_readert<graphic::image::format::raw::libpgm::to_bgra_image_reader> image_reader;
+        if ((load_image(image_reader, image_file, image_format))) {
+            return true;
+        }
+        return false;
+    }
+    virtual bool dng_load_image(const char_t* image_file, image_format_t image_format) {
+        image_readert<graphic::image::format::raw::libraw::to_bgra_image_reader> image_reader;
+        if ((load_image(image_reader, image_file, image_format))) {
+            return true;
+        }
+        return false;
+    }
+    virtual bool raw_load_image(const char_t* image_file, image_format_t image_format) {
+        /*image_readert<graphic::image::format::raw::rbga::to_bgra_image_reader> image_reader;
+        if ((load_image(image_reader, image_file, image_format))) {
+            return true;
+        }*/
+        return false;
+    }
+    virtual bool load_image(graphic::image::format::viewer::image_reader& reader, const char_t* image_file, image_format_t image_format) {
+        VEDERE_LOG_MESSAGE_DEBUG("load_image(..., " <<  chars_to_string(image_file) << ", " << image_format << ")...");
+        if ((image_file) && (image_file[0])) {
+            if ((reader.read_image(image_file))) {
+                if ((load_image(reader))) {
+                    return true;
+                }
+            }
+        }
+        VEDERE_LOG_MESSAGE_DEBUG("...load_image(..., " <<  chars_to_string(image_file) << ", " << image_format << ")");
+        return false;
+    }
+#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+    virtual const char_t* set_image_format(const char_t* to) {
+#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+        if ((to) && (to[0])) {
+            VEDERE_LOG_MESSAGE_DEBUG("set image_format = \"" << to << "\"...");
+            if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_PNG_OPTARG_C))
+                || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_PNG_OPTARG_S))) {
+                VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_png");
+                image_format_ = image_format_png;
+                load_image_ = &Derives::png_load_image;
+            } else {
+                if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_JPEG_OPTARG_C))
+                    || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_JPEG_OPTARG_S))) {
+                    VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_jpeg");
+                    image_format_ = image_format_jpeg;
+                    load_image_ = &Derives::jpeg_load_image;
+                } else {
+                    if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_TIFF_OPTARG_C))
+                        || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_TIFF_OPTARG_S))) {
+                        VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_tiff");
+                        image_format_ = image_format_tiff;
+                        load_image_ = &Derives::tiff_load_image;
+                    } else {
+                        if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_GIF_OPTARG_C))
+                            || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_GIF_OPTARG_S))) {
+                            VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_gif");
+                            image_format_ = image_format_gif;
+                            load_image_ = &Derives::gif_load_image;
+                        } else {
+                            if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_BMP_OPTARG_C))
+                                || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_BMP_OPTARG_S))) {
+                                VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_bmp");
+                                image_format_ = image_format_bmp;
+                                load_image_ = &Derives::bmp_load_image;
+                            } else {
+                                if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_PGM_OPTARG_C))
+                                    || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_PGM_OPTARG_S))) {
+                                    VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_pgm");
+                                    image_format_ = image_format_pgm;
+                                    load_image_ = &Derives::pgm_load_image;
+                                } else {
+                                    if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_DNG_OPTARG_C))
+                                        || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_DNG_OPTARG_S))) {
+                                        VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_dng");
+                                        image_format_ = image_format_dng;
+                                        load_image_ = &Derives::dng_load_image;
+                                    } else {
+                                        if ((!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_RAW_OPTARG_C))
+                                            || (!chars_t::compare(to, VEDERE_APP_GUI_HELLO_MAIN_IMAGE_FORMAT_RAW_OPTARG_S))) {
+                                            VEDERE_LOG_MESSAGE_DEBUG("image_format = image_format_raw");
+                                            image_format_ = image_format_raw;
+                                            load_image_ = &Derives::raw_load_image;
+                                        } else {
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
+        return to;
+    }
     virtual const char_t* set_image_transform(const char_t* to) {
         if ((to) && (to[0])) {
             VEDERE_LOG_MESSAGE_DEBUG("set image_transform = \"" << to << "\"...");
