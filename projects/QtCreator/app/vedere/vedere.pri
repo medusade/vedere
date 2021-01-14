@@ -38,8 +38,6 @@ $${vedere_INCLUDEPATH} \
 vedere_exe_DEFINES += \
 $${vedere_DEFINES} \
 XOS_DEFAULT_LOG_ERROR \
-XOS_NO_ERR_LOG_DEBUG \
-XOS_NO_ERR_LOG_TRACE \
 
 ########################################################################
 # vedere_exe OBJECTIVE_HEADERS

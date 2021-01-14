@@ -82,14 +82,26 @@ NADIR_LIB = $${NADIR_PRJ_BLD}/lib
 # nadir LIBS
 #
 nadir_LIBS += \
--L$${NADIR_LIB}/lib$${NADIR_NAME} \
--l$${NADIR_NAME} \
+-L$${NADIR_LIB}/lib$${NADIR_LIBRARY_NAME} \
+-l$${NADIR_LIBRARY_NAME} \
 
 # xosnadir LIBS
 #
 xosnadir_LIBS += \
--L$${NADIR_LIB}/libxos$${NADIR_NAME} \
--lxos$${NADIR_NAME} \
+-L$${NADIR_LIB}/libxos$${NADIR_LIBRARY_NAME} \
+-lxos$${NADIR_LIBRARY_NAME} \
+
+# nadir SOURCE_LIBS
+#
+nadir_SOURCE_LIBS += \
+-L$${NADIR_LIB}/lib$${NADIR_SOURCE_LIBRARY_NAME} \
+-l$${NADIR_SOURCE_LIBRARY_NAME} \
+
+# xosnadir SOURCE_LIBS
+#
+xosnadir_SOURCE_LIBS += \
+-L$${NADIR_LIB}/libxos$${NADIR_SOURCE_LIBRARY_NAME} \
+-lxos$${NADIR_SOURCE_LIBRARY_NAME} \
 
 ########################################################################
 # lamna

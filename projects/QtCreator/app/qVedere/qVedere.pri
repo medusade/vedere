@@ -16,10 +16,16 @@
 #   File: qVedere.pri
 #
 # Author: $author$
-#   Date: 12/24/2020
+#   Date: 12/24/2020, 1/5/2021
 #
 # QtCreator .pri file for vedere executable qVedere
 ########################################################################
+
+qVedere_USE_OPENGL = NO
+contains(qVedere_USE_OPENGL, NO) {
+} else {
+QT += opengl
+} # contains(qVedere_USE_OPENGL, NO)
 
 ########################################################################
 # qVedere
@@ -46,6 +52,12 @@ qVedere_DEFINES += \
 $${vedere_DEFINES} \
 XOS_DEFAULT_LOG_ERROR \
 VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER \
+
+contains(qVedere_USE_OPENGL, NO) {
+qVedere_DEFINES += VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_NO_USE_OPENGL
+} else {
+qVedere_DEFINES += VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_USE_OPENGL
+} # contains(qVedere_USE_OPENGL, NO)
 
 ########################################################################
 # qVedere OBJECTIVE_HEADERS
@@ -156,14 +168,47 @@ $${VEDERE_SRC}/vedere/graphic/image/format/raw/libpgm/reader.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/raw/libpgm/image_reader.cpp \
 \
 $${VEDERE_SRC}/vedere/graphic/image/format/viewer/image_loader.cpp \
-$${VEDERE_SRC}/vedere/graphic/image/format/viewer/qt/renderer.cpp \
-$${VEDERE_SRC}/vedere/graphic/image/format/viewer/qt/image_renderer.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/viewer/qt/main_window.cpp \
-$${VEDERE_SRC}/vedere/graphic/image/format/viewer/qt/window.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/viewer/qt/main.cpp \
 $${VEDERE_SRC}/vedere/graphic/image/format/viewer/main_opt.cpp \
 \
 $${VEDERE_SRC}/vedere/console/main_main.cpp \
+
+########################################################################
+# qVedere HEADERS
+#
+qVedere_HEADERS += \
+$${VEDERE_SRC}/vedere/gui/point.hpp \
+$${VEDERE_SRC}/vedere/gui/size.hpp \
+$${VEDERE_SRC}/vedere/gui/rectangle.hpp \
+$${VEDERE_SRC}/vedere/gui/opengl/gl.hpp \
+$${VEDERE_SRC}/vedere/gui/opengl/point.hpp \
+$${VEDERE_SRC}/vedere/gui/opengl/size.hpp \
+$${VEDERE_SRC}/vedere/gui/opengl/rectangle.hpp \
+$${VEDERE_SRC}/vedere/gui/opengl/context.hpp \
+$${VEDERE_SRC}/vedere/gui/qt/opengl.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/viewer/opengl/image_renderer.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/viewer/qt/opengl/image_renderer.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/viewer/qt/opengl/renderer.hpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/viewer/qt/opengl/window.hpp \
+
+# qVedere SOURCES
+#
+contains(qVedere_USE_OPENGL, NO) {
+} else {
+
+qVedere_SOURCES += \
+$${VEDERE_SRC}/vedere/gui/opengl/gl.cpp \
+$${VEDERE_SRC}/vedere/gui/opengl/point.cpp \
+$${VEDERE_SRC}/vedere/gui/opengl/size.cpp \
+$${VEDERE_SRC}/vedere/gui/opengl/rectangle.cpp \
+$${VEDERE_SRC}/vedere/gui/opengl/context.cpp \
+$${VEDERE_SRC}/vedere/gui/qt/opengl.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/viewer/qt/opengl/image_renderer.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/viewer/qt/opengl/renderer.cpp \
+$${VEDERE_SRC}/vedere/graphic/image/format/viewer/qt/opengl/window.cpp \
+
+} # contains(qVedere_USE_OPENGL, NO)
 
 ########################################################################
 # qVedere FRAMEWORKS
