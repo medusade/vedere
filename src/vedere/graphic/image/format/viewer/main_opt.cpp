@@ -53,6 +53,15 @@ public:
         set_image_transform(optarg);
         return err;
     }
+    virtual int on_use_opengl_option
+    (int optval, const char_t* optarg,
+     const char_t* optname, int optind,
+     int argc, char_t**argv, char_t**env) {
+        int err = 0;
+        bool on = true;
+        set_use_opengl(optarg);
+        return err;
+    }
     ///////////////////////////////////////////////////////////////////////
     virtual int on_image_width_option
     (int optval, const char_t* optarg,
@@ -97,6 +106,10 @@ public:
             err = on_image_transform_option
             (optval, optarg, optname, optind, argc, argv, env);
             break;
+        case VEDERE_APP_GUI_HELLO_MAIN_USE_OPENGL_OPTVAL_C:
+            err = on_use_opengl_option
+            (optval, optarg, optname, optind, argc, argv, env);
+            break;
         case VEDERE_APP_GUI_HELLO_MAIN_IMAGE_WIDTH_OPTVAL_C:
             err = on_image_width_option
             (optval, optarg, optname, optind, argc, argv, env);
@@ -127,6 +140,10 @@ public:
         case VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_OPTVAL_C:
             optarg = VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_OPTARG;
             chars = VEDERE_APP_GUI_HELLO_MAIN_IMAGE_TRANSFORM_OPTUSE;
+            break;
+        case VEDERE_APP_GUI_HELLO_MAIN_USE_OPENGL_OPTVAL_C:
+            optarg = VEDERE_APP_GUI_HELLO_MAIN_USE_OPENGL_OPTARG;
+            chars = VEDERE_APP_GUI_HELLO_MAIN_USE_OPENGL_OPTUSE;
             break;
         case VEDERE_APP_GUI_HELLO_MAIN_IMAGE_WIDTH_OPTVAL_C:
             optarg = VEDERE_APP_GUI_HELLO_MAIN_IMAGE_WIDTH_OPTARG;

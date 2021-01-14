@@ -31,7 +31,11 @@
 namespace vedere {
 
 typedef lamna::implement_base implement_base;
+typedef lamna::base extend_base;
 typedef lamna::base base;
+
+typedef implement_base implement;
+typedef extend_base extend;
 
 typedef xos::base::chars_t chars_t;
 typedef xos::base::tchars_t tchars_t;

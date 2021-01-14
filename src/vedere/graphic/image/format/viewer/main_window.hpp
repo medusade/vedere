@@ -41,8 +41,8 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    main_windowt(image_loader* _image_loader = 0)
-    : image_loader_(_image_loader) {
+    main_windowt(image_loader* _image_loader = 0, bool _use_opengl = false)
+    : image_loader_(_image_loader), use_opengl_(_use_opengl) {
     }
     virtual ~main_windowt() {
     }
@@ -85,8 +85,14 @@ public:
     (size_t image_width, size_t image_height,
      size_t image_depth, const char_t* image_file,
      raw_image_format_t raw_image_format = first_raw_image_format) {
+        if ((image_loader_)) {
+            if ((image_loader_->load_raw_image
+                 (image_width, image_height, image_depth, image_file, raw_image_format))) {
+                return true;
+            }
+        }
         if ((image_file) && (image_width) && (image_height) && (image_depth)) {
-            size_t image_pixel_size = ((image_depth+7)/8),
+            size_t image_pixel_size = (((image_depth*8)+7)/8),
                    image_size = (image_width*image_height*image_pixel_size);
             FILE* file = 0;
 
@@ -139,8 +145,19 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+    virtual bool set_use_opengl(bool to = true) {
+        use_opengl_ = to;
+        return use_opengl_;
+    }
+    virtual bool use_opengl() const {
+        return use_opengl_;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 protected:
     image_loader* image_loader_;
+    bool use_opengl_;
 };
 
 } // namespace viewer

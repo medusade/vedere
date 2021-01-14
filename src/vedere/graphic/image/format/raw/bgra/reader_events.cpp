@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2015 $organization$
+/// Copyright (c) 1988-2021 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -13,65 +13,27 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: color.hpp
+///   File: reader_events.cpp
 ///
 /// Author: $author$
-///   Date: 11/17/2015
+///   Date: 1/10/2021
 ///////////////////////////////////////////////////////////////////////
-#ifndef _VEDERE_GRAPHIC_IMAGE_COLOR_HPP
-#define _VEDERE_GRAPHIC_IMAGE_COLOR_HPP
-
-#include "vedere/base/base.hpp"
+#include "vedere/graphic/image/format/raw/bgra/reader_events.hpp"
 
 namespace vedere {
 namespace graphic {
 namespace image {
-namespace color {
-namespace space {
-
-typedef uint64_t axis_t;
-typedef int axes_t;
-enum {
-    axes_unknown,
-    axes_rgba,
-    axes_bgra
-};
-
-namespace rgba {
-typedef int axis_t;
-enum {
-    axis_red,
-    axis_green,
-    axis_blue,
-    axis_alpha,
-
-    next_axis,
-    first_axis = axis_red,
-    last_axis = next_axis - 1,
-    axes = last_axis - first_axis + 1
-}; // enum axis_t
-} // namespace rgba
-
+namespace format {
+namespace raw {
 namespace bgra {
-typedef int axis_t;
-enum {
-    axis_blue,
-    axis_green,
-    axis_red,
-    axis_alpha,
 
-    next_axis,
-    first_axis = axis_red,
-    last_axis = next_axis - 1,
-    axes = last_axis - first_axis + 1
-}; // enum axis_t
-} // namespace bgra
+///////////////////////////////////////////////////////////////////////
+/// class reader_events
+///////////////////////////////////////////////////////////////////////
 
-} // namespace space
-
-} // namespace color 
-} // namespace image 
-} // namespace graphic 
-} // namespace vedere 
-
-#endif // _VEDERE_GRAPHIC_IMAGE_COLOR_HPP 
+} /// namespace bgra
+} /// namespace raw
+} /// namespace format
+} /// namespace image
+} /// namespace graphic
+} /// namespace vedere

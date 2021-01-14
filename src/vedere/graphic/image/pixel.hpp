@@ -16,7 +16,7 @@
 ///   File: pixel.hpp
 ///
 /// Author: $author$
-///   Date: 11/17/2015
+///   Date: 11/17/2015, 1/14/2021
 ///////////////////////////////////////////////////////////////////////
 #ifndef _VEDERE_GRAPHIC_IMAGE_PIXEL_HPP
 #define _VEDERE_GRAPHIC_IMAGE_PIXEL_HPP
@@ -37,7 +37,7 @@ enum {
     pixel_value_interpretation_rgb,
     pixel_value_interpretation_bgr,
     pixel_value_interpretation_rgba,
-    pixel_value_interpretation_brga,
+    pixel_value_interpretation_bgra,
     pixel_value_interpretation_argb,
     pixel_value_interpretation_abgr,
 

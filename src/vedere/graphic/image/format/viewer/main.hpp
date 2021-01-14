@@ -45,6 +45,10 @@
 #include "vedere/graphic/image/format/raw/libraw/image_reader.hpp"
 #endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_DNG_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
 
+#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_BGRA_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_BGRA_VIEWER)
+#include "vedere/graphic/image/format/raw/bgra/image_reader.hpp"
+#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_BGRA_VIEWER) || defined(VEDERE_GRAPHIC_IMAGE_FORMAT_BGRA_VIEWER)
+
 #include "vedere/graphic/image/format/viewer/main_opt.hpp"
 #include "vedere/graphic/image/format/viewer/image_loader.hpp"
 #include "vedere/graphic/image/format/viewer/image_reader.hpp"
@@ -109,6 +113,32 @@ public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     using image_loader::load_image;
+    virtual bool load_raw_image
+    (size_t image_width, size_t image_height,size_t image_depth, 
+     const char_t* image_file, raw_image_format_t raw_image_format) {
+#if defined(VEDERE_GRAPHIC_IMAGE_FORMAT_BGRA_VIEWER)
+            graphic::image::format::raw::bgra::to_bgra_image_reader reader;
+            VEDERE_LOG_MESSAGE_DEBUG("reader.init(image_height = " << image_height << ", image_width = " << image_width << ", image_depth = " << image_depth << ")...");
+            if (!(reader.init(image_height_, image_width_, image_depth_))) {
+                VEDERE_LOG_MESSAGE_ERROR("...failed on reader.init(image_height = " << image_height << ", image_width = " << image_width << ", image_depth = " << image_depth << ")");
+                return false;
+            } else {
+                VEDERE_LOG_MESSAGE_DEBUG("reader.read(\"" << image_file << "\")...");
+                if ((reader.read(image_file))) {
+                    VEDERE_LOG_MESSAGE_DEBUG("load_image(reader)...");
+                    if ((load_image(reader))) {
+                        VEDERE_LOG_MESSAGE_DEBUG("...load_image(reader)");
+                        return true;
+                    } else {
+                        VEDERE_LOG_MESSAGE_ERROR("...failed on load_image(reader)");
+                    }
+                } else {
+                    VEDERE_LOG_MESSAGE_ERROR("...failed on reader.read(\"" << image_file << "\")");
+                }
+            }
+#endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_BGRA_VIEWER)
+        return false;
+    }
     virtual bool load_image(const char_t* image_file, image_format_t image_format) {
 #if !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_ALL_VIEWER)
 #if !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_NONE_VIEWER)
@@ -127,11 +157,14 @@ public:
 #elif defined(VEDERE_GRAPHIC_IMAGE_FORMAT_PGM_VIEWER)
             graphic::image::format::raw::libpgm::to_bgra_image_reader reader;
 #endif /// defined(VEDERE_GRAPHIC_IMAGE_FORMAT_JPEG_VIEWER)
+#if !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_BGRA_VIEWER)
             if ((reader.read(image_file))) {
                 if ((load_image(reader))) {
                     return true;
                 }
+            } else {
             }
+#endif /// !defined(VEDERE_GRAPHIC_IMAGE_FORMAT_BGRA_VIEWER)
         } else {
         }
         VEDERE_LOG_MESSAGE_DEBUG("...load_image(" <<  chars_to_string(image_file) << ", " << image_format << ")");
@@ -309,6 +342,14 @@ public:
                 }
             }
         }
+        return to;
+    }
+    virtual const char_t* set_use_opengl(const char_t* to) {
+        bool on = true;
+        set_use_opengl(on);
+        return to;
+    }
+    virtual bool set_use_opengl(bool to) {
         return to;
     }
     ///////////////////////////////////////////////////////////////////////

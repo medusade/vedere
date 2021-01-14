@@ -36,13 +36,22 @@ namespace image {
 namespace format {
 namespace viewer {
 
+typedef int renderer_image_format_t;
+enum { renderer_image_format_none = 0 };
+
+typedef int renderer_aspect_ratio_mode_t;
+enum { renderer_aspect_ratio_mode_none = 0 };
+
+typedef int renderer_transformation_mode_t;
+enum { renderer_transformation_mode_none = 0 };
+
 ///////////////////////////////////////////////////////////////////////
 ///  Class: image_renderert
 ///////////////////////////////////////////////////////////////////////
 template
-<typename TImageFormat, TImageFormat VImageFormatNone,
- typename TAspectRatioMode, TAspectRatioMode VAspectRatioModeNone,
- typename TTransformationMode, TTransformationMode VTransformationModeNone,
+<typename TImageFormat = renderer_image_format_t, TImageFormat VImageFormatNone = renderer_image_format_none,
+ typename TAspectRatioMode = renderer_aspect_ratio_mode_t, TAspectRatioMode VAspectRatioModeNone = renderer_aspect_ratio_mode_none,
+ typename TTransformationMode = renderer_transformation_mode_t, TTransformationMode VTransformationModeNone = renderer_transformation_mode_none,
  class TImplements = implement_base>
 
 class _EXPORT_CLASS image_renderert: virtual public TImplements {
@@ -52,6 +61,7 @@ public:
     typedef TImageFormat image_format_t;
     typedef TAspectRatioMode aspect_ratio_mode_t;
     typedef TTransformationMode transformation_mode_t;
+
     static const image_format_t image_format_none = VImageFormatNone;
     static const aspect_ratio_mode_t aspect_ratio_mode_none = VAspectRatioModeNone;
     static const transformation_mode_t transformation_mode_none = VTransformationModeNone;
@@ -59,12 +69,21 @@ public:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
     virtual bool initialize() {
+        return on_initialize();
+    }
+    virtual bool on_initialize() {
         return true;
     }
     virtual bool realize() {
+        return on_realize();
+    }
+    virtual bool on_realize() {
         return true;
     }
     virtual bool resize(size_t width, size_t height) {
+        return on_resize(width, height);
+    }
+    virtual bool on_resize(size_t width, size_t height) {
         return true;
     }
 
@@ -234,7 +253,7 @@ public:
     virtual bool resize(size_t width, size_t height) {
         width_ = width;
         height_ = height;
-        return true;
+        return this->on_resize(width, height);
     }
 
     ///////////////////////////////////////////////////////////////////////
@@ -280,5 +299,3 @@ protected:
 } // namespace vedere 
 
 #endif // _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_IMAGE_RENDERER_HPP 
-        
-

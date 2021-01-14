@@ -66,6 +66,18 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+    virtual bool load_raw_image
+    (size_t image_width, size_t image_height,
+     size_t image_depth, const char_t* image_file,
+     raw_image_format_t raw_image_format) {
+        image_loadert* forward_to = image_loader_forward_to();
+        VEDERE_LOG_MESSAGE_DEBUG("load_raw_image(...," <<  chars_to_string(image_file) << ", " << raw_image_format << ")...");
+        if ((forward_to)) {
+            return forward_to->load_raw_image(image_width, image_height, image_depth, image_file, raw_image_format);
+        }
+        VEDERE_LOG_MESSAGE_DEBUG("...load_raw_image(...," <<  chars_to_string(image_file) << ", " << raw_image_format << ")");
+        return false;
+    }
     virtual bool load_image
     (const char_t* image_file, image_format_t image_format) {
         image_loadert* forward_to = image_loader_forward_to();

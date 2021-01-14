@@ -16,7 +16,7 @@
 ///   File: to_bytes_reader.hpp
 ///
 /// Author: $author$
-///   Date: 11/24/2015
+///   Date: 11/24/2015, 1/14/2021
 ///////////////////////////////////////////////////////////////////////
 #ifndef _VEDERE_GRAPHIC_IMAGE_TO_BYTES_READER_HPP
 #define _VEDERE_GRAPHIC_IMAGE_TO_BYTES_READER_HPP
@@ -154,7 +154,7 @@ public:
     virtual ~to_bgra_bytes_readert() {
         VEDERE_LOG_MESSAGE_DEBUG("this->free_image()...");
         this->free_image();
-        VEDERE_LOG_MESSAGE_DEBUG("...this->free_image()");
+        VEDERE_LOG_MESSAGE_ERROR("...this->free_image()");
     }
 
     typedef bool (Derives::*on_image_pixel_t)
@@ -180,7 +180,7 @@ public:
                 image_size = (image_height * image_width * image_byte_depth);
                 on_image_pixel_ = &Derives::on_rgb_image_pixel;
             } else {
-                VEDERE_LOG_MESSAGE_ERROR("invalid image configuration values_per_pixel = " << values_per_pixel << ", bits_per_value = " << bits_per_value << "");
+                VEDERE_LOG_MESSAGE_ERROR("...invalid image configuration values_per_pixel = " << values_per_pixel << ", bits_per_value = " << bits_per_value << "");
                 return false;
             }
             break; }
@@ -191,7 +191,7 @@ public:
                 image_size = (image_height * image_width * image_byte_depth);
                 on_image_pixel_ = &Derives::on_greyscale_image_pixel;
             } else {
-                VEDERE_LOG_MESSAGE_ERROR("invalid image configuration values_per_pixel = " << values_per_pixel << ", bits_per_value = " << bits_per_value << "");
+                VEDERE_LOG_MESSAGE_ERROR("...invalid image configuration values_per_pixel = " << values_per_pixel << ", bits_per_value = " << bits_per_value << "");
                 return false;
             }
             break; }
@@ -202,7 +202,7 @@ public:
                 image_size = (image_height * image_width * image_byte_depth);
                 on_image_pixel_ = &Derives::on_rgb_image_pixel;
             } else {
-                VEDERE_LOG_MESSAGE_ERROR("invalid image configuration values_per_pixel = " << values_per_pixel << ", bits_per_value = " << bits_per_value << "");
+                VEDERE_LOG_MESSAGE_ERROR("...invalid image configuration values_per_pixel = " << values_per_pixel << ", bits_per_value = " << bits_per_value << "");
                 return false;
             }
             break; }
@@ -213,12 +213,23 @@ public:
                 image_size = (image_height * image_width * image_byte_depth);
                 on_image_pixel_ = &Derives::on_rgba_image_pixel;
             } else {
-                VEDERE_LOG_MESSAGE_ERROR("invalid image configuration values_per_pixel = " << values_per_pixel << ", bits_per_value = " << bits_per_value << "");
+                VEDERE_LOG_MESSAGE_ERROR("...invalid image configuration values_per_pixel = " << values_per_pixel << ", bits_per_value = " << bits_per_value << "");
+                return false;
+            }
+            break; }
+        case pixel_value_interpretation_bgra: {
+            if ((1 == image_planes) && (8 == bits_per_value)
+                && ((4 == values_per_pixel))) {
+                image_byte_depth = 4;
+                image_size = (image_height * image_width * image_byte_depth);
+                on_image_pixel_ = &Derives::on_bgra_image_pixel;
+            } else {
+                VEDERE_LOG_MESSAGE_ERROR("...invalid image configuration values_per_pixel = " << values_per_pixel << ", bits_per_value = " << bits_per_value << "");
                 return false;
             }
             break; }
         default:
-            VEDERE_LOG_MESSAGE_ERROR("imvalid pixel_value_interpretation = " << pixel_value_interpretation << "");
+            VEDERE_LOG_MESSAGE_ERROR("...imvalid pixel_value_interpretation = " << pixel_value_interpretation << "");
             return false;
         }
         this->free_image();
@@ -234,7 +245,6 @@ public:
      pixel_value_interpretation_t pixel_value_interpretation) {
         bool success = true;
         on_image_pixel_ = 0;
-        //VEDERE_LOG_MESSAGE_DEBUG("(" << this->bytes_[0] << ", "  << this->bytes_[1] << ", "  << this->bytes_[2] << ", "  << this->bytes_[3] << ")");
         return success;
     }
 
@@ -292,7 +302,6 @@ public:
             byte[2] = pixel.color_axis(color::space::rgba::axis_red);
             byte[3] = 255;
             on_bgra_image_pixel_byte(byte);
-            //VEDERE_LOG_MESSAGE_DEBUG("col = " << image_col << " row = " << image_row << " byte[" << pixel_offset << "] = (" << byte[0] << ", "  << byte[1] << ", "  << byte[2] << ", "  << byte[3] << ")");
         }
         return success;
     }
@@ -311,7 +320,24 @@ public:
             byte[2] = pixel.color_axis(color::space::rgba::axis_red);
             byte[3] = pixel.color_axis(color::space::rgba::axis_alpha);
             on_bgra_image_pixel_byte(byte);
-            //VEDERE_LOG_MESSAGE_DEBUG("col = " << image_col << " row = " << image_row << " byte[" << pixel_offset << "] = (" << byte[0] << ", "  << byte[1] << ", "  << byte[2] << ", "  << byte[3] << ")");
+        }
+        return success;
+    }
+    virtual bool on_bgra_image_pixel
+    (vedere::graphic::image::pixel_t& pixel, byte_t* pixel_byte, size_t pixel_bytes,
+     size_t image_col, size_t image_row, size_t image_plane,
+     size_t image_width, size_t image_height, size_t image_planes,
+     size_t values_per_pixel, size_t bits_per_value,
+     pixel_value_interpretation_t pixel_value_interpretation) {
+        bool success = true;
+        size_t pixel_offset = ((image_row*image_width)+(image_col))*4;
+        if ((this->bytes_) && (this->image_size_ > pixel_offset)) {
+            byte_t* byte = this->bytes_ + pixel_offset;
+            byte[0] = pixel.color_axis(color::space::bgra::axis_red);
+            byte[1] = pixel.color_axis(color::space::bgra::axis_green);
+            byte[2] = pixel.color_axis(color::space::bgra::axis_blue);
+            byte[3] = pixel.color_axis(color::space::bgra::axis_alpha);
+            on_bgra_image_pixel_byte(byte);
         }
         return success;
     }

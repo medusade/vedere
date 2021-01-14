@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2016 $organization$
+/// Copyright (c) 1988-2021 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -16,12 +16,12 @@
 ///   File: window.hpp
 ///
 /// Author: $author$
-///   Date: 7/17/2016, 1/4/2021
+///   Date: 1/5/2021
 ///////////////////////////////////////////////////////////////////////
-#ifndef _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_WINDOW_HPP
-#define _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_WINDOW_HPP
+#ifndef _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_OPENGL_WINDOW_HPP
+#define _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_OPENGL_WINDOW_HPP
 
-#include "vedere/graphic/image/format/viewer/qt/renderer.hpp"
+#include "vedere/graphic/image/format/viewer/qt/opengl/renderer.hpp"
 #include "vedere/graphic/image/format/viewer/window.hpp"
 #include "vedere/graphic/image/format/viewer/main.hpp"
 
@@ -31,19 +31,27 @@ namespace image {
 namespace format {
 namespace viewer {
 namespace qt {
+namespace opengl {
 
-typedef viewer::windowt<QWidget> main_widget_extends;
+typedef viewer::windowt<QGLWidget> main_widget_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: main_widget
 ///////////////////////////////////////////////////////////////////////
 class _EXPORT_CLASS main_widget: public main_widget_extends {
 public:
     typedef main_widget_extends Extends;
-
+    typedef main_widget Derives;
+    
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
+private:
+    main_widget(const main_widget &copy) {
+    }
+public:
     main_widget(QWidget* parent) {
         setParent(parent);
+    }
+    virtual ~main_widget() {
     }
 
     ///////////////////////////////////////////////////////////////////////
@@ -85,16 +93,20 @@ public:
 protected:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual void resizeEvent(QResizeEvent *event) {
-        size_t width = this->width(), height = this->height();
+    virtual void initializeGL() {
+        VEDERE_LOG_MESSAGE_DEBUG("renderer_.initialize()");
+        renderer_.initialize();
+    }
+    virtual void resizeGL(int width, int height) {
         VEDERE_LOG_MESSAGE_DEBUG("renderer_.resize(" << width << ", " << height << ")");
-        Extends::resizeEvent(event);
         renderer_.resize(width, height);
     }
-    virtual void paintEvent(QPaintEvent *event) {
-        Extends::paintEvent(event);
+    virtual void paintGL() {
         renderer_.render();
     }
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     virtual void mouseReleaseEvent(QMouseEvent *event) {
         Qt::MouseButton button = Qt::NoButton;
         Extends::mouseReleaseEvent(event);
@@ -149,13 +161,14 @@ protected:
     ///////////////////////////////////////////////////////////////////////
 protected:
     renderer renderer_;
-};
+}; /// class _EXPORT_CLASS main_widget
 
-} // namespace qt
-} // namespace viewer 
-} // namespace format 
-} // namespace image 
-} // namespace graphic 
-} // namespace vedere 
+} /// namespace opengl
+} /// namespace qt
+} /// namespace viewer
+} /// namespace format
+} /// namespace image
+} /// namespace graphic
+} /// namespace vedere
 
-#endif // _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_WINDOW_HPP 
+#endif /// _VEDERE_GRAPHIC_IMAGE_FORMAT_VIEWER_QT_OPENGL_WINDOW_HPP

@@ -16,11 +16,12 @@
 ///   File: main.hpp
 ///
 /// Author: $author$
-///   Date: 11/20/2018
+///   Date: 11/20/2018, 1/12/2021
 ///////////////////////////////////////////////////////////////////////
 #ifndef _VEDERE_APP_CONSOLE_VEDERE_MAIN_HPP
 #define _VEDERE_APP_CONSOLE_VEDERE_MAIN_HPP
 
+#include "xos/console/lib/version/main.hpp"
 #include "vedere/console/main.hpp"
 #include "vedere/lib/vedere/version.hpp"
 
@@ -29,12 +30,14 @@ namespace app {
 namespace console {
 namespace vedere {
 
-typedef ::vedere::console::main_implements maint_implements;
-typedef ::vedere::console::main maint_extends;
 ///////////////////////////////////////////////////////////////////////
 ///  Class: maint
 ///////////////////////////////////////////////////////////////////////
-template <class TImplements = maint_implements, class TExtends = maint_extends>
+template 
+<class TExtends = ::xos::console::lib::version::maint
+ < ::vedere::lib::vedere::version, 
+   ::vedere::console::main::Implements, ::vedere::console::main >, 
+   class TImplements = typename TExtends::Implements>
 class _EXPORT_CLASS maint: virtual public TImplements, public TExtends {
 public:
     typedef TImplements Implements;
@@ -51,16 +54,8 @@ private:
     maint(const maint &copy) {
     }
 
-protected:
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////
-    virtual int run(int argc, char_t** argv, char_t** env) {
-        int err = 0;
-        const lib::version& version = lib::vedere::version::which();
-        this->outl(version.name(), " version = ", version.to_string().chars(), NULL);
-        this->outln();
-        return err;
-    }
 };
 typedef maint<> main;
 

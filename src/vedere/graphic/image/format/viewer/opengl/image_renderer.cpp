@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////
-/// Copyright (c) 1988-2015 $organization$
+/// Copyright (c) 1988-2021 $organization$
 ///
 /// This software is provided by the author and contributors ``as is'' 
 /// and any express or implied warranties, including, but not limited to, 
@@ -13,65 +13,28 @@
 /// or otherwise) arising in any way out of the use of this software, 
 /// even if advised of the possibility of such damage.
 ///
-///   File: color.hpp
+///   File: image_renderer.cpp
 ///
 /// Author: $author$
-///   Date: 11/17/2015
+///   Date: 1/4/2021
 ///////////////////////////////////////////////////////////////////////
-#ifndef _VEDERE_GRAPHIC_IMAGE_COLOR_HPP
-#define _VEDERE_GRAPHIC_IMAGE_COLOR_HPP
-
-#include "vedere/base/base.hpp"
+#include "vedere/graphic/image/format/viewer/opengl/image_renderer.hpp"
 
 namespace vedere {
 namespace graphic {
 namespace image {
-namespace color {
-namespace space {
+namespace format {
+namespace viewer {
+namespace opengl {
 
-typedef uint64_t axis_t;
-typedef int axes_t;
-enum {
-    axes_unknown,
-    axes_rgba,
-    axes_bgra
-};
+///////////////////////////////////////////////////////////////////////
+///  Class: image_renderer
+///////////////////////////////////////////////////////////////////////
 
-namespace rgba {
-typedef int axis_t;
-enum {
-    axis_red,
-    axis_green,
-    axis_blue,
-    axis_alpha,
+} /// namespace opengl
+} /// namespace viewer
+} /// namespace format
+} /// namespace image
+} /// namespace graphic
+} /// namespace vedere
 
-    next_axis,
-    first_axis = axis_red,
-    last_axis = next_axis - 1,
-    axes = last_axis - first_axis + 1
-}; // enum axis_t
-} // namespace rgba
-
-namespace bgra {
-typedef int axis_t;
-enum {
-    axis_blue,
-    axis_green,
-    axis_red,
-    axis_alpha,
-
-    next_axis,
-    first_axis = axis_red,
-    last_axis = next_axis - 1,
-    axes = last_axis - first_axis + 1
-}; // enum axis_t
-} // namespace bgra
-
-} // namespace space
-
-} // namespace color 
-} // namespace image 
-} // namespace graphic 
-} // namespace vedere 
-
-#endif // _VEDERE_GRAPHIC_IMAGE_COLOR_HPP 
